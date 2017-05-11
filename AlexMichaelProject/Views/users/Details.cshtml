@@ -1,7 +1,8 @@
 ﻿@model AlexMichaelProject.Models.user
 
 @{
-    Layout = null;
+    //Layout = null;
+    ViewBag.Title = "Details";
 }
 
 <!DOCTYPE html>
@@ -17,7 +18,15 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.password)
+                @*@Html.DisplayNameFor(model => model.username)*@
+                User Name:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
+            <dt>
+                @*@Html.DisplayNameFor(model => model.password*@
+                Password:
             </dt>
     
             <dd>
@@ -25,7 +34,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.fName)
+                @*@Html.DisplayNameFor(model => model.fName)*@
+                Firs Name:
             </dt>
     
             <dd>
@@ -33,7 +43,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.fLname)
+                @*@Html.DisplayNameFor(model => model.fLname)*@
+                Last Name:
             </dt>
     
             <dd>
@@ -41,7 +52,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.adress)
+                @*@Html.DisplayNameFor(model => model.adress)*@
+                Adress:
             </dt>
     
             <dd>
@@ -49,7 +61,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.phoneNumber)
+                @*@Html.DisplayNameFor(model => model.phoneNumber)*@
+                Phone number:
             </dt>
     
             <dd>
@@ -57,7 +70,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.mail)
+                @*@Html.DisplayNameFor(model => model.mail)*@
+                E-mail:
             </dt>
     
             <dd>
@@ -65,7 +79,8 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.favoriteClub)
+                @*@Html.DisplayNameFor(model => model.favoriteClub)*@
+                Favorite Club:
             </dt>
     
             <dd>

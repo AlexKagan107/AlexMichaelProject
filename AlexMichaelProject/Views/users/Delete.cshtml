@@ -1,7 +1,8 @@
 ﻿@model AlexMichaelProject.Models.user
 
 @{
-    Layout = null;
+    //Layout = null;
+    ViewBag.Title = "Delete";
 }
 
 <!DOCTYPE html>
@@ -18,74 +19,89 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.password)
+                @*@Html.DisplayNameFor(model => model.username)*@
+                User Name:
             </dt>
-    
+            <dd>
+                @Html.DisplayFor(model => model.username)
+            </dd>
+            <dt>
+                @*@Html.DisplayNameFor(model => model.password*@
+                Password:
+            </dt>
+
             <dd>
                 @Html.DisplayFor(model => model.password)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.fName)
+                @*@Html.DisplayNameFor(model => model.fName)*@
+                Firs Name:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.fName)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.fLname)
+                @*@Html.DisplayNameFor(model => model.fLname)*@
+                Last Name:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.fLname)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.adress)
+                @*@Html.DisplayNameFor(model => model.adress)*@
+                Adress:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.adress)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.phoneNumber)
+                @*@Html.DisplayNameFor(model => model.phoneNumber)*@
+                Phone number:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.phoneNumber)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.mail)
+                @*@Html.DisplayNameFor(model => model.mail)*@
+                E-mail:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.mail)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.favoriteClub)
+                @*@Html.DisplayNameFor(model => model.favoriteClub)*@
+                Favorite Club:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.favoriteClub)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.isadmin)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.isadmin)
             </dd>
-    
+
         </dl>
-    
-        @using (Html.BeginForm()) {
+
+        @using (Html.BeginForm())
+        {
             @Html.AntiForgeryToken()
-    
+
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-default" /> |
                 @Html.ActionLink("Back to List", "Index")

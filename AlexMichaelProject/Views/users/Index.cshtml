@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.user>
 
 @{
-    Layout = null;
+    //Layout = null;
+    ViewBag.Title = "Index";
 }
 
 <!DOCTYPE html>
@@ -12,31 +13,43 @@
     <title>Index</title>
 </head>
 <body>
+    <br />
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.password)
+                @*@Html.DisplayNameFor(model => model.username)*@
+                User Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fName)
+                @*@Html.DisplayNameFor(model => model.password)*@
+                Password
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fLname)
+                @*@Html.DisplayNameFor(model => model.fName)*@
+                Firs Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.adress)
+                @*@Html.DisplayNameFor(model => model.fLname)*@
+                Last Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.phoneNumber)
+                @*@Html.DisplayNameFor(model => model.adress)*@
+                Adress
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.mail)
+                @*@Html.DisplayNameFor(model => model.phoneNumber)*@
+                Phone Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.favoriteClub)
+                @*@Html.DisplayNameFor(model => model.mail)*@
+                E-Mail
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.favoriteClub)*@
+                Favorite Club
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.isadmin)
@@ -46,6 +59,9 @@
     
     @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.password)
             </td>

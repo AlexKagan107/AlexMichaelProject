@@ -155,6 +155,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FansOfClubs.cs" />
     <Compile Include="Models\manufacturer.cs">
       <DependentUpon>projectDB.tt</DependentUpon>
     </Compile>
@@ -265,6 +266,7 @@
     <Content Include="Views\users\Edit.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
     <Content Include="Views\users\login.cshtml" />
+    <Content Include="Views\users\AddClubToUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -39,6 +39,7 @@ namespace AlexMichaelProject.Controllers
         // GET: users/Create
         public ActionResult Create()
         {
+            ViewBag.favoriteClub = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
 
@@ -53,6 +54,7 @@ namespace AlexMichaelProject.Controllers
             {
                 db.users.Add(user);
                 await db.SaveChangesAsync();
+                await AddClubToUser2(user.username, user.favoriteClub);
                 return RedirectToAction("Index");
             }
 
@@ -62,6 +64,7 @@ namespace AlexMichaelProject.Controllers
         // GET: users/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            ViewBag.favoriteClub = new SelectList(db.teams, "teamName", "teamName");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -106,12 +109,28 @@ namespace AlexMichaelProject.Controllers
         }
 
         // POST: users/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(string id)
+        //{
+        //    user user = await db.users.FindAsync(id);
+        //    db.users.Remove(user);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            user user = await db.users.FindAsync(id);
-            db.users.Remove(user);
+            user users = await db.users.FindAsync(id);
+            team[] clubArray = users.teams.ToArray<team>();
+            for (int i = 0; i < clubArray.Length; i++)
+            {
+                users.teams.Remove(clubArray[i]);
+            }
+            db.users.Remove(users);
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -125,6 +144,43 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult AddClubToUser()
+        {
+            ViewBag.teamName = new SelectList(db.teams, "teamName", "teamName");
+            ViewBag.username = new SelectList(db.users, "username", "username");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddClubToUser([Bind(Include = "username,teamName")] FansOfClubs model)
+        {
+            if (ModelState.IsValid)
+            {
+                team club = await db.teams.FindAsync(model.teamName);
+                user user = await db.users.FindAsync(model.username);
+                user.teams.Add(club);
+                await db.SaveChangesAsync();
+                return RedirectToAction("AddClubToUser");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddClubToUser2(string username, string teamName)
+        {
+            if (ModelState.IsValid)
+            {
+                team club = await db.teams.FindAsync(teamName);
+                user user = await db.users.FindAsync(username);
+                user.teams.Add(club);
+                await db.SaveChangesAsync();
+                return RedirectToAction("AddClubToUser");
+            }
+            return View();
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -134,13 +190,13 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> loginUser(user model)
         {
- 
+
             user user = await db.users.SingleOrDefaultAsync(x => x.username == model.username && x.password == model.password);
             string result = "fail";
             if (user != null)
             {
                 Session["username"] = user.username;
-                Session["fullname"] = user.fName+" "+user.fLname;
+                Session["fullname"] = user.fName + " " + user.fLname;
                 if (user.isadmin.Equals("admin"))
                 {
                     result = "admin";
