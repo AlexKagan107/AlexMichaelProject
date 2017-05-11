@@ -1,0 +1,48 @@
+﻿@model AlexMichaelProject.Models.team
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>FootBall Club</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Club Name:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.teamName)
+            </dd>
+            <dt>
+                League:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.leuge)
+            </dd>
+
+            <dt>
+                Home Stadium:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.homeStadium)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.teamName }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

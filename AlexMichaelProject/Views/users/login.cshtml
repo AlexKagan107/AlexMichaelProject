@@ -1,0 +1,61 @@
+﻿@model AlexMichaelProject.Models.user
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<form id="myForm">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-12">
+            <h2>Login</h2>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Id" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <a href="#" class="btn btn-default" onclick="LoginUser()">Submit</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<script>
+    var LoginUser = function () {
+        // debugger
+        var data = $("#myForm").serialize();
+
+        $.ajax({
+            type: "Post",
+            url: "/users/loginUser",
+            data: data,
+            success: function (response) {
+                // debugger
+                if (response == "fail") {
+                    window.location.href = "/users/Login";
+                }
+                else if (response == "user") {
+                    window.location.href = "/users/Index";
+                }
+            }
+
+        })
+    }
+</script>

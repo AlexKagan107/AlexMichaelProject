@@ -1,0 +1,762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fansof">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="teamName" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="teamName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="manufacturer">
+          <Key>
+            <PropertyRef Name="mname" />
+          </Key>
+          <Property Name="mname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="msite" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="match">
+          <Key>
+            <PropertyRef Name="matchID" />
+          </Key>
+          <Property Name="matchID" Type="int" Nullable="false" />
+          <Property Name="teamA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="teamB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stadium" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="league" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paymentoption">
+          <Key>
+            <PropertyRef Name="creditcardnumber" />
+          </Key>
+          <Property Name="creditcardnumber" Type="int" Nullable="false" />
+          <Property Name="creditcardcompany" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="expireddate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paymentOptionToUser">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="creditNumber" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="creditNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producedBy">
+          <Key>
+            <PropertyRef Name="mname" />
+            <PropertyRef Name="product" />
+          </Key>
+          <Property Name="mname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="product" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product" />
+          </Key>
+          <Property Name="product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="manufacturer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="clubName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="size" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="photo" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchases">
+          <Key>
+            <PropertyRef Name="dealID" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="creditcardnumber" Type="int" Nullable="false" />
+          <Property Name="dateOfPurchase" Type="date" Nullable="false" />
+          <Property Name="dealID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="teamName" />
+          </Key>
+          <Property Name="teamName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="leuge" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="homeStadium" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="int" Nullable="false" />
+          <Property Name="matchID" Type="int" Nullable="false" />
+          <Property Name="seatNumber" Type="int" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="seatType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fLname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="favoriteClub" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isadmin" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_fansof_ToTable">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="fansof" Type="Self.fansof" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="fansof">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fansof_ToTable_1">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="fansof" Type="Self.fansof" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="fansof">
+              <PropertyRef Name="teamName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_match_ToTable">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="match" Type="Self.match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="match">
+              <PropertyRef Name="teamA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_match_ToTable_1">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="match" Type="Self.match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="match">
+              <PropertyRef Name="teamB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paymentOptionToUser_ToTable">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="paymentOptionToUser" Type="Self.paymentOptionToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="paymentOptionToUser">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paymentOptionToUser_ToTable_1">
+          <End Role="paymentoption" Type="Self.paymentoption" Multiplicity="1" />
+          <End Role="paymentOptionToUser" Type="Self.paymentOptionToUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentoption">
+              <PropertyRef Name="creditcardnumber" />
+            </Principal>
+            <Dependent Role="paymentOptionToUser">
+              <PropertyRef Name="creditNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_producedBy_ToTable">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="1" />
+          <End Role="producedBy" Type="Self.producedBy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturer">
+              <PropertyRef Name="mname" />
+            </Principal>
+            <Dependent Role="producedBy">
+              <PropertyRef Name="mname" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_producedBy_ToTable_1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="producedBy" Type="Self.producedBy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product" />
+            </Principal>
+            <Dependent Role="producedBy">
+              <PropertyRef Name="product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_ToTable">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturer">
+              <PropertyRef Name="mname" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_ToTable_1">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="clubName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable_1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable_2">
+          <End Role="paymentoption" Type="Self.paymentoption" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentoption">
+              <PropertyRef Name="creditcardnumber" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="creditcardnumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_ToTable">
+          <End Role="match" Type="Self.match" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="match">
+              <PropertyRef Name="matchID" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="matchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="fansof" EntityType="Self.fansof" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="manufacturer" EntityType="Self.manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="match" EntityType="Self.match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentoption" EntityType="Self.paymentoption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paymentOptionToUser" EntityType="Self.paymentOptionToUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producedBy" EntityType="Self.producedBy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchases" EntityType="Self.purchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_fansof_ToTable" Association="Self.FK_fansof_ToTable">
+            <End Role="user" EntitySet="user" />
+            <End Role="fansof" EntitySet="fansof" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fansof_ToTable_1" Association="Self.FK_fansof_ToTable_1">
+            <End Role="team" EntitySet="team" />
+            <End Role="fansof" EntitySet="fansof" />
+          </AssociationSet>
+          <AssociationSet Name="FK_match_ToTable" Association="Self.FK_match_ToTable">
+            <End Role="team" EntitySet="team" />
+            <End Role="match" EntitySet="match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_match_ToTable_1" Association="Self.FK_match_ToTable_1">
+            <End Role="team" EntitySet="team" />
+            <End Role="match" EntitySet="match" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paymentOptionToUser_ToTable" Association="Self.FK_paymentOptionToUser_ToTable">
+            <End Role="user" EntitySet="user" />
+            <End Role="paymentOptionToUser" EntitySet="paymentOptionToUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paymentOptionToUser_ToTable_1" Association="Self.FK_paymentOptionToUser_ToTable_1">
+            <End Role="paymentoption" EntitySet="paymentoption" />
+            <End Role="paymentOptionToUser" EntitySet="paymentOptionToUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_producedBy_ToTable" Association="Self.FK_producedBy_ToTable">
+            <End Role="manufacturer" EntitySet="manufacturer" />
+            <End Role="producedBy" EntitySet="producedBy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_producedBy_ToTable_1" Association="Self.FK_producedBy_ToTable_1">
+            <End Role="product" EntitySet="product" />
+            <End Role="producedBy" EntitySet="producedBy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_ToTable" Association="Self.FK_product_ToTable">
+            <End Role="manufacturer" EntitySet="manufacturer" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_ToTable_1" Association="Self.FK_product_ToTable_1">
+            <End Role="team" EntitySet="team" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable" Association="Self.FK_purchases_ToTable">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable_1" Association="Self.FK_purchases_ToTable_1">
+            <End Role="product" EntitySet="product" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable_2" Association="Self.FK_purchases_ToTable_2">
+            <End Role="paymentoption" EntitySet="paymentoption" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_ToTable" Association="Self.FK_ticket_ToTable">
+            <End Role="match" EntitySet="match" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="manufacturer">
+          <Key>
+            <PropertyRef Name="mname" />
+          </Key>
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="msite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_ToTable" FromRole="manufacturer" ToRole="product" />
+          <NavigationProperty Name="products1" Relationship="Self.producedBy" FromRole="manufacturer" ToRole="product" />
+        </EntityType>
+        <EntityType Name="match">
+          <Key>
+            <PropertyRef Name="matchID" />
+          </Key>
+          <Property Name="matchID" Type="Int32" Nullable="false" />
+          <Property Name="teamA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="teamB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stadium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="league" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="team" Relationship="Self.FK_match_ToTable" FromRole="match" ToRole="team" />
+          <NavigationProperty Name="team1" Relationship="Self.FK_match_ToTable_1" FromRole="match" ToRole="team" />
+          <NavigationProperty Name="tickets" Relationship="Self.FK_ticket_ToTable" FromRole="match" ToRole="ticket" />
+        </EntityType>
+        <EntityType Name="paymentoption">
+          <Key>
+            <PropertyRef Name="creditcardnumber" />
+          </Key>
+          <Property Name="creditcardnumber" Type="Int32" Nullable="false" />
+          <Property Name="creditcardcompany" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="expireddate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="purchases" Relationship="Self.FK_purchases_ToTable_2" FromRole="paymentoption" ToRole="purchases" />
+          <NavigationProperty Name="users" Relationship="Self.paymentOptionToUser" FromRole="paymentoption" ToRole="user" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product1" />
+          </Key>
+          <Property Name="product1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="clubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="size" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="manufacturer1" Relationship="Self.FK_product_ToTable" FromRole="product" ToRole="manufacturer" />
+          <NavigationProperty Name="team" Relationship="Self.FK_product_ToTable_1" FromRole="product" ToRole="team" />
+          <NavigationProperty Name="purchases" Relationship="Self.FK_purchases_ToTable_1" FromRole="product" ToRole="purchases" />
+          <NavigationProperty Name="manufacturers" Relationship="Self.producedBy" FromRole="product" ToRole="manufacturer" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="dealID" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="creditcardnumber" Type="Int32" Nullable="false" />
+          <Property Name="dateOfPurchase" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dealID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="paymentoption" Relationship="Self.FK_purchases_ToTable_2" FromRole="purchases" ToRole="paymentoption" />
+          <NavigationProperty Name="product1" Relationship="Self.FK_purchases_ToTable_1" FromRole="purchases" ToRole="product" />
+          <NavigationProperty Name="user" Relationship="Self.FK_purchases_ToTable" FromRole="purchases" ToRole="user" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="teamName" />
+          </Key>
+          <Property Name="teamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="leuge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="homeStadium" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="matches" Relationship="Self.FK_match_ToTable" FromRole="team" ToRole="match" />
+          <NavigationProperty Name="matches1" Relationship="Self.FK_match_ToTable_1" FromRole="team" ToRole="match" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_ToTable_1" FromRole="team" ToRole="product" />
+          <NavigationProperty Name="users" Relationship="Self.fansof" FromRole="team" ToRole="user" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="ticketID" />
+          </Key>
+          <Property Name="ticketID" Type="Int32" Nullable="false" />
+          <Property Name="matchID" Type="Int32" Nullable="false" />
+          <Property Name="seatNumber" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="seatType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="match" Relationship="Self.FK_ticket_ToTable" FromRole="ticket" ToRole="match" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fLname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="favoriteClub" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isadmin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="purchases" Relationship="Self.FK_purchases_ToTable" FromRole="user" ToRole="purchases" />
+          <NavigationProperty Name="teams" Relationship="Self.fansof" FromRole="user" ToRole="team" />
+          <NavigationProperty Name="paymentoptions" Relationship="Self.paymentOptionToUser" FromRole="user" ToRole="paymentoption" />
+        </EntityType>
+        <Association Name="FK_product_ToTable">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="manufacturer">
+              <PropertyRef Name="mname" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_match_ToTable">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="match" Type="Self.match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="match">
+              <PropertyRef Name="teamA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_match_ToTable_1">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="match" Type="Self.match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="match">
+              <PropertyRef Name="teamB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_ToTable">
+          <End Role="match" Type="Self.match" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="match">
+              <PropertyRef Name="matchID" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="matchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable_2">
+          <End Role="paymentoption" Type="Self.paymentoption" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentoption">
+              <PropertyRef Name="creditcardnumber" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="creditcardnumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_ToTable_1">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="teamName" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="clubName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable_1">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product1" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchases_ToTable">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="purchases" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="purchases">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fansof">
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <End Role="team" Type="Self.team" Multiplicity="*" />
+        </Association>
+        <Association Name="paymentOptionToUser">
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <End Role="paymentoption" Type="Self.paymentoption" Multiplicity="*" />
+        </Association>
+        <Association Name="producedBy">
+          <End Role="manufacturer" Type="Self.manufacturer" Multiplicity="*" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="manufacturers" EntityType="Self.manufacturer" />
+          <EntitySet Name="matches" EntityType="Self.match" />
+          <EntitySet Name="paymentoptions" EntityType="Self.paymentoption" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="purchases" EntityType="Self.purchase" />
+          <EntitySet Name="teams" EntityType="Self.team" />
+          <EntitySet Name="tickets" EntityType="Self.ticket" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_product_ToTable" Association="Self.FK_product_ToTable">
+            <End Role="manufacturer" EntitySet="manufacturers" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_match_ToTable" Association="Self.FK_match_ToTable">
+            <End Role="team" EntitySet="teams" />
+            <End Role="match" EntitySet="matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_match_ToTable_1" Association="Self.FK_match_ToTable_1">
+            <End Role="team" EntitySet="teams" />
+            <End Role="match" EntitySet="matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_ToTable" Association="Self.FK_ticket_ToTable">
+            <End Role="match" EntitySet="matches" />
+            <End Role="ticket" EntitySet="tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable_2" Association="Self.FK_purchases_ToTable_2">
+            <End Role="paymentoption" EntitySet="paymentoptions" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_ToTable_1" Association="Self.FK_product_ToTable_1">
+            <End Role="team" EntitySet="teams" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable_1" Association="Self.FK_purchases_ToTable_1">
+            <End Role="product" EntitySet="products" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchases_ToTable" Association="Self.FK_purchases_ToTable">
+            <End Role="user" EntitySet="users" />
+            <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="fansof" Association="Self.fansof">
+            <End Role="user" EntitySet="users" />
+            <End Role="team" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="paymentOptionToUser" Association="Self.paymentOptionToUser">
+            <End Role="user" EntitySet="users" />
+            <End Role="paymentoption" EntitySet="paymentoptions" />
+          </AssociationSet>
+          <AssociationSet Name="producedBy" Association="Self.producedBy">
+            <End Role="manufacturer" EntitySet="manufacturers" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="manufacturers">
+            <EntityTypeMapping TypeName="DBModel.manufacturer">
+              <MappingFragment StoreEntitySet="manufacturer">
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="msite" ColumnName="msite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="matches">
+            <EntityTypeMapping TypeName="DBModel.match">
+              <MappingFragment StoreEntitySet="match">
+                <ScalarProperty Name="matchID" ColumnName="matchID" />
+                <ScalarProperty Name="teamA" ColumnName="teamA" />
+                <ScalarProperty Name="teamB" ColumnName="teamB" />
+                <ScalarProperty Name="stadium" ColumnName="stadium" />
+                <ScalarProperty Name="league" ColumnName="league" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentoptions">
+            <EntityTypeMapping TypeName="DBModel.paymentoption">
+              <MappingFragment StoreEntitySet="paymentoption">
+                <ScalarProperty Name="creditcardnumber" ColumnName="creditcardnumber" />
+                <ScalarProperty Name="creditcardcompany" ColumnName="creditcardcompany" />
+                <ScalarProperty Name="expireddate" ColumnName="expireddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="DBModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="product1" ColumnName="product" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="manufacturer" ColumnName="manufacturer" />
+                <ScalarProperty Name="clubName" ColumnName="clubName" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchases">
+            <EntityTypeMapping TypeName="DBModel.purchase">
+              <MappingFragment StoreEntitySet="purchases">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="creditcardnumber" ColumnName="creditcardnumber" />
+                <ScalarProperty Name="dateOfPurchase" ColumnName="dateOfPurchase" />
+                <ScalarProperty Name="dealID" ColumnName="dealID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="DBModel.team">
+              <MappingFragment StoreEntitySet="team">
+                <ScalarProperty Name="teamName" ColumnName="teamName" />
+                <ScalarProperty Name="leuge" ColumnName="leuge" />
+                <ScalarProperty Name="homeStadium" ColumnName="homeStadium" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tickets">
+            <EntityTypeMapping TypeName="DBModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="ticketID" ColumnName="ticketID" />
+                <ScalarProperty Name="matchID" ColumnName="matchID" />
+                <ScalarProperty Name="seatNumber" ColumnName="seatNumber" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="seatType" ColumnName="seatType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="DBModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fLname" ColumnName="fLname" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="favoriteClub" ColumnName="favoriteClub" />
+                <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="fansof" TypeName="DBModel.fansof" StoreEntitySet="fansof">
+            <EndProperty Name="user">
+              <ScalarProperty Name="username" ColumnName="username" />
+            </EndProperty>
+            <EndProperty Name="team">
+              <ScalarProperty Name="teamName" ColumnName="teamName" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="paymentOptionToUser" TypeName="DBModel.paymentOptionToUser" StoreEntitySet="paymentOptionToUser">
+            <EndProperty Name="user">
+              <ScalarProperty Name="username" ColumnName="username" />
+            </EndProperty>
+            <EndProperty Name="paymentoption">
+              <ScalarProperty Name="creditcardnumber" ColumnName="creditNumber" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="producedBy" TypeName="DBModel.producedBy" StoreEntitySet="producedBy">
+            <EndProperty Name="manufacturer">
+              <ScalarProperty Name="mname" ColumnName="mname" />
+            </EndProperty>
+            <EndProperty Name="product">
+              <ScalarProperty Name="product1" ColumnName="product" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

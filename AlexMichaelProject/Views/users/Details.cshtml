@@ -1,0 +1,90 @@
+﻿@model AlexMichaelProject.Models.user
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>user</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fLname)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fLname)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.adress)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.adress)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.phoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.phoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.mail)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.mail)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.favoriteClub)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.favoriteClub)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.isadmin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.isadmin)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.username }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
