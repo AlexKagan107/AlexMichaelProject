@@ -15,6 +15,10 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
         // GET: users
         public async Task<ActionResult> Index()
         {

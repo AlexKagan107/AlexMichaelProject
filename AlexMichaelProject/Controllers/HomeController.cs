@@ -13,18 +13,23 @@ namespace AlexMichaelProject.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult SideMenu()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return PartialView("SideMenu");
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //public ActionResult About()
+        //{
+        //    ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
+        //    return View();
+        //}
+
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
+
+        //    return View();
+        //}
     }
 }

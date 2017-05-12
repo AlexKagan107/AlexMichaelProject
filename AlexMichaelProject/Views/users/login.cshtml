@@ -4,37 +4,45 @@
     ViewBag.Title = "Login";
 }
 
-
-<form id="myForm">
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        <div class="col-md-12">
-            <h2>Login</h2>
-        </div>
+<div class="panel panel-danger">
+    <div class="col-md-3">
+        @{ Html.RenderAction("SideMenu", "Home");}
     </div>
 
-    <div class="form-horizontal">
+    <div class="col-md-9">
 
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Id" })
+        <form id="myForm">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-12">
+                    <h2>Login</h2>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
-            </div>
-        </div>
+            <div class="form-horizontal">
 
-        <div class="form-group">
-            <div class="col-md-12">
-                <a href="#" class="btn btn-default" onclick="LoginUser()">Submit</a>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Id" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <a href="#" class="btn btn-default" onclick="LoginUser()">Submit</a>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </form>
     </div>
-
-</form>
+</div>
 
 
 <script>
