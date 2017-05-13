@@ -28,7 +28,7 @@ namespace AlexMichaelProject.Models
         public int cost { get; set; }
         public int size { get; set; }
         public string description { get; set; }
-        public byte[] photo { get; set; }
+        public string photo { get; set; }
     
         public virtual manufacturer manufacturer1 { get; set; }
         public virtual team team { get; set; }

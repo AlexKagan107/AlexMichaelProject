@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\manufacturersController.cs" />
     <Compile Include="Controllers\productsController.cs" />
     <Compile Include="Controllers\teamsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
@@ -275,6 +276,11 @@
     <Content Include="Views\products\Details.cshtml" />
     <Content Include="Views\products\Edit.cshtml" />
     <Content Include="Views\products\Index.cshtml" />
+    <Content Include="Views\manufacturers\Create.cshtml" />
+    <Content Include="Views\manufacturers\Delete.cshtml" />
+    <Content Include="Views\manufacturers\Details.cshtml" />
+    <Content Include="Views\manufacturers\Edit.cshtml" />
+    <Content Include="Views\manufacturers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
