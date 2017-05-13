@@ -1,0 +1,88 @@
+﻿@model AlexMichaelProject.Models.product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.type)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.cost)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.cost)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.size)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.size)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.photo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.photo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.manufacturer1.msite)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.manufacturer1.msite)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.team.leuge)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.team.leuge)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿@model AlexMichaelProject.Models.product
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.type)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.cost)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.cost)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.size)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.size)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.photo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.photo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.manufacturer1.msite)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.manufacturer1.msite)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.team.leuge)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.team.leuge)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.product1 }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

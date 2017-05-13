@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AlexMichaelProject.Models.product>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.manufacturer1.msite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.team.leuge)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.photo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.manufacturer1.msite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.leuge)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.product1 }) |
+                @Html.ActionLink("Details", "Details", new { id=item.product1 }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.product1 })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
