@@ -15,6 +15,11 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
+
         // GET: products
         public async Task<ActionResult> Index()
         {
@@ -41,7 +46,7 @@ namespace AlexMichaelProject.Controllers
         public ActionResult Create()
         {
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite");
-            ViewBag.clubName = new SelectList(db.teams, "teamName", "leuge");
+            ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
 
