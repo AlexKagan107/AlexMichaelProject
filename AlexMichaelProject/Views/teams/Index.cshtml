@@ -12,43 +12,52 @@
     <title>Index</title>
 </head>
 <body>
-    <br />
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Club Name
-            </th>
-            <th>
-                League
-            </th>
-            <th>
-                Home Stadium
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.teamName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.leuge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.homeStadium)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.teamName }) |
-                @Html.ActionLink("Details", "Details", new { id=item.teamName }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.teamName })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <div class="panel panel-danger">
+        <div class="col-md-3" style="margin-top:20px">
+            @{ Html.RenderAction("SideMenu", "Home");}
+        </div>
+
+        <div class="col-md-9">
+            <br />
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        Club Name
+                    </th>
+                    <th>
+                        League
+                    </th>
+                    <th>
+                        Home Stadium
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.teamName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.leuge)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.homeStadium)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.teamName }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.teamName }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.teamName })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
 </body>
 </html>

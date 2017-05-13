@@ -27,18 +27,18 @@
                 </ul>
                 @if (Session["username"] != null)
                 {
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Welcome : @Session["username"]</a></li>
-                    <li><a href="/users/Logout">Logout</a></li>
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Welcome : @Session["username"]</a></li>
+                        <li><a href="/users/Logout">Logout</a></li>
+                    </ul>
 
                 }
                 else
                 {
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/users/Login">Login</a></li>
-                    <li><a href="/users/Create">Register</a></li>
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/users/Login">Login</a></li>
+                        <li><a href="/users/Create">Register</a></li>
+                    </ul>
                 }
             </div>
         </div>
