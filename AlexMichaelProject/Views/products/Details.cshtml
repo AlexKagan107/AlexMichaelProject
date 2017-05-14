@@ -16,6 +16,10 @@
         <h4>product</h4>
         <hr />
         <dl class="dl-horizontal">
+            <dd>
+                <img src=@Html.DisplayFor(model => model.photo) style="width:250px;height:250px;" />
+            </dd>
+           
             <dt>
                 @Html.DisplayNameFor(model => model.type)
             </dt>
@@ -48,13 +52,13 @@
                 @Html.DisplayFor(model => model.description)
             </dd>
     
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.photo)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.photo)
-            </dd>
+                <img src=@Html.DisplayFor(model => model.photo) style="width:100px;height:100px;" />
+            </dd>*@
     
             <dt>
                 @Html.DisplayNameFor(model => model.manufacturer1.msite)
@@ -65,11 +69,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.team.leuge)
+                @Html.DisplayNameFor(model => model.team.teamName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.team.leuge)
+                @Html.DisplayFor(model => model.team.teamName)
             </dd>
     
         </dl>

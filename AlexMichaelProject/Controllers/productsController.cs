@@ -65,7 +65,7 @@ namespace AlexMichaelProject.Controllers
             }
 
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite", product.manufacturer);
-            ViewBag.clubName = new SelectList(db.teams, "teamName", "leuge", product.clubName);
+            ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName", product.clubName);
             return View(product);
         }
 
@@ -82,7 +82,7 @@ namespace AlexMichaelProject.Controllers
                 return HttpNotFound();
             }
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite", product.manufacturer);
-            ViewBag.clubName = new SelectList(db.teams, "teamName", "leuge", product.clubName);
+            ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName", product.clubName);
             return View(product);
         }
 
@@ -100,7 +100,7 @@ namespace AlexMichaelProject.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite", product.manufacturer);
-            ViewBag.clubName = new SelectList(db.teams, "teamName", "leuge", product.clubName);
+            ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName", product.clubName);
             return View(product);
         }
 

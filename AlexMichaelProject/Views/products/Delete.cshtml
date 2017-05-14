@@ -1,7 +1,7 @@
 ﻿@model AlexMichaelProject.Models.product
 
 @{
-    Layout = null;
+    //Layout = null;
 }
 
 <!DOCTYPE html>
@@ -17,6 +17,14 @@
         <h4>product</h4>
         <hr />
         <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.product1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.product1)
+            </dd>
+
             <dt>
                 @Html.DisplayNameFor(model => model.type)
             </dt>
@@ -49,13 +57,13 @@
                 @Html.DisplayFor(model => model.description)
             </dd>
     
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.photo)
             </dt>
     
             <dd>
                 @Html.DisplayFor(model => model.photo)
-            </dd>
+            </dd>*@
     
             <dt>
                 @Html.DisplayNameFor(model => model.manufacturer1.msite)
@@ -66,11 +74,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.team.leuge)
+                @Html.DisplayNameFor(model => model.team.teamName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.team.leuge)
+                @Html.DisplayFor(model => model.team.teamName)
             </dd>
     
         </dl>
