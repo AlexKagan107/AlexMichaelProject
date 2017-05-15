@@ -100,8 +100,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.isadmin, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.isadmin, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isadmin, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.isadmin, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input type="radio" name="isadmin" checked="checked" value="user" />user
+                    @*@Html.ValidationMessageFor(model => model.isadmin, "", new { @class = "text-danger" })*@
                 </div>
             </div>
     

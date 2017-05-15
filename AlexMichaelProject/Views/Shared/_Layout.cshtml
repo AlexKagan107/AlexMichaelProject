@@ -20,9 +20,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    @if (Session["username"] != null)
+                    {
+                        <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>         
+                    }
+                    
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @if (Session["username"] != null)
