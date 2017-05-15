@@ -79,16 +79,26 @@
         </dl>
     </div>
     <div style="margin-left:50px;">
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.product1 })
-        </p>
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Purchase", "Purchase", new { id = Model.product1 })
-        </p>
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Edit", "Edit", new { id = Model.product1 })
-        </p>
-        <p class="btn btn-primary btn-md">
+        @if ((String)Session["power"] == "user")
+        {
+            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+                @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.product1 })
+            </p>
+            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aqua;">
+                @Html.ActionLink("Purchase", "Purchase", new { id = Model.product1 })
+            </p>
+        }
+        @if ((String)Session["power"] == "admin")
+        {
+            <p class="btn btn-primary btn-md">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.product1 })
+            </p>
+            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+
+                @Html.ActionLink("Delete", "Delete", new { id = Model.product1 })
+            </p>
+        }
+        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
             @Html.ActionLink("Back to List", "Index")
         </p>
     </div>

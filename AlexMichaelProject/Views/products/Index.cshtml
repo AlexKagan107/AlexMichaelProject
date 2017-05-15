@@ -13,11 +13,14 @@
 </head>
 <body>
 
-    <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
 
-        @Html.ActionLink("Create New", "Create")
+    @if ((String)Session["power"] == "admin")
+    {
+        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
 
-    </p>
     <table class="table">
         <tr>
             <th>
@@ -48,7 +51,7 @@
         </tr>
 
         @foreach (var item in Model)
-        {
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.product1)
@@ -76,18 +79,29 @@
                     <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
                 </td>
                 <td>
-                    
-                    <p class="btn btn-primary btn-md" style="margin-right:5px;">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.product1 })
-                    </p>
-                    
-                    <p class="btn btn-primary btn-md" style="margin-right:5px;">
+                    @if ((String)Session["power"] == "user")
+                    {
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aqua;">
+                            @Html.ActionLink("Purchase", "Purchase", new { id = item.product1 })
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+                            @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.product1 })
+                        </p>
+                    }
+                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
                         @Html.ActionLink("Details", "Details", new { id = item.product1 })
                     </p>
-                    <p class="btn btn-primary btn-md" style="margin-right:5px;">
+                    @if ((String)Session["power"] == "admin")
+                    {
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.product1 })
+                        </p>
 
-                        @Html.ActionLink("Delete", "Delete", new { id = item.product1 })
-                    </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+
+                            @Html.ActionLink("Delete", "Delete", new { id = item.product1 })
+                        </p>
+                    }
                 </td>
 
             </tr>

@@ -201,11 +201,13 @@ namespace AlexMichaelProject.Controllers
             {
                 Session["username"] = user.username;
                 Session["fullname"] = user.fName + " " + user.fLname;
+                Session["power"] = user.isadmin;
                 if (user.isadmin.Equals("admin"))
                 {
                     result = "admin";
                 }
-                result = "user";
+                else { result = "user"; }
+                
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
