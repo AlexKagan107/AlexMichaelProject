@@ -39,6 +39,7 @@ namespace AlexMichaelProject.Controllers
         // GET: teams/Create
         public ActionResult Create()
         {
+            ViewBag.leuge = new SelectList(db.teams, "leuge", "leuge");
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace AlexMichaelProject.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.leuge = new SelectList(db.teams, "leuge", "leuge");
             return View(team);
         }
 
@@ -71,6 +72,7 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.leuge = new SelectList(db.teams, "leuge", "leuge");
             return View(team);
         }
 
@@ -87,6 +89,7 @@ namespace AlexMichaelProject.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.leuge = new SelectList(db.teams, "leuge", "leuge");
             return View(team);
         }
 
