@@ -1,7 +1,7 @@
 ﻿@model AlexMichaelProject.Models.product
 
 @{
-    //Layout = null;
+//Layout = null;
 }
 
 <!DOCTYPE html>
@@ -19,68 +19,78 @@
             <dd>
                 <img src=@Html.DisplayFor(model => model.photo) style="width:250px;height:250px;" />
             </dd>
-           
+
             <dt>
-                @Html.DisplayNameFor(model => model.type)
+                Product Type:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.type)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.cost)
+                Cost
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.cost)
+                @Html.DisplayFor(model => model.cost)$
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.size)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.size)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.description)
+                Description:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.description)
             </dd>
-    
+
             @*<dt>
-                @Html.DisplayNameFor(model => model.photo)
-            </dt>
-    
-            <dd>
-                <img src=@Html.DisplayFor(model => model.photo) style="width:100px;height:100px;" />
-            </dd>*@
-    
+                    @Html.DisplayNameFor(model => model.photo)
+                </dt>
+
+                <dd>
+                    <img src=@Html.DisplayFor(model => model.photo) style="width:100px;height:100px;" />
+                </dd>*@
+
             <dt>
-                @Html.DisplayNameFor(model => model.manufacturer1.msite)
+                Manufacturer
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.manufacturer1.msite)
+                <a href=@Html.DisplayFor(model => model.manufacturer1.msite)>@Html.DisplayFor(model => model.manufacturer1.mname)</a>
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.team.teamName)
+                Team Name:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.team.teamName)
             </dd>
-    
+
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.product1 }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div style="margin-left:50px;">
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.product1 })
+        </p>
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Purchase", "Purchase", new { id = Model.product1 })
+        </p>
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.product1 })
+        </p>
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </body>
 </html>
