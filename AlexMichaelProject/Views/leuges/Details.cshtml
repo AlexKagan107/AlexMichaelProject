@@ -1,0 +1,33 @@
+﻿@model AlexMichaelProject.Models.leuge
+
+@{
+    //Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>leuge</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Legue Name:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.leugeName)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.leugeName }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

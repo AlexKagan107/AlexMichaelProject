@@ -24,6 +24,8 @@
         <AssociationConnector Association="DBModel.fansof" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.paymentOptionToUser" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.producedBy" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBModel.leuge" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="DBModel.FK_team_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

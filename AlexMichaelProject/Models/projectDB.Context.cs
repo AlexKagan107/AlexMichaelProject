@@ -33,5 +33,6 @@ namespace AlexMichaelProject.Models
         public virtual DbSet<team> teams { get; set; }
         public virtual DbSet<ticket> tickets { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<leuge> leuges { get; set; }
     }
 }

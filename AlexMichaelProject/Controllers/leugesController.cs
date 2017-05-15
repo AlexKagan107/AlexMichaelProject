@@ -11,7 +11,7 @@ using AlexMichaelProject.Models;
 
 namespace AlexMichaelProject.Controllers
 {
-    public class teamsController : Controller
+    public class leugesController : Controller
     {
         private DBEntities db = new DBEntities();
 
@@ -20,106 +20,103 @@ namespace AlexMichaelProject.Controllers
             return PartialView("SideMenu");
         }
 
-        // GET: teams
+        // GET: leuges
         public async Task<ActionResult> Index()
         {
-            return View(await db.teams.ToListAsync());
+            return View(await db.leuges.ToListAsync());
         }
 
-        // GET: teams/Details/5
+        // GET: leuges/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            team team = await db.teams.FindAsync(id);
-            if (team == null)
+            leuge leuge = await db.leuges.FindAsync(id);
+            if (leuge == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(leuge);
         }
 
-        // GET: teams/Create
+        // GET: leuges/Create
         public ActionResult Create()
         {
-            ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
             return View();
         }
 
-        // POST: teams/Create
+        // POST: leuges/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "teamName,leuge,homeStadium")] team team)
+        public async Task<ActionResult> Create([Bind(Include = "leugeName")] leuge leuge)
         {
             if (ModelState.IsValid)
             {
-                db.teams.Add(team);
+                db.leuges.Add(leuge);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
-            return View(team);
+
+            return View(leuge);
         }
 
-        // GET: teams/Edit/5
+        // GET: leuges/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            team team = await db.teams.FindAsync(id);
-            if (team == null)
+            leuge leuge = await db.leuges.FindAsync(id);
+            if (leuge == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
-            return View(team);
+            return View(leuge);
         }
 
-        // POST: teams/Edit/5
+        // POST: leuges/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "teamName,leuge,homeStadium")] team team)
+        public async Task<ActionResult> Edit([Bind(Include = "leugeName")] leuge leuge)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(team).State = EntityState.Modified;
+                db.Entry(leuge).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
-            return View(team);
+            return View(leuge);
         }
 
-        // GET: teams/Delete/5
+        // GET: leuges/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            team team = await db.teams.FindAsync(id);
-            if (team == null)
+            leuge leuge = await db.leuges.FindAsync(id);
+            if (leuge == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(leuge);
         }
 
-        // POST: teams/Delete/5
+        // POST: leuges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            team team = await db.teams.FindAsync(id);
-            db.teams.Remove(team);
+            leuge leuge = await db.leuges.FindAsync(id);
+            db.leuges.Remove(leuge);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

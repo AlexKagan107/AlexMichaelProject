@@ -35,5 +35,6 @@ namespace AlexMichaelProject.Models
         public virtual ICollection<product> products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
+        public virtual leuge leuge1 { get; set; }
     }
 }

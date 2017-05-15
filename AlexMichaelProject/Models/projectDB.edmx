@@ -13,6 +13,12 @@
           <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="teamName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="leuge">
+          <Key>
+            <PropertyRef Name="leugeName" />
+          </Key>
+          <Property Name="leugeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="manufacturer">
           <Key>
             <PropertyRef Name="mname" />
@@ -266,6 +272,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_team_ToTable">
+          <End Role="leuge" Type="Self.leuge" Multiplicity="1" />
+          <End Role="team" Type="Self.team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="leuge">
+              <PropertyRef Name="leugeName" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="leuge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ticket_ToTable">
           <End Role="match" Type="Self.match" Multiplicity="1" />
           <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
@@ -280,6 +298,7 @@
         </Association>
         <EntityContainer Name="DBModelStoreContainer">
           <EntitySet Name="fansof" EntityType="Self.fansof" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leuge" EntityType="Self.leuge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="manufacturer" EntityType="Self.manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="match" EntityType="Self.match" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="paymentoption" EntityType="Self.paymentoption" Schema="dbo" store:Type="Tables" />
@@ -341,6 +360,10 @@
           <AssociationSet Name="FK_purchases_ToTable_2" Association="Self.FK_purchases_ToTable_2">
             <End Role="paymentoption" EntitySet="paymentoption" />
             <End Role="purchases" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_team_ToTable" Association="Self.FK_team_ToTable">
+            <End Role="leuge" EntitySet="leuge" />
+            <End Role="team" EntitySet="team" />
           </AssociationSet>
           <AssociationSet Name="FK_ticket_ToTable" Association="Self.FK_ticket_ToTable">
             <End Role="match" EntitySet="match" />
@@ -425,6 +448,7 @@
           <NavigationProperty Name="matches1" Relationship="Self.FK_match_ToTable_1" FromRole="team" ToRole="match" />
           <NavigationProperty Name="products" Relationship="Self.FK_product_ToTable_1" FromRole="team" ToRole="product" />
           <NavigationProperty Name="users" Relationship="Self.fansof" FromRole="team" ToRole="user" />
+          <NavigationProperty Name="leuge1" Relationship="DBModel.FK_team_ToTable" FromRole="team" ToRole="leuge" />
         </EntityType>
         <EntityType Name="ticket">
           <Key>
@@ -615,7 +639,31 @@
             <End Role="manufacturer" EntitySet="manufacturers" />
             <End Role="product" EntitySet="products" />
           </AssociationSet>
+          <EntitySet Name="leuges" EntityType="DBModel.leuge" />
+          <AssociationSet Name="FK_team_ToTable" Association="DBModel.FK_team_ToTable">
+            <End Role="leuge" EntitySet="leuges" />
+            <End Role="team" EntitySet="teams" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="leuge">
+          <Key>
+            <PropertyRef Name="leugeName" />
+          </Key>
+          <Property Name="leugeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="teams" Relationship="DBModel.FK_team_ToTable" FromRole="leuge" ToRole="team" />
+        </EntityType>
+        <Association Name="FK_team_ToTable">
+          <End Type="DBModel.leuge" Role="leuge" Multiplicity="1" />
+          <End Type="DBModel.team" Role="team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="leuge">
+              <PropertyRef Name="leugeName" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="leuge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -735,6 +783,13 @@
               <ScalarProperty Name="product1" ColumnName="product" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="leuges">
+            <EntityTypeMapping TypeName="DBModel.leuge">
+              <MappingFragment StoreEntitySet="leuge">
+                <ScalarProperty Name="leugeName" ColumnName="leugeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
