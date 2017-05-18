@@ -35,16 +35,74 @@
                 <dt>@Html.DisplayNameFor(model => model.isadmin)</dt>
                 <dd>@Html.DisplayFor(model => model.isadmin)</dd>
             }
+            <dt>Credit Cards:</dt>
         </dl>
+
+            <table class="table" style="width:650px;">
+                <tr>
+                    <th>CreditCard Number</th>
+                    <th>Credit Company</th>
+                    <th>Expired Date</th>
+                    <th>Actions</th>
+                </tr>
+                
+
+                    @foreach (var item in Model.paymentoptions)
+                    {
+                    
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.creditcardnumber)</td>
+
+                        <td>@Html.DisplayFor(modelItem => item.creditcardcompany)</td>
+
+                        <td>@Html.DisplayFor(modelItem => item.expireddate)</td>
+
+                        <td>
+                            
+                            @Html.ActionLink("Edit", "Edit", "paymentoptions", new { id = item.creditcardnumber },null)
+                            @Html.ActionLink("Details", "Details", "paymentoptions", new { id = item.creditcardnumber }, null)
+                            @Html.ActionLink("Delete", "Delete", "paymentoptions", new { id = item.creditcardnumber }, null)
+                        </td>
+                    </tr>
+                    }
+                </table>
+            
+        <dl class="dl-horizontal">
+            <dt>Intrested in:</dt>
+        </dl>
+        <br />
+        <table class="table" style="width:650px; margin-left:150px;">
+            <tr>
+                <th>Team Name</th>
+                <th>League</th>
+                
+            </tr>
+
+            
+                @foreach (var item in Model.teams)
+            {
+
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.teamName)</td>
+
+                        <td>@Html.DisplayFor(modelItem => item.leuge)</td>
+
+                        <td>
+
+                            @Html.ActionLink("Edit", "Edit", "teams", new { id = item.teamName }, null)
+                            @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
+                            @Html.ActionLink("Delete", "Delete", "teams", new { id = item.teamName }, null)
+                        </td>
+                    </tr>
+                }
+</table>
+
+            
+        
     </div>
+
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Edit", "Edit", new { id = Model.username })
-    </p>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("Manage My Clubs", "AddClubToUser", new { id = Model.username })
-    </p>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("My Credit Cards", "ShowCreditCards", new { id = Model.username })
     </p>
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Add Credit Card", "AddCardToUser", new { id = Model.username })

@@ -84,9 +84,7 @@
             <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
                 @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.product1 })
             </p>
-            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aqua;">
-                @Html.ActionLink("Purchase", "Purchase", new { id = Model.product1 })
-            </p>
+            
         }
         @if ((String)Session["power"] == "admin")
         {

@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.match>
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -18,25 +15,36 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.stadium)
+                MatchID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.league)
+                Team A
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.date)
+                Team B
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.team.leuge)
+                Stadium
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.team1.leuge)
+                League
             </th>
-            <th></th>
+            <th>
+                Date
+            </th>
         </tr>
     
     @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.matchID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.stadium)
             </td>
@@ -45,12 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.team.leuge)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.team1.leuge)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.matchID }) |

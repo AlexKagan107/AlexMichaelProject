@@ -24,6 +24,10 @@ namespace AlexMichaelProject.Controllers
         {
             return View(await db.users.ToListAsync());
         }
+        public async Task<ActionResult> showcart()
+        {
+            return View("showcart");
+        }
 
         // GET: users/Details/5
         public async Task<ActionResult> Details(string id)
@@ -37,7 +41,7 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.usercreditcards = db.paymentoptions.FindAsync(id);
+            userCreditCards(id);
             return View(user);
         }
 
@@ -261,5 +265,12 @@ namespace AlexMichaelProject.Controllers
         //    }
         //    return View();
         //}
+
+        public async void userCreditCards(String username)
+        {
+            user users = await db.users.FindAsync(username);
+            paymentoption[] creditCards= users.paymentoptions.ToArray();
+            ViewBag.userCreditCards = creditCards;
+        }
     }
 }

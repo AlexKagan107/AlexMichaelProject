@@ -139,5 +139,25 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
+        public async Task<ActionResult> addToCart(int prodoctID)
+        {
+            String username = (String)Session["username"];
+            List<product> cart;
+            if (Session[username + "-cart"] == null)
+            {
+                cart = new List<product>();
+            }
+            else
+            {
+                cart = (List<product>)Session[username + "-cart"];
+            }
+            product temp = await db.products.FindAsync(prodoctID);
+            if (temp != null)
+            {
+                cart.Add(temp);
+                Session.Add(username + "-cart", cart);
+            }
+            return RedirectToAction("users/showcart");
+        }
     }
 }

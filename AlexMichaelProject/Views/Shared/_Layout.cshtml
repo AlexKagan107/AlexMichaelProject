@@ -22,10 +22,12 @@
                 <ul class="nav navbar-nav">
                     @if (Session["username"] != null)
                     {
-                        <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>         
+                        <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>
+                        <li>@Html.ActionLink("My Cart", "showcart", "users")</li>
                     }
                     
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    
                 </ul>
                 @if (Session["username"] != null)
                 {

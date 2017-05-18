@@ -5,18 +5,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Products Page</title>
+    <title>Cart</title>
 </head>
 <body>
-
-
-    @if ((String)Session["power"] == "admin")
-    {
-        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-            @Html.ActionLink("Create New", "Create")
-        </p>
+    @{ 
+        List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session[(String)Session["username"]+"-cart"];
     }
-
     <table class="table">
         <tr>
             <th>
@@ -76,7 +70,7 @@
                 <td>
                     @if ((String)Session["power"] == "user")
                     {
-                       
+
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
                             @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.product1 })
                         </p>
@@ -89,9 +83,7 @@
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
                             @Html.ActionLink("Edit", "Edit", new { id = item.product1 })
                         </p>
-
                         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-
                             @Html.ActionLink("Delete", "Delete", new { id = item.product1 })
                         </p>
                     }
@@ -101,5 +93,6 @@
         }
 
     </table>
+
 </body>
 </html>
