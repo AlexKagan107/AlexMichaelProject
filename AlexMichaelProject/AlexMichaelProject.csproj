@@ -152,12 +152,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\leugesController.cs" />
     <Compile Include="Controllers\manufacturersController.cs" />
+    <Compile Include="Controllers\matchesController.cs" />
+    <Compile Include="Controllers\paymentoptionsController.cs" />
     <Compile Include="Controllers\productsController.cs" />
+    <Compile Include="Controllers\purchasesController.cs" />
     <Compile Include="Controllers\teamsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CardBelongsTo.cs" />
     <Compile Include="Models\FansOfClubs.cs" />
     <Compile Include="Models\leuge.cs">
       <DependentUpon>projectDB.tt</DependentUpon>
@@ -290,6 +294,22 @@
     <Content Include="Views\leuges\Details.cshtml" />
     <Content Include="Views\leuges\Edit.cshtml" />
     <Content Include="Views\leuges\Index.cshtml" />
+    <Content Include="Views\purchases\Create.cshtml" />
+    <Content Include="Views\purchases\Delete.cshtml" />
+    <Content Include="Views\purchases\Details.cshtml" />
+    <Content Include="Views\purchases\Edit.cshtml" />
+    <Content Include="Views\purchases\Index.cshtml" />
+    <Content Include="Views\paymentoptions\Create.cshtml" />
+    <Content Include="Views\paymentoptions\Delete.cshtml" />
+    <Content Include="Views\paymentoptions\Details.cshtml" />
+    <Content Include="Views\paymentoptions\Edit.cshtml" />
+    <Content Include="Views\paymentoptions\Index.cshtml" />
+    <Content Include="Views\users\AddCardToUser.cshtml" />
+    <Content Include="Views\matches\Create.cshtml" />
+    <Content Include="Views\matches\Delete.cshtml" />
+    <Content Include="Views\matches\Details.cshtml" />
+    <Content Include="Views\matches\Edit.cshtml" />
+    <Content Include="Views\matches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

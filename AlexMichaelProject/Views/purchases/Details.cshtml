@@ -1,0 +1,58 @@
+﻿@model AlexMichaelProject.Models.purchase
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>purchase</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.dateOfPurchase)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.dateOfPurchase)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.paymentoption.creditcardcompany)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.paymentoption.creditcardcompany)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.product1.type)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.product1.type)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.user.password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.user.password)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.dealID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

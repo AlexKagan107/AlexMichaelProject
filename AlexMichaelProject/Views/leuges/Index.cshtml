@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.leuge>
 
 @{
-    //Layout = null;
+//Layout = null;
 }
 
 <!DOCTYPE html>
@@ -12,27 +12,42 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @if ((String)Session["power"] == "admin")
+    {
+        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
     <table class="table">
         <tr>
             <th>Leuge Name</th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.leugeName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.leugeName }) |
-                @Html.ActionLink("Details", "Details", new { id=item.leugeName }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.leugeName })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.leugeName)
+                </td>
+                <td>
+                    @if ((String)Session["power"] == "admin")
+                    {
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.leugeName })
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.leugeName })
+                        </p>
+                    }
+                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+
+                        @Html.ActionLink("Details", "Details", new { id = item.leugeName })
+                    </p>
+
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>

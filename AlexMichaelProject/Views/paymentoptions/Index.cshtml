@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AlexMichaelProject.Models.paymentoption>
+
+@{
+//Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Credit Card Number
+            </th>
+            <th>
+                Credit Card Company
+            </th>
+            <th>
+                Expired Date
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        string cNumber = item.creditcardnumber + "";
+                        Char[] temp = cNumber.ToCharArray();
+                        for (int i = 0; i < temp.Length - 4; i++)
+                        {
+                            temp[i] = '*';
+                        }
+                        String number = "";
+                        for (int j = 0; j < temp.Length; j++)
+                        {
+                            number = number + temp[j];
+                        }
+                    }
+
+                    @number.ToString()
+                    @*@Html.DisplayFor(modelItem => item.creditcardnumber)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.creditcardcompany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.expireddate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.creditcardnumber }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.creditcardnumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.creditcardnumber })
+                </td>
+            </tr>
+                        }
+
+    </table>
+</body>
+</html>

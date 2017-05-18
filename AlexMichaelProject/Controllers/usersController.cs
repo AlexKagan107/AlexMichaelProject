@@ -37,6 +37,7 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.usercreditcards = db.paymentoptions.FindAsync(id);
             return View(user);
         }
 
@@ -219,5 +220,46 @@ namespace AlexMichaelProject.Controllers
             Session.Abandon();
             return RedirectToAction("Login");
         }
+
+
+
+        
+
+        public ActionResult AddCardToUser()
+        {
+            ViewBag.username = new SelectList(db.users, "username", "username");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> addCardToUser([Bind(Include = "username,cardnumber")] CardBelongsTo model)
+        {
+            if (ModelState.IsValid)
+            {
+                paymentoption card = await db.paymentoptions.FindAsync(model.cardnumber);
+                
+                user user = await db.users.FindAsync(model.username);
+                user.paymentoptions.Add(card);
+                await db.SaveChangesAsync();
+                return RedirectToAction("AddCardToUser");
+            }
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> addCardToUser2(string username, string teamName)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        team club = await db.teams.FindAsync(teamName);
+        //        user user = await db.users.FindAsync(username);
+        //        user.teams.Add(club);
+        //        await db.SaveChangesAsync();
+        //        return RedirectToAction("AddClubToUser");
+        //    }
+        //    return View();
+        //}
     }
 }

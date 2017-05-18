@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <title>leuge @Model.leugeName</title>
 </head>
 <body>
     <div>
@@ -25,9 +25,13 @@
             </dd>
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.leugeName }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div style="margin-left:50px;">
+        <p class="btn btn-primary btn-md" style="background-color:wheat;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.leugeName })
+        </p>
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </body>
 </html>

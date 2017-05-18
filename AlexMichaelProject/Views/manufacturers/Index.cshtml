@@ -12,9 +12,12 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @if ((String)Session["power"] == "admin")
+    {
+        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
     <table class="table">
         <tr>
             <th>
@@ -36,9 +39,19 @@
                     <a href=http://@Html.DisplayFor(modelItem => item.msite)>@Html.DisplayFor(modelItem => item.msite)</a>
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.mname }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.mname }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.mname })
+                    @if ((String)Session["power"] == "admin")
+                    {
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.mname })
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.mname })
+                        </p>
+                    }
+                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+
+                        @Html.ActionLink("Details", "Details", new { id = item.mname })
+                    </p>
                 </td>
             </tr>
         }

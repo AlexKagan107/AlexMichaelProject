@@ -1,10 +1,7 @@
 ﻿@model AlexMichaelProject.Models.user
-
 @{
-    //Layout = null;
     ViewBag.Title = "Details";
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -14,92 +11,51 @@
 </head>
 <body>
     <div>
-        <h4>user</h4>
+        <h4>user: @Model.username</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @*@Html.DisplayNameFor(model => model.username)*@
-                User Name:
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.username)
-            </dd>
-            <dt>
-                @*@Html.DisplayNameFor(model => model.password*@
-                Password:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.password)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.fName)*@
-                Firs Name:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.fName)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.fLname)*@
-                Last Name:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.fLname)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.adress)*@
-                Adress:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.adress)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.phoneNumber)*@
-                Phone number:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.phoneNumber)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.mail)*@
-                E-mail:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.mail)
-            </dd>
-    
-            <dt>
-                @*@Html.DisplayNameFor(model => model.favoriteClub)*@
-                Favorite Club:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.favoriteClub)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.isadmin)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.isadmin)
-            </dd>
-    
+            <dt>User Name:</dt>
+            <dd>@Html.DisplayFor(model => model.username)</dd>
+            <dt>Password:</dt>
+            <dd>@Html.DisplayFor(model => model.password)</dd>
+            <dt>First Name:</dt>
+            <dd>@Html.DisplayFor(model => model.fName)</dd>
+            <dt>Last Name:</dt>
+            <dd>@Html.DisplayFor(model => model.fLname)</dd>
+            <dt>Adress:</dt>
+            <dd>@Html.DisplayFor(model => model.adress)</dd>
+            <dt>Phone number:</dt>
+            <dd>@Html.DisplayFor(model => model.phoneNumber)</dd>
+            <dt>E-mail:</dt>
+            <dd>@Html.DisplayFor(model => model.mail)</dd>
+            <dt>Favorite Club:</dt>
+            <dd>@Html.DisplayFor(model => model.favoriteClub)</dd>
+            @if ((String)Session["power"] == "admin")
+            {
+                <dt>@Html.DisplayNameFor(model => model.isadmin)</dt>
+                <dd>@Html.DisplayFor(model => model.isadmin)</dd>
+            }
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.username }) |
-        @Html.ActionLink("Back to List", "Index")
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.username })
     </p>
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("Manage My Clubs", "AddClubToUser", new { id = Model.username })
+    </p>
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("My Credit Cards", "ShowCreditCards", new { id = Model.username })
+    </p>
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("Add Credit Card", "AddCardToUser", new { id = Model.username })
+    </p>
+
+    @if ((String)Session["power"] == "admin")
+    {
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+
 </body>
 </html>

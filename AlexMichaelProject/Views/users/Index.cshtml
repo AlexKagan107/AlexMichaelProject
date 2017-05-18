@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.user>
 
 @{
-    //Layout = null;
     ViewBag.Title = "Index";
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -12,89 +10,41 @@
     @*<meta name="viewport" content="width=device-width" />*@
     <title>Index</title>
 </head>
-
 <body>
     <div class="panel panel-danger">
         <div class="col-md-3" style="margin-top:20px">
             @{ Html.RenderAction("SideMenu", "Home");}
         </div>
-
         <div class="col-md-9">
-
             <br />
             <p>
                 @Html.ActionLink("Create New", "Create")
             </p>
             <table class="table">
                 <tr>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.username)*@
-                        User Name
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.password)*@
-                        Password
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.fName)*@
-                        Firs Name
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.fLname)*@
-                        Last Name
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.adress)*@
-                        Adress
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.phoneNumber)*@
-                        Phone Number
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.mail)*@
-                        E-Mail
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.favoriteClub)*@
-                        Favorite Club
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.isadmin)
-                    </th>
-                    <th></th>
+                    <th>User Name</th>
+                    <th>Password</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Adress</th>
+                    <th>Phone Number</th>
+                    <th>E-Mail</th>
+                    <th>Favorite Club</th>
+                    <th>IsAdmin?</th>
                 </tr>
 
                 @foreach (var item in Model)
             {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.username)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.password)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fLname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.adress)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.phoneNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.mail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.favoriteClub)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.isadmin)
-                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.password)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.fLname)</td>
+                        <td>@Html.DisplayFor(modelItem => item.adress)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.mail)</td>
+                        <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
+                        <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.username }) |
                             @Html.ActionLink("Details", "Details", new { id = item.username }) |

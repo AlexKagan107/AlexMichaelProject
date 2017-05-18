@@ -1,0 +1,66 @@
+﻿@model AlexMichaelProject.Models.match
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>match</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.stadium)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.stadium)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.league)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.league)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.date)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.team.leuge)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.team.leuge)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.team1.leuge)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.team1.leuge)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.matchID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

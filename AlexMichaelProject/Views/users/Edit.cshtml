@@ -22,13 +22,13 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>user</h4>
+            <h4>Edit user:@Model.username</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.username)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.username,"Username:",htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.password,"Password:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.fName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.fName,"Firstname:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fName, "", new { @class = "text-danger" })
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.fLname, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.fLname,"Lastname:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.fLname, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fLname, "", new { @class = "text-danger" })
@@ -60,7 +60,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.adress, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.adress,"Adress:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.adress, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.adress, "", new { @class = "text-danger" })
@@ -68,7 +68,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.phoneNumber,"Phone Number:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.mail, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.mail,"Mail:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.mail, "", new { @class = "text-danger" })
@@ -92,31 +92,36 @@
                 </div>*@
 
             <div class="form-group">
-                @Html.LabelFor(model => model.favoriteClub, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.favoriteClub,"Favorite Club:", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("favoriteClub", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.favoriteClub, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.isadmin, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.isadmin, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.isadmin, "", new { @class = "text-danger" })
+            @if ((String)Session["power"] == "admin")
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.isadmin,"IsAdmin:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.isadmin, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.isadmin, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-
+            }
+            else {
+                <input type="hidden" name="isadmin" value=@Session["power"] />
+            }
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />
+                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
                 </div>
             </div>
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    
 </body>
 </html>
