@@ -59,15 +59,23 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "username,password,fName,fLname,adress,phoneNumber,mail,favoriteClub,isadmin")] user user)
         {
+            string result = "true";
             if (ModelState.IsValid)
             {
-                db.users.Add(user);
-                await db.SaveChangesAsync();
-                await AddClubToUser2(user.username, user.favoriteClub);
-                return RedirectToAction("Index");
+                user dbUser = await db.users.FindAsync(user.username);
+                if(dbUser == null) { 
+                    db.users.Add(user);
+                    await db.SaveChangesAsync();
+                    await AddClubToUser2(user.username, user.favoriteClub);
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
             }
-
-            return View(user);
+            //return View(user);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: users/Edit/5
@@ -212,7 +220,7 @@ namespace AlexMichaelProject.Controllers
                     result = "admin";
                 }
                 else { result = "user"; }
-                
+
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -227,7 +235,7 @@ namespace AlexMichaelProject.Controllers
 
 
 
-        
+
 
         public ActionResult AddCardToUser()
         {
@@ -242,7 +250,7 @@ namespace AlexMichaelProject.Controllers
             if (ModelState.IsValid)
             {
                 paymentoption card = await db.paymentoptions.FindAsync(model.cardnumber);
-                
+
                 user user = await db.users.FindAsync(model.username);
                 user.paymentoptions.Add(card);
                 await db.SaveChangesAsync();
@@ -269,7 +277,7 @@ namespace AlexMichaelProject.Controllers
         public async void userCreditCards(String username)
         {
             user users = await db.users.FindAsync(username);
-            paymentoption[] creditCards= users.paymentoptions.ToArray();
+            paymentoption[] creditCards = users.paymentoptions.ToArray();
             ViewBag.userCreditCards = creditCards;
         }
     }
