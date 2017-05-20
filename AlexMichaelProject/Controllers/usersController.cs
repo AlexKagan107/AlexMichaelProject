@@ -26,7 +26,7 @@ namespace AlexMichaelProject.Controllers
         }
         public async Task<ActionResult> showcart()
         {
-            return View("showcart");
+            return View(await db.users.ToListAsync());
         }
 
         // GET: users/Details/5

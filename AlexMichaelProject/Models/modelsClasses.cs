@@ -8,8 +8,7 @@ namespace AlexMichaelProject.Models
     public class modelsClasses
     {
         public user user { get; set; }
-        public paymentoption[] creditCards { get; set; }
+        public List<product>
 
-
-    }
+}
 }

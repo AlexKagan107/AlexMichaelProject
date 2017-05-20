@@ -139,7 +139,7 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
-        public async Task<ActionResult> addToCart(int prodoctID)
+        public async Task<ActionResult> addToCart(string id)
         {
             String username = (String)Session["username"];
             List<product> cart;
@@ -151,13 +151,13 @@ namespace AlexMichaelProject.Controllers
             {
                 cart = (List<product>)Session[username + "-cart"];
             }
-            product temp = await db.products.FindAsync(prodoctID);
+            product temp = await db.products.FindAsync(id);
             if (temp != null)
             {
                 cart.Add(temp);
                 Session.Add(username + "-cart", cart);
             }
-            return RedirectToAction("users/showcart");
+            return RedirectToAction("http://localhost:60323/users/showcart");
         }
     }
 }

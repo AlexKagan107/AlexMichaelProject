@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AlexMichaelProject.Models.product>
+﻿@*@model IEnumerable<AlexMichaelProject.Models.product>*@
+@model IEnumerable<System.Collections.Generic.List<AlexMichaelProject.Models.product>>
 
 <!DOCTYPE html>
 
@@ -8,7 +9,9 @@
     <title>Cart</title>
 </head>
 <body>
+    
     @{ 
+        
         List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session[(String)Session["username"]+"-cart"];
     }
     <table class="table">
@@ -29,7 +32,7 @@
                 Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.size)
+                Size
             </th>
             <th>
                 Description
@@ -39,52 +42,52 @@
             </th>
         </tr>
 
-        @foreach (var item in Model)
-            {
+        @for (int i=0;i< CartItems.Capacity;i++)
+        {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.product1)
+                    @Html.DisplayFor(modelItem => CartItems[i].product1)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.manufacturer)
+                    @Html.DisplayFor(modelItem => CartItems[i].manufacturer)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.clubName)
+                    @Html.DisplayFor(modelItem => CartItems[i].clubName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.type)
+                    @Html.DisplayFor(modelItem => CartItems[i].type)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.cost)
+                    @Html.DisplayFor(modelItem => CartItems[i].cost)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.size)
+                    @Html.DisplayFor(modelItem => CartItems[i].size)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.description)
+                    @Html.DisplayFor(modelItem => CartItems[i].description)
                 </td>
                 <td>
 
-                    <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
+                    <img src=@Html.DisplayFor(modelItem => CartItems[i].photo) style="width:40px;height:40px;" />
                 </td>
                 <td>
                     @if ((String)Session["power"] == "user")
                     {
 
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
-                            @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.product1 })
+                            @Html.ActionLink("Add To Cart", "AddToCart", new { id = CartItems[i].product1 })
                         </p>
                     }
                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
-                        @Html.ActionLink("Details", "Details", new { id = item.product1 })
+                        @Html.ActionLink("Details", "Details", new { id = CartItems[i].product1 })
                     </p>
                     @if ((String)Session["power"] == "admin")
                     {
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.product1 })
+                            @Html.ActionLink("Edit", "Edit", new { id = CartItems[i].product1 })
                         </p>
                         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                            @Html.ActionLink("Delete", "Delete", new { id = item.product1 })
+                            @Html.ActionLink("Delete", "Delete", new { id = CartItems[i].product1 })
                         </p>
                     }
                 </td>
