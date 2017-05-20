@@ -80,7 +80,7 @@
                         </p>
 
                         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                            @Html.ActionLink("Remove From Cart", "Delete", new { id = item.product1 })
+                            @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
                         </p>
                     </td>
                 </tr>

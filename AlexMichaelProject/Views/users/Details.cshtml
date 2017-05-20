@@ -55,7 +55,12 @@
 
                         <td>@Html.DisplayFor(modelItem => item.creditcardcompany)</td>
 
-                        <td>@Html.DisplayFor(modelItem => item.expireddate)</td>
+                        <td>
+                        @{
+                            string date = item.expireddate.ToString("dd/MM/yyyy");
+                        }
+                        @date
+                        </td>
 
                         <td>
                             
@@ -107,7 +112,9 @@
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Add Credit Card", "AddCardToUser", new { id = Model.username })
     </p>
-
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("My Items", "index", "purchases", new { id = Model.username },null)
+    </p>
     @if ((String)Session["power"] == "admin")
     {
         <p class="btn btn-primary btn-md">

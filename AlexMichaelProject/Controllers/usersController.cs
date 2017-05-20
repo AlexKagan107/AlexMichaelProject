@@ -289,5 +289,44 @@ namespace AlexMichaelProject.Controllers
             paymentoption[] creditCards = users.paymentoptions.ToArray();
             ViewBag.userCreditCards = creditCards;
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> BuyCart(int paymentoptions)
+        {
+            if (ModelState.IsValid)
+            {
+                List<product> cartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
+                string username = (string)Session["username"];
+                for (int i = 0; i < cartItems.Count; i++)
+                {
+                    int j = 0;
+                    purchase temp = new purchase();
+                    temp.username = username;
+                    temp.product = cartItems.ElementAt(i).product1;
+                    temp.creditcardnumber = paymentoptions;
+                    temp.dateOfPurchase = DateTime.Today;
+                    Boolean flag = false;
+                    while (flag == false)
+                    {
+                        purchase test = new purchase();
+                        test = await db.purchases.FindAsync(j);
+                        if (test == null)
+                        {
+                            flag = true;
+                        }
+                        else
+                            j++;
+
+                    }
+                    temp.dealID = j;
+                    db.purchases.Add(temp);
+                }
+                Session["cart"] = null;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "products");
+            }
+            return View();
+        }
     }
 }

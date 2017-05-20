@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.purchase>
 
-@{
-    //Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -12,9 +9,6 @@
     <title>Index</title>
 </head>
 <body>
-    @*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
     <table class="table">
         <tr>
             <th>
@@ -30,37 +24,40 @@
                 Date of purchase
             </th>
             <th>
-                Purchase Number
+                DealID
             </th>
             
             <th></th>
         </tr>
     
     @foreach (var item in Model) {
+        if(Session["username"].Equals(item.username)|| Session["power"].Equals("admin")) { 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.product1)
+                @Html.DisplayFor(modelItem => item.product1.product1)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.creditcardnumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dateOfPurchase)
+                @{ 
+                    string date= item.dateOfPurchase.ToString("dd/MM/yyyy");
+                }
+                
+                @date
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dealID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.dealID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.dealID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.dealID })
+                @Html.ActionLink("Details", "Details", "Products", new { id = item.product1.product1 }, null)
             </td>
         </tr>
+        }
     }
-    
     </table>
 </body>
 </html>

@@ -29,7 +29,11 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.expireddate)
+                @{
+                    string date = Model.expireddate.ToString("dd/MM/yyyy");
+                }
+
+                @date
             </dd>
     
         </dl>

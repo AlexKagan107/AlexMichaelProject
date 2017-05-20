@@ -54,7 +54,11 @@
                     @Html.DisplayFor(modelItem => item.creditcardcompany)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.expireddate)
+                    @{
+                        string date = item.expireddate.ToString("dd/MM/yyyy");
+                    }
+
+                    @date
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.creditcardnumber }) |

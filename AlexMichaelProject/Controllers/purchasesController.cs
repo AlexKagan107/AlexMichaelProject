@@ -66,6 +66,9 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
+        
+
+
         // GET: purchases/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {

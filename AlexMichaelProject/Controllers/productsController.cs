@@ -158,9 +158,31 @@ namespace AlexMichaelProject.Controllers
             {
                 cart.Add(temp);
                 Session.Add("cart", cart);
-                ViewBag.cart = cart;
             }
             return RedirectToAction("showcart","users");
+        }
+
+        public async Task<ActionResult> removeFromCart(string id)
+        {
+            String username = (String)Session["username"];
+            
+            List<product>cart = (List<product>)Session["cart"];
+            
+            product temp = await db.products.FindAsync(id);
+            List<product> tempList = new List<product>();
+
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (cart.ElementAt(i).product1.Equals(temp.product1))
+                {
+                    cart.RemoveAt(i);
+                    break;
+                }
+                    
+            }
+            Session["card"] = cart;
+
+            return RedirectToAction("showcart", "users");
         }
     }
 }
