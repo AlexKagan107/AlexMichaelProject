@@ -15,6 +15,15 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
+        public async Task<ActionResult> BuyCart()
+        {
+            string username = (string)Session["username"];
+            user tempuser = await db.users.FindAsync(username);
+            ViewBag.paymentoptions = new SelectList(tempuser.paymentoptions, "creditcardnumber", "creditcardnumber");
+        
+            return View();
+        }
+
         public ActionResult SideMenu()
         {
             return PartialView("SideMenu");
@@ -26,7 +35,7 @@ namespace AlexMichaelProject.Controllers
         }
         public async Task<ActionResult> showcart()
         {
-            return View(await db.users.ToListAsync());
+            return View(await db.products.ToListAsync());
         }
 
         // GET: users/Details/5

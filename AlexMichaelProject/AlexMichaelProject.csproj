@@ -172,7 +172,6 @@
     <Compile Include="Models\match.cs">
       <DependentUpon>projectDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\modelsClasses.cs" />
     <Compile Include="Models\paymentoption.cs">
       <DependentUpon>projectDB.tt</DependentUpon>
     </Compile>
@@ -312,6 +311,7 @@
     <Content Include="Views\matches\Edit.cshtml" />
     <Content Include="Views\matches\Index.cshtml" />
     <Content Include="Views\users\showcart.cshtml" />
+    <Content Include="Views\users\BuyCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

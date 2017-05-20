@@ -15,6 +15,8 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
+        
+
         public ActionResult SideMenu()
         {
             return PartialView("SideMenu");
@@ -143,21 +145,22 @@ namespace AlexMichaelProject.Controllers
         {
             String username = (String)Session["username"];
             List<product> cart;
-            if (Session[username + "-cart"] == null)
+            if (Session["cart"] == null)
             {
                 cart = new List<product>();
             }
             else
             {
-                cart = (List<product>)Session[username + "-cart"];
+                cart = (List<product>)Session["cart"];
             }
             product temp = await db.products.FindAsync(id);
             if (temp != null)
             {
                 cart.Add(temp);
-                Session.Add(username + "-cart", cart);
+                Session.Add("cart", cart);
+                ViewBag.cart = cart;
             }
-            return RedirectToAction("http://localhost:60323/users/showcart");
+            return RedirectToAction("showcart","users");
         }
     }
 }
