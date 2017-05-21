@@ -20,7 +20,7 @@ namespace AlexMichaelProject.Controllers
             string username = (string)Session["username"];
             user tempuser = await db.users.FindAsync(username);
             ViewBag.paymentoptions = new SelectList(tempuser.paymentoptions, "creditcardnumber", "creditcardnumber");
-        
+
             return View();
         }
 
@@ -72,7 +72,8 @@ namespace AlexMichaelProject.Controllers
             if (ModelState.IsValid)
             {
                 user dbUser = await db.users.FindAsync(user.username);
-                if(dbUser == null) { 
+                if (dbUser == null)
+                {
                     db.users.Add(user);
                     await db.SaveChangesAsync();
                     await AddClubToUser2(user.username, user.favoriteClub);
@@ -110,13 +111,16 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "username,password,fName,fLname,adress,phoneNumber,mail,favoriteClub,isadmin")] user user)
         {
+            string result = "true";
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                result = "true";
+                //return RedirectToAction("Index");
             }
-            return View(user);
+            //return View(user);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: users/Delete/5
@@ -135,16 +139,6 @@ namespace AlexMichaelProject.Controllers
         }
 
         // POST: users/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(string id)
-        //{
-        //    user user = await db.users.FindAsync(id);
-        //    db.users.Remove(user);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -156,7 +150,6 @@ namespace AlexMichaelProject.Controllers
                 users.teams.Remove(clubArray[i]);
             }
             db.users.Remove(users);
-
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

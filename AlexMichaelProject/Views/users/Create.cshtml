@@ -128,11 +128,11 @@
                 success: function (response) {
                     debugger
                     if (response == "true") {
-                        alert("User added successfully");
+                        alert("User deleteed successfully");
                         window.location.href = "/users/Index";
                     }
-                    else if (response == "false") {
-                        alert("Fuck YOU");
+                    else  {
+                        alert("Sorry the Username Not Available! Please choose a different Username");
                     }
                 }
             })
