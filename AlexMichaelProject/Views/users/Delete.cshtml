@@ -96,16 +96,16 @@
 
 
         <form id="myForm" action=@Url.Action("DeleteConfirmed","users") method="post">
-            @using (Html.BeginForm())
-            {
+            @*@using (Html.BeginForm())
+            {*@
                 @Html.AntiForgeryToken()
 
-                <div class="form-actions no-color" >
+                <div class="form-actions no-color">
                     <input type="hidden" value=@Model.username name="id" />
                     <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
                     @Html.ActionLink("Back to List", "Index")
                 </div>
-            }
+            @*}*@
         </form>
     </div>
 
@@ -116,15 +116,15 @@
     <script>
         $(document).ready(function () {
             $("#btnDelete").click(function () {
-                // debugger
+                 //debugger
                 var data = $("#myForm").serialize();
 
                 $.ajax({
                     type: "POST",
-                    url: "/users/DeleteConfirmed",
+                    url: "/users/Delete",
                     data: data,
                     success: function (response) {
-                        // debugger
+                         //debugger
                         if (response == "true") {
                             alert("User Deleteed successfully");
                             window.location.href = "/users/Index";

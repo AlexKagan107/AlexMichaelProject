@@ -139,7 +139,8 @@ namespace AlexMichaelProject.Controllers
         }
 
         // POST: users/Delete/5
-        [HttpPost, ActionName("Delete")]
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
@@ -151,7 +152,9 @@ namespace AlexMichaelProject.Controllers
             }
             db.users.Remove(users);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string result = "true";
+            //return RedirectToAction("Index");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
