@@ -144,16 +144,24 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            user users = await db.users.FindAsync(id);
-            team[] clubArray = users.teams.ToArray<team>();
-            for (int i = 0; i < clubArray.Length; i++)
-            {
-                users.teams.Remove(clubArray[i]);
-            }
-            db.users.Remove(users);
-            await db.SaveChangesAsync();
             string result = "true";
-            //return RedirectToAction("Index");
+            try
+            {
+                user users = await db.users.FindAsync(id);
+                team[] clubArray = users.teams.ToArray<team>();
+                for (int i = 0; i < clubArray.Length; i++)
+                {
+                    users.teams.Remove(clubArray[i]);
+                }
+                db.users.Remove(users);
+                await db.SaveChangesAsync();
+                result = "true";
+                //return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                result = "false";
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
