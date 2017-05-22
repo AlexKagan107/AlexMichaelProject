@@ -157,6 +157,7 @@
     <Compile Include="Controllers\productsController.cs" />
     <Compile Include="Controllers\purchasesController.cs" />
     <Compile Include="Controllers\teamsController.cs" />
+    <Compile Include="Controllers\ticketsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -312,6 +313,11 @@
     <Content Include="Views\matches\Index.cshtml" />
     <Content Include="Views\users\showcart.cshtml" />
     <Content Include="Views\users\BuyCart.cshtml" />
+    <Content Include="Views\tickets\Create.cshtml" />
+    <Content Include="Views\tickets\Delete.cshtml" />
+    <Content Include="Views\tickets\Details.cshtml" />
+    <Content Include="Views\tickets\Edit.cshtml" />
+    <Content Include="Views\tickets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
