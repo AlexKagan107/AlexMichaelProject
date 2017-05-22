@@ -118,7 +118,7 @@
 <script>
     $(document).ready(function () {
         $("#btnCreate").click(function () {
-            debugger
+            //debugger
             var data = $("#myForm").serialize();
 
             $.ajax({
@@ -127,7 +127,7 @@
                 data: data,
                 async: true,
                 success: function (response) {
-                    debugger
+                    //debugger
                     if (response == "true") {
                         alert("User Created successfully!");
                         window.location.href = "/users/Index";
