@@ -1,0 +1,81 @@
+﻿@model IEnumerable<AlexMichaelProject.Models.ticket>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                TicketID
+            </th>
+            <th>
+                MatchID
+            </th>
+            <th>
+                Seat Number
+            </th>
+            <th>
+                Seat Type
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ticketID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.matchID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.seatNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.seatType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cost)
+                </td>
+                <td>
+                    @if ((String)Session["power"] == "user")
+                {
+
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+                            @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.ticketID })
+                        </p>
+                    }
+                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+                        @Html.ActionLink("Details", "Details", new { id = item.ticketID })
+                    </p>
+                    @if ((String)Session["power"] == "admin")
+                {
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ticketID })
+                        </p>
+
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ticketID })
+                        </p>
+                    }
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -91,11 +91,11 @@
                     <td>@Html.DisplayFor(modelItem => item.teamName)</td>
 
                     <td>@Html.DisplayFor(modelItem => item.leuge)</td>
-
+                
                     <td>
-
-                        @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
-                        @Html.ActionLink("Delete", "DeleteFan", "users", new { id = item.teamName }, null)
+                        <p class="btn btn-default" style="background-color:grey;">
+                            @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
+                        </p>
                     </td>
                 </tr>
             }
@@ -131,24 +131,24 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#btnSave").click(function () {
-            //debugger
+        $("#btnDelete").click(function () {
+            debugger
             var data = $("#myForm").serialize();
 
             $.ajax({
                 type: "POST",
-                url: "/users/Edit",
+                url: "/users/Details/5",
                 data: data,
                 async: true,
                 success: function (response) {
-                    // debugger
+                    debugger
                     if (response == "true") {
-                        alert("Edit successfully");
-                        //window.location.href = "/users/Index";
+                        alert("Deleteed successfully");
+                        window.location.href = "/users/Details";
                     }
-                    //else if (response == "false") {
-                    //    alert("Sorry the Username Not Available! Please choose a different Username");
-                    //}
+                    else {
+                        alert("Sorry, This Team can not be Deleted!!!");
+                    }
                 }
             })
         })
