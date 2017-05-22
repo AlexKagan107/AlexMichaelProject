@@ -331,6 +331,7 @@
     <Content Include="Views\tickets\Details.cshtml" />
     <Content Include="Views\tickets\Edit.cshtml" />
     <Content Include="Views\tickets\Index.cshtml" />
+    <Content Include="Views\tickets\Buy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

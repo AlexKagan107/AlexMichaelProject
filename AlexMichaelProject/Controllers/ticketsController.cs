@@ -22,6 +22,14 @@ namespace AlexMichaelProject.Controllers
             return View(await tickets.ToListAsync());
         }
 
+
+        public async Task<ActionResult> Buy(int id)
+        {
+            match temp = await db.matches.FindAsync(id);
+            List<ticket> tickets = temp.tickets.ToList();
+            return View(tickets.ToList());
+        }
+
         // GET: tickets/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -41,7 +49,7 @@ namespace AlexMichaelProject.Controllers
         public ActionResult Create()
         {
             ViewBag.matchID = new SelectList(db.matches, "matchID", "matchID");
-            
+
             return View();
         }
 
@@ -65,14 +73,14 @@ namespace AlexMichaelProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(int matchID, int seatNumber,int cost,string seatType,string amount)
+        public async Task<ActionResult> Create(int matchID, int seatNumber, int cost, string seatType, string amount)
         {
             if (ModelState.IsValid)
             {
                 int quanity = Int32.Parse(amount);
                 int[] ticketsID = new int[quanity];
                 int counter = 0;
-                for(int i=0; counter < quanity; i++)
+                for (int i = 0; counter < quanity; i++)
                 {
                     ticket temp = new ticket();
                     temp = await db.tickets.FindAsync(i);
@@ -81,12 +89,12 @@ namespace AlexMichaelProject.Controllers
                         ticketsID[counter] = i;
                         counter++;
                     }
-                    
+
                 }
                 match tempMatch = await db.matches.FindAsync(matchID);
-                
-                
-                for(int j=0;j< quanity; j++)
+
+
+                for (int j = 0; j < quanity; j++)
                 {
                     ticket ticket = new ticket();
                     ticket.matchID = tempMatch.matchID;
@@ -175,6 +183,42 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
-       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> buyTicket(int paymentoptions, int ticketID)
+        {
+            if (ModelState.IsValid)
+            {
+
+                string username = (string)Session["username"];
+
+                int j = 0;
+                purchase temp = new purchase();
+                temp.username = username;
+                temp.product = ticketID+" ";
+                temp.creditcardnumber = paymentoptions;
+                temp.dateOfPurchase = DateTime.Today;
+                Boolean flag = false;
+                while (flag == false)
+                {
+                    purchase test = new purchase();
+                    test = await db.purchases.FindAsync(j);
+                    if (test == null)
+                    {
+                        flag = true;
+                    }
+                    else
+                        j++;
+
+                }
+                temp.dealID = j;
+                db.purchases.Add(temp);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "products");
+            }
+            return View();
+        }
+
+
     }
 }

@@ -1,9 +1,5 @@
 ﻿@model AlexMichaelProject.Models.match
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -13,11 +9,35 @@
 </head>
 <body>
     <div>
-        <h4>match</h4>
+        <h4>match between @Model.teamA Vs @Model.teamB at @Model.stadium, Time:@Model.date</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.stadium)
+                MatchID:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.matchID)
+            </dd>
+    
+            <dt>
+                Team A:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.teamA)
+            </dd>
+    
+            <dt>
+                Team B:
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.teamB)
+            </dd>
+    
+            <dt>
+                Stadium:
             </dt>
     
             <dd>
@@ -25,41 +45,27 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.league)
+                League:
             </dt>
     
             <dd>
                 @Html.DisplayFor(model => model.league)
             </dd>
-    
+
             <dt>
-                @Html.DisplayNameFor(model => model.date)
+                Date:
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.date)
             </dd>
     
-            <dt>
-                @Html.DisplayNameFor(model => model.team.leuge)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.team.leuge)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.team1.leuge)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.team1.leuge)
-            </dd>
-    
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.matchID }) |
+    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+        @Html.ActionLink("Buy Tickets", "Buy","tickets", new { id = Model.matchID },null)
+    </p>
+    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>

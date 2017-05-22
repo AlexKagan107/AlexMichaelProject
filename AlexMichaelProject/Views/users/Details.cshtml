@@ -91,12 +91,11 @@
                     <td>@Html.DisplayFor(modelItem => item.teamName)</td>
 
                     <td>@Html.DisplayFor(modelItem => item.leuge)</td>
-
+                
                     <td>
-
-                        @*@Html.ActionLink("Edit", "Edit", "teams", new { id = item.teamName }, null)*@
-                        @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
-                        @Html.ActionLink("Delete", "DeleteFan", "teams", new { id = item.teamName }, null)
+                        <p class="btn btn-default" style="background-color:grey;">
+                            @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
+                        </p>
                     </td>
                 </tr>
             }
@@ -127,3 +126,36 @@
 
 </body>
 </html>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnDelete").click(function () {
+            debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/users/Details/5",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("Deleteed successfully");
+                        window.location.href = "/users/Details";
+                    }
+                    else {
+                        alert("Sorry, This Team can not be Deleted!!!");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
