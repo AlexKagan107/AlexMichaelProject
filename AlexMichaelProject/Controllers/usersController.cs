@@ -33,6 +33,7 @@ namespace AlexMichaelProject.Controllers
         {
             return View(await db.users.ToListAsync());
         }
+
         public async Task<ActionResult> showcart()
         {
             return View(await db.products.ToListAsync());
