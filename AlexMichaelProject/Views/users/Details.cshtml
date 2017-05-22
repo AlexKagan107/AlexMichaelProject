@@ -94,9 +94,9 @@
 
                     <td>
 
-                        @Html.ActionLink("Edit", "Edit", "teams", new { id = item.teamName }, null)
+                        @*@Html.ActionLink("Edit", "Edit", "teams", new { id = item.teamName }, null)*@
                         @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
-                        @Html.ActionLink("Delete", "Delete", "teams", new { id = item.teamName }, null)
+                        @Html.ActionLink("Delete", "DeleteFan", "teams", new { id = item.teamName }, null)
                     </td>
                 </tr>
             }
