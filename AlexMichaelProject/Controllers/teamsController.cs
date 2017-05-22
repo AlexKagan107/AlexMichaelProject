@@ -55,14 +55,24 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "teamName,leuge,homeStadium")] team team)
         {
+            string result = "true";
             if (ModelState.IsValid)
             {
-                db.teams.Add(team);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                team dbTeam = await db.teams.FindAsync(team.teamName);
+                if (dbTeam == null)
+                {
+                    db.teams.Add(team);
+                    await db.SaveChangesAsync();
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
             }
             ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
-            return View(team);
+            //return View(team);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: teams/Edit/5
@@ -88,14 +98,17 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "teamName,leuge,homeStadium")] team team)
         {
+            string result = "true";
             if (ModelState.IsValid)
             {
                 db.Entry(team).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                result = "true";
+                //return RedirectToAction("Index");
             }
             ViewBag.leuge = new SelectList(db.leuges, "leugeName", "leugeName");
-            return View(team);
+            //return View(team);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: teams/Delete/5
@@ -114,14 +127,25 @@ namespace AlexMichaelProject.Controllers
         }
 
         // POST: teams/Delete/5
-        [HttpPost, ActionName("Delete")]
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            team team = await db.teams.FindAsync(id);
-            db.teams.Remove(team);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string result = "true";
+            try
+            {
+                team team = await db.teams.FindAsync(id);
+                db.teams.Remove(team);
+                await db.SaveChangesAsync();
+                result = "true";
+                //return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

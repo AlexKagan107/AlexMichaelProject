@@ -2,7 +2,7 @@
 
 @{
     //Layout = null;
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Create";
 }
 
 <!DOCTYPE html>
@@ -128,11 +128,11 @@
                 success: function (response) {
                     debugger
                     if (response == "true") {
-                        alert("User deleteed successfully");
+                        alert("User Created successfully!");
                         window.location.href = "/users/Index";
                     }
                     else  {
-                        alert("Sorry the Username Not Available! Please choose a different Username");
+                        alert("Sorry the Username Not Available! Please choose a different Username.");
                     }
                 }
             })

@@ -246,10 +246,6 @@ namespace AlexMichaelProject.Controllers
             return RedirectToAction("Login");
         }
 
-
-
-
-
         public ActionResult AddCardToUser()
         {
             ViewBag.username = new SelectList(db.users, "username", "username");
