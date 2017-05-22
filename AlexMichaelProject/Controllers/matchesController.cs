@@ -40,8 +40,8 @@ namespace AlexMichaelProject.Controllers
         // GET: matches/Create
         public ActionResult Create()
         {
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge");
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge");
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName");
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
 
@@ -59,8 +59,8 @@ namespace AlexMichaelProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
@@ -76,8 +76,8 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
@@ -94,8 +94,8 @@ namespace AlexMichaelProject.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
