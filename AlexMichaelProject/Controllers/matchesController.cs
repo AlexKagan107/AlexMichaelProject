@@ -44,6 +44,7 @@ namespace AlexMichaelProject.Controllers
             ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
+        //תקנתי
 
         // POST: matches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
