@@ -121,16 +121,16 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/users/Delete",
+                    url: "/users/DeleteConfirmed",
                     data: data,
                     success: function (response) {
-                         //debugger
+                         debugger
                         if (response == "true") {
                             alert("User Deleteed successfully");
                             window.location.href = "/users/Index";
                         }
-                        else if (response == "false") {
-                            alert("Sorry, this Username can not be deleted");
+                        else{
+                            alert("Sorry, This Username can not be Deleted!!!");
                         }
                     }
                 })

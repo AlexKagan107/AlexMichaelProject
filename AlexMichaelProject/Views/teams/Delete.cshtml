@@ -1,7 +1,7 @@
 ﻿@model AlexMichaelProject.Models.team
 
 @{
-    //Layout = null;
+//Layout = null;
 }
 
 <!DOCTYPE html>
@@ -20,29 +20,63 @@
             <dt>
                 @Html.DisplayNameFor(model => model.leuge)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.leuge)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.homeStadium)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.homeStadium)
             </dd>
-    
+
         </dl>
-    
-        @using (Html.BeginForm()) {
+        <form id="myForm" action=@Url.Action("DeleteConfirmed","teams") method="post">
+            @*@using (Html.BeginForm())
+                {*@
             @Html.AntiForgeryToken()
-    
+
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <input type="hidden" value=@Model.teamName name="id" />
+                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
                 @Html.ActionLink("Back to List", "Index")
             </div>
-        }
+            @*}*@
+        </form>
     </div>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $("#btnDelete").click(function () {
+                 //debugger
+                var data = $("#myForm").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/teams/DeleteConfirmed",
+                    data: data,
+                    success: function (response) {
+                         debugger
+                        if (response == "true") {
+                            alert("Football Team Deleteed successfully");
+                            window.location.href = "/users/Index";
+                        }
+                        else{
+                            alert("Sorry, This Team can not be Deleted!!!");
+                        }
+                    }
+                })
+            })
+        })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
