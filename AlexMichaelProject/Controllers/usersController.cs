@@ -264,11 +264,17 @@ namespace AlexMichaelProject.Controllers
             if (ModelState.IsValid)
             {
                 paymentoption card = await db.paymentoptions.FindAsync(model.cardnumber);
-
-                user user = await db.users.FindAsync(model.username);
-                user.paymentoptions.Add(card);
-                await db.SaveChangesAsync();
-                result = "true";
+                if (card != null)
+                {
+                    user user = await db.users.FindAsync(model.username);
+                    user.paymentoptions.Add(card);
+                    await db.SaveChangesAsync();
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
                 //return RedirectToAction("AddCardToUser");
             }
             //return View();
