@@ -227,6 +227,7 @@ namespace AlexMichaelProject.Controllers
             {
                 Session["username"] = user.username;
                 Session["fullname"] = user.fName + " " + user.fLname;
+                Session["fanclub"] = user.favoriteClub;
                 Session["power"] = user.isadmin;
                 if (user.isadmin.Equals("admin"))
                 {

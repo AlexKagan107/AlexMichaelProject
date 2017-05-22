@@ -123,6 +123,7 @@
                     type: "POST",
                     url: "/users/DeleteConfirmed",
                     data: data,
+                    async: true,
                     success: function (response) {
                          debugger
                         if (response == "true") {

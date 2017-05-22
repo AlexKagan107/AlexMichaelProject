@@ -85,11 +85,12 @@
                 type: "POST",
                 url: "/teams/Edit",
                 data: data,
+                async: true,
                 success: function (response) {
                     // debugger
                     if (response == "true") {
                         alert("Edit successfully");
-                        window.location.href = "/teams/Index";
+                        //window.location.href = "/teams/Index";
                     }
                 }
             })
