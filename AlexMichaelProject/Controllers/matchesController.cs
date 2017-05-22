@@ -44,6 +44,7 @@ namespace AlexMichaelProject.Controllers
             ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
+        //תקנתי
 
         // POST: matches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -59,8 +60,8 @@ namespace AlexMichaelProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
@@ -76,8 +77,8 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
@@ -94,8 +95,8 @@ namespace AlexMichaelProject.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge", match.teamA);
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge", match.teamB);
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
             return View(match);
         }
 
