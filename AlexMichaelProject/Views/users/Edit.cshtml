@@ -140,11 +140,12 @@
                 type: "POST",
                 url: "/users/Edit",
                 data: data,
+                async: true,
                 success: function (response) {
                     // debugger
                     if (response == "true") {
                         alert("Edit successfully");
-                        window.location.href = "/users/Index";
+                        //window.location.href = "/users/Index";
                     }
                     //else if (response == "false") {
                     //    alert("Sorry the Username Not Available! Please choose a different Username");

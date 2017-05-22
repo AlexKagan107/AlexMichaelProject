@@ -7,8 +7,75 @@
         @{ Html.RenderAction("SideMenu", "Home");}
     </div>
 
-    <div class="col-md-9">
-        <img src="~/Content/Images/barca camp.jpg" class="img-rounded" style="width:95% ; height:85%"/>
-    </div>
+    @if ((string)Session["fanclub"] == "FC Barcelona")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/barca camp.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Chelsea")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/Chelsea.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "AC Milan")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/Milan1.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Man Unt")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/unated.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Juventus")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/juventus.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Real Madrid")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/madrid.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Dortmund")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/dortmund.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "Bayern Munchen")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/bayern.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if ((string)Session["fanclub"] == "PSG")
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/psg.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
+    @if (Session["fanclub"] == null)
+    {
+        <div class="col-md-9">
+            <img src="~/Content/Images/home4.jpg" class="img-rounded" style="width:95% ; height:85%" />
+        </div>
+    }
+
 </div>
 
