@@ -48,19 +48,63 @@ namespace AlexMichaelProject.Controllers
         // POST: tickets/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Create([Bind(Include = "ticketID,matchID,seatNumber,cost,seatType")] ticket ticket)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tickets.Add(ticket);
+        //        await db.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.matchID = new SelectList(db.matches, "matchID", "teamA", ticket.matchID);
+        //    return View(ticket);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ticketID,matchID,seatNumber,cost,seatType")] ticket ticket)
+        public async Task<ActionResult> Create(int matchID, int seatNumber,int cost,string seatType,string amount)
         {
             if (ModelState.IsValid)
             {
-                db.tickets.Add(ticket);
+                int quanity = Int32.Parse(amount);
+                int[] ticketsID = new int[quanity];
+                int counter = 0;
+                for(int i=0; counter < quanity; i++)
+                {
+                    ticket temp = new ticket();
+                    temp = await db.tickets.FindAsync(i);
+                    if (temp == null)
+                    {
+                        ticketsID[counter] = i;
+                        counter++;
+                    }
+                    
+                }
+                match tempMatch = await db.matches.FindAsync(matchID);
+                
+                
+                for(int j=0;j< quanity; j++)
+                {
+                    ticket ticket = new ticket();
+                    ticket.matchID = tempMatch.matchID;
+                    ticket.cost = cost;
+                    ticket.seatType = seatType;
+                    int seatNumberIndex = seatNumber;
+                    ticket.seatNumber = seatNumberIndex;
+                    seatNumberIndex++;
+                    ticket.ticketID = ticketsID[j];
+                    db.tickets.Add(ticket);
+                    await db.SaveChangesAsync();
+
+                }
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
 
-            ViewBag.matchID = new SelectList(db.matches, "matchID", "teamA", ticket.matchID);
-            return View(ticket);
         }
 
         // GET: tickets/Edit/5
