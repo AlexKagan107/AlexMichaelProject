@@ -185,15 +185,18 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddClubToUser([Bind(Include = "username,teamName")] FansOfClubs model)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 team club = await db.teams.FindAsync(model.teamName);
                 user user = await db.users.FindAsync(model.username);
                 user.teams.Add(club);
                 await db.SaveChangesAsync();
-                return RedirectToAction("AddClubToUser");
+                result = "true";
+                //return RedirectToAction("AddClubToUser");
             }
-            return View();
+            //return View();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -257,6 +260,7 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> addCardToUser([Bind(Include = "username,cardnumber")] CardBelongsTo model)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 paymentoption card = await db.paymentoptions.FindAsync(model.cardnumber);
@@ -264,9 +268,11 @@ namespace AlexMichaelProject.Controllers
                 user user = await db.users.FindAsync(model.username);
                 user.paymentoptions.Add(card);
                 await db.SaveChangesAsync();
-                return RedirectToAction("AddCardToUser");
+                result = "true";
+                //return RedirectToAction("AddCardToUser");
             }
-            return View();
+            //return View();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //[HttpPost]
