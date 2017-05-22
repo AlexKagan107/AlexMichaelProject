@@ -335,5 +335,30 @@ namespace AlexMichaelProject.Controllers
             }
             return View();
         }
+
+        // POST: teams/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteFan(string id)
+        {
+            string result = "true";
+            try
+            {
+                team team = await db.teams.FindAsync(id);
+
+                user usertemp = await db.users.FindAsync((string)Session["username"]);
+                usertemp.teams.Remove(team);
+                team.users.Remove(usertemp);
+                await db.SaveChangesAsync();
+                result = "true";
+                //return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
