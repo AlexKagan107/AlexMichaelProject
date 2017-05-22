@@ -40,8 +40,8 @@ namespace AlexMichaelProject.Controllers
         // GET: matches/Create
         public ActionResult Create()
         {
-            ViewBag.teamA = new SelectList(db.teams, "teamName", "leuge");
-            ViewBag.teamB = new SelectList(db.teams, "teamName", "leuge");
+            ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName");
+            ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
 
