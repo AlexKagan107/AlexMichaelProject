@@ -77,12 +77,6 @@
                         </td>
 
                         <td>
-
-                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
-                                @Html.ActionLink("Details", "Details", "products", new { id = item.product1 }, null)
-
-                            </p>
-
                             @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
                                 @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
                                 @Ajax.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, new AjaxOptions()
@@ -94,11 +88,16 @@
                                 </p>*@
 
                             @*<form id="myForm">*@
+                            <div class="col-md-offset-2 col-md-10">
                                 @Html.AntiForgeryToken()
                                 <div class="form-actions no-color">
                                     <input type="hidden" value=@item.product1 name="id" />
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
+                                        @Html.ActionLink("Details", "Details", "products", new { id = item.product1 }, null)
+                                    </p>
                                     <input type="button" value="Delete" class="btn btn-default" id="@item.product1" onclick="Click()" />
                                 </div>
+                            </div>
                             @*</form>*@
                         </td>
                     </tr>
@@ -137,39 +136,39 @@
 
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-         var tmp;
+<script type="text/javascript">
+    var tmp;
 
-        var Click = function () {
-            tmp = event.srcElement.id;
-            //$(document).ready(function () {
-            //$("#btnDelete").click(function () {
-            debugger
-            //var data = $("#myForm").serialize();
+    var Click = function () {
+        tmp = event.srcElement.id;
+        //$(document).ready(function () {
+        //$("#btnDelete").click(function () {
+        debugger
+        //var data = $("#myForm").serialize();
 
-            $.ajax({
-                type: "POST",
-                url: "/products/removeFromCart",
-                //data: data,
-                data: {id: tmp},
-                async: true,
-                success: function (response) {
-                    debugger
-                    if (response == "true") {
-                        alert("Deleteed successfully");
-                        window.location.href = "/users/showcart";
-                    }
-                    else {
-                        alert("Sorry, This Product can not be Deleted!!!");
-                    }
+        $.ajax({
+            type: "POST",
+            url: "/products/removeFromCart",
+            //data: data,
+            data: { id: tmp },
+            async: true,
+            success: function (response) {
+                debugger
+                if (response == "true") {
+                    alert("Deleteed successfully");
+                    window.location.href = "/users/showcart";
                 }
-            })
-            //})
-            //})
-        }
+                else {
+                    alert("Sorry, This Product can not be Deleted!!!");
+                }
+            }
+        })
+        //})
+        //})
+    }
 
-    </script>
+</script>
 
 
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
