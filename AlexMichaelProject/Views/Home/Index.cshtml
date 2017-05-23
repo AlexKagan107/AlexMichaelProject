@@ -79,18 +79,19 @@
             <img src="~/Content/Images/home4.jpg" class="img-rounded" style="width:95% ; height:85%" />
         </div>
     }
-    @*<div style="width:30%; float:left;">
-        @foreach (var item in Model)
-            if (item != null)
-            {
-                {
-                    <div>
-                        @Html.DisplayFor(modelItem => item.teamA) Vs @Html.DisplayFor(modelItem => item.teamB)
-                        Playing at:@Html.DisplayFor(modelItem => item.stadium) Date:@Html.DisplayFor(modelItem => item.date)
-                        @Html.ActionLink("Details", "Details", new { id = item.matchID })
-                    </div>
-                    }
-                }
-        </div>*@
+    
 
     </div>
+<div style="width:30%; float:right;">
+    @foreach (var item in Model)
+
+
+    {
+        <div style="float:right;">
+            @Html.DisplayFor(modelItem => item.teamA) Vs @Html.DisplayFor(modelItem => item.teamB)
+            Playing at:@Html.DisplayFor(modelItem => item.stadium) Date:@Html.DisplayFor(modelItem => item.date)
+            @Html.ActionLink("Details", "Details","matches", new { id = item.matchID },null)
+        </div>
+    }
+
+</div>
