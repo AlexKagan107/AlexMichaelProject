@@ -8,26 +8,59 @@
     <title>Purchase</title>
 </head>
 <body>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <div class="form-group">
-                @Html.LabelFor(model => model.paymentoptions, "chose credit card:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("paymentoptions", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.paymentoptions, "", new { @class = "text-danger" })
+    <form id="myForm">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.paymentoptions, "chose credit card:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("paymentoptions", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.paymentoptions, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <h4 class="control-label col-md-2">
-                Total Price to Pay: @Session["sum"]$
-            </h4>
-            <h4 class="btn btn-primary btn-md">
-                <input type="submit" value="Buy" class="btn btn-default" />
+                <h4 class="control-label col-md-2">
+                    Total Price to Pay: @Session["sum"]$
+                </h4>
+                <h4 class="btn btn-primary btn-md">
+                    <input type="button" value="Buy" class="btn btn-default" id="btnBuy" />
 
-            </h4>
-        </div>
-}
+                </h4>
+            </div>
+        }
+    </form>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnBuy").click(function () {
+            //debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/users/BuyCart",
+                data: data,
+                async: true,
+                success: function (response) {
+                    //debugger
+                    if (response == "true") {
+                        alert("Product successfully purchased!");
+                        window.location.href = "/products/Index";
+                    }
+                    else  {
+                        alert("Not Goog");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
