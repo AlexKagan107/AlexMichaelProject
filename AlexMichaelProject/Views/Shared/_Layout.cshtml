@@ -23,7 +23,14 @@
                     @if (Session["username"] != null)
                     {
                         <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>
-                        <li>@Html.ActionLink("My Cart", "showcart", "users")</li>
+                        if (Session["cartsize"]!=null && (int)Session["cartsize"] > 0) {
+                            string s = "My Cart,Items:" + (int)Session["cartsize"];
+                        <li>@Html.ActionLink(s,"showcart", "users")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("My Cart (Empty)", "showcart", "users")</li>
+                        }
                     }
                     
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

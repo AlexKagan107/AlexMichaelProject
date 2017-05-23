@@ -145,19 +145,24 @@ namespace AlexMichaelProject.Controllers
         {
             String username = (String)Session["username"];
             List<product> cart;
+            int counter = 0;
             if (Session["cart"] == null)
             {
                 cart = new List<product>();
+                counter = 0;
             }
             else
             {
                 cart = (List<product>)Session["cart"];
+                counter = cart.Count;
             }
             product temp = await db.products.FindAsync(id);
             if (temp != null)
             {
                 cart.Add(temp);
+                counter++;
                 Session.Add("cart", cart);
+                Session.Add("cartsize", counter);
             }
             return RedirectToAction("showcart","users");
         }
@@ -176,6 +181,9 @@ namespace AlexMichaelProject.Controllers
                 if (cart.ElementAt(i).product1.Equals(temp.product1))
                 {
                     cart.RemoveAt(i);
+                    int size = (int)Session["cartsize"];
+                    size=size-1;
+                    Session["cartsize"] = size;
                     break;
                 }
                     

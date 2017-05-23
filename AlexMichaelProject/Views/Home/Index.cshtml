@@ -1,8 +1,11 @@
-﻿@{
+﻿@model System.Collections.Generic.IList<AlexMichaelProject.Models.match>
+
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="panel panel-body">
+<div class="panel panel-body" style="width:70%;float:left">
     <div class="col-md-3">
         @{ Html.RenderAction("SideMenu", "Home");}
     </div>
@@ -76,6 +79,18 @@
             <img src="~/Content/Images/home4.jpg" class="img-rounded" style="width:95% ; height:85%" />
         </div>
     }
+    <div style="width:30%; float:left;">
+        @foreach (var item in Model)
+            if (item != null)
+            {
+                {
+                    <div>
+                        @Html.DisplayFor(modelItem => item.teamA) Vs @Html.DisplayFor(modelItem => item.teamB)
+                        Playing at:@Html.DisplayFor(modelItem => item.stadium) Date:@Html.DisplayFor(modelItem => item.date)
+                        @Html.ActionLink("Details", "Details", new { id = item.matchID })
+                    </div>
+                    }
+                }
+        </div>
 
-</div>
-
+    </div>
