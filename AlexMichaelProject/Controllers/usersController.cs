@@ -149,9 +149,11 @@ namespace AlexMichaelProject.Controllers
             try
             {
                 user users = await db.users.FindAsync(id);
+                
                 team[] clubArray = users.teams.ToArray<team>();
                 for (int i = 0; i < clubArray.Length; i++)
                 {
+                    
                     users.teams.Remove(clubArray[i]);
                 }
                 db.users.Remove(users);
@@ -322,6 +324,10 @@ namespace AlexMichaelProject.Controllers
                     db.purchases.Add(temp);
                 }
                 Session["cart"] = null;
+                Session.Remove("cart");
+                Session.Remove("cartsize");
+                int zero = 0;
+                Session["cartsize"]=zero;
                 await db.SaveChangesAsync();
                 result = "true";
                 //return RedirectToAction("Index", "products");

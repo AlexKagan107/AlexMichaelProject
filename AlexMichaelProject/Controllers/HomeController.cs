@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlexMichaelProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace AlexMichaelProject.Controllers
 {
     public class HomeController : Controller
     {
+        private DBEntities db = new DBEntities();
+
+
         public ActionResult Index()
         {
             return View();
