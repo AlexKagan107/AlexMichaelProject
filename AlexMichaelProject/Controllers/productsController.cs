@@ -162,7 +162,8 @@ namespace AlexMichaelProject.Controllers
             return RedirectToAction("showcart","users");
         }
 
-        public async Task<ActionResult> removeFromCart(string id)
+        [HttpPost]
+        public async Task<JsonResult> removeFromCart(string id)
         {
             String username = (String)Session["username"];
             

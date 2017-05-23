@@ -13,108 +13,115 @@
 
         List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
     }
+    <div id="show">
+        <table class="table">
+            <tr>
+                <th>
+                    Product Code
+                </th>
+                <th>
+                    Manufacturer
+                </th>
+                <th>
+                    Club
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Photo
+                </th>
+            </tr>
 
-    <table class="table">
-        <tr>
-            <th>
-                Product Code
-            </th>
-            <th>
-                Manufacturer
-            </th>
-            <th>
-                Club
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Size
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Photo
-            </th>
-        </tr>
-
-        @if (CartItems != null)
-        {
-
-            int total = 0;
-            foreach (var item in CartItems)
+            @if (CartItems != null)
             {
-                total = total + item.cost;
 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.product1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clubName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
+                int total = 0;
+                foreach (var item in CartItems)
+                {
+                    total = total + item.cost;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.product1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.manufacturer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.clubName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.size)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td>
 
-                <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
-            </td>
+                            <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
+                        </td>
 
-            <td>
+                        <td>
 
-                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
-                    @Html.ActionLink("Details", "Details", "products", new { id = item.product1 }, null)
-                </p>
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
+                                @Html.ActionLink("Details", "Details", "products", new { id = item.product1 }, null)
 
-                @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                        @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
-                    </p>*@ 
+                            </p>
 
-                <form id="myForm">
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color">
-                        <input type="hidden" value=@item.product1 name="id" />
-                        <input type="button" value="Delete" class="btn btn-default" id="@item.product1" onclick="Click()" />
-                    </div>
-                </form>
-            </td>
-        </tr>
-        }
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+                            @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                                @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
+                                @Ajax.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "show",
+                                        InsertionMode = InsertionMode.Replace,
+                                    })
+                                </p>*@
 
-            <td><h3>The sum is:@total$</h3></td>
-            @{
-                Session["sum"] = @total + " ";
-            }
-            <td>
-                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:blue;">
-                    @Html.ActionLink("Purchase", "BuyCart", new { })
-                </p>
-            </td>
-        </tr>
-        }
-    </table>
+                            @*<form id="myForm">*@
+                                @Html.AntiForgeryToken()
+                                <div class="form-actions no-color">
+                                    <input type="hidden" value=@item.product1 name="id" />
+                                    <input type="button" value="Delete" class="btn btn-default" id="@item.product1" onclick="Click()" />
+                                </div>
+                            @*</form>*@
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td><h3>The sum is:@total$</h3></td>
+                    @{
+                        Session["sum"] = @total + " ";
+                    }
+                    <td>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:blue;">
+                            @Html.ActionLink("Purchase", "BuyCart", new { })
+                        </p>
+                    </td>
+                </tr>
+                        }
+        </table>
+    </div>
 
     @if (CartItems == null)
     {
@@ -130,38 +137,39 @@
 
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script>
-   // var tmp;
+    <script type="text/javascript">
+         var tmp;
 
-    var Click = function () {
-        //tmp = event.srcElement.id;
-        //$(document).ready(function () {
-        //$("#btnDelete").click(function () {
-        debugger
-        var data = $("#myForm").serialize();
+        var Click = function () {
+            tmp = event.srcElement.id;
+            //$(document).ready(function () {
+            //$("#btnDelete").click(function () {
+            debugger
+            //var data = $("#myForm").serialize();
 
-        $.ajax({
-            type: "POST",
-            url: "/products/removeFromCart",
-            data: data,
-            async: true,
-            success: function (response) {
-                debugger
-                if (response == "true") {
-                    alert("Deleteed successfully");
-                    window.location.href = "/users/showcart";
+            $.ajax({
+                type: "POST",
+                url: "/products/removeFromCart",
+                //data: data,
+                data: {id: tmp},
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("Deleteed successfully");
+                        window.location.href = "/users/showcart";
+                    }
+                    else {
+                        alert("Sorry, This Product can not be Deleted!!!");
+                    }
                 }
-                else {
-                    alert("Sorry, This Product can not be Deleted!!!");
-                }
-            }
-        })
-        //})
-        //})
-    }
+            })
+            //})
+            //})
+        }
 
-</script>
+    </script>
 
 
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
