@@ -24,12 +24,12 @@
                     {
                         <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>
                         if (Session["cartsize"]!=null && (int)Session["cartsize"] > 0) {
-                            string s = "My Cart,Items:" + (int)Session["cartsize"];
+                            string s = "My Cart(" + (int)Session["cartsize"]+")";
                         <li>@Html.ActionLink(s,"showcart", "users")</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("My Cart (Empty)", "showcart", "users")</li>
+                            <li>@Html.ActionLink("My Cart (0)", "showcart", "users")</li>
                         }
                     }
                     
