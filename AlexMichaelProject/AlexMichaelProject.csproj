@@ -216,13 +216,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\barca camp.jpg" />
-    <Content Include="Content\Images\bayern.jpg" />
+    <Content Include="Content\Images\bayern2.jpg" />
     <Content Include="Content\Images\Chelsea.jpg" />
     <Content Include="Content\Images\dortmund.jpg" />
     <Content Include="Content\Images\home4.jpg" />
     <Content Include="Content\Images\juventus.jpg" />
     <Content Include="Content\Images\madrid.jpg" />
-    <Content Include="Content\Images\Milan1.jpg" />
+    <Content Include="Content\Images\milan.jpg" />
     <Content Include="Content\Images\psg.jpg" />
     <Content Include="Content\Images\unated.jpg" />
     <Content Include="favicon.ico" />

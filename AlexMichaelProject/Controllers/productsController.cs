@@ -181,8 +181,9 @@ namespace AlexMichaelProject.Controllers
                     
             }
             Session["card"] = cart;
-
-            return RedirectToAction("showcart", "users");
+            string result = "true";
+            //return RedirectToAction("showcart", "users");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

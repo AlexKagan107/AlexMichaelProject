@@ -33,6 +33,7 @@ namespace AlexMichaelProject.Controllers
         {
             return View(await db.users.ToListAsync());
         }
+
         public async Task<ActionResult> showcart()
         {
             return View(await db.products.ToListAsync());
@@ -291,6 +292,7 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> BuyCart(int paymentoptions)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 List<product> cartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
@@ -321,9 +323,11 @@ namespace AlexMichaelProject.Controllers
                 }
                 Session["cart"] = null;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "products");
+                result = "true";
+                //return RedirectToAction("Index", "products");
             }
-            return View();
+            //return View();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
