@@ -28,6 +28,12 @@ namespace AlexMichaelProject.Controllers
             var products = db.products.Include(p => p.manufacturer1).Include(p => p.team);
             return View(await products.ToListAsync());
         }
+        [HttpPost]
+        public async Task<PartialViewResult> Index(string clubName)
+        {
+            var products = db.products.Where(o=>o.clubName.StartsWith(clubName)).Include(p => p.manufacturer1).Include(p => p.team);
+            return PartialView(await products.ToListAsync());
+        }
 
         // GET: products/Details/5
         public async Task<ActionResult> Details(string id)
