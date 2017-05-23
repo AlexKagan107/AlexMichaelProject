@@ -183,19 +183,45 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
+        public async Task<ActionResult> purchaset(int id)
+        {
+            string username = (string)Session["username"];
+            user tempuser = await db.users.FindAsync(username);
+            
+            ViewBag.paymentoptions = new SelectList(tempuser.paymentoptions, "creditcardnumber", "creditcardnumber");
+            ticket t = await db.tickets.FindAsync(id);
+            
+            Session["ticketPrice"] = t.cost + "";
+            Session["ticketid"] = id;
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> buyTicket(int paymentoptions, int ticketID)
+        public async Task<ActionResult> buyt(int paymentoptions)
         {
             if (ModelState.IsValid)
             {
-
                 string username = (string)Session["username"];
+                user tempuser = await db.users.FindAsync(username);
+                int ticketid = (int)Session["ticketid"];
+                ticket t = await db.tickets.FindAsync(ticketid);
+
+                product p = new product();
+                p.product1 = "999";
+                p.type = t.seatType;
+                p.manufacturer = t.ticketID + "";
+                p.clubName = "ticket";
+                p.cost = t.cost;
+                p.size = t.seatNumber;
+                p.description = t.matchID+"";
+                p.photo = null;
 
                 int j = 0;
                 purchase temp = new purchase();
                 temp.username = username;
-                temp.product = ticketID+" ";
+                temp.product = p.product1 ;
                 temp.creditcardnumber = paymentoptions;
                 temp.dateOfPurchase = DateTime.Today;
                 Boolean flag = false;
@@ -213,8 +239,10 @@ namespace AlexMichaelProject.Controllers
                 }
                 temp.dealID = j;
                 db.purchases.Add(temp);
+                db.tickets.Remove(t);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "products");
+                
             }
             return View();
         }

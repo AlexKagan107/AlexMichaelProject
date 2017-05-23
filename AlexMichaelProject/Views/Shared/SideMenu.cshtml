@@ -6,10 +6,18 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="/leuges/Index" class="btn btn-default btn-block" style="background-color:darksalmon">Leuge</a></li>
             <li class="list-group-item"><a href="/teams/Index" class="btn btn-default btn-block" style="background-color:darkmagenta">Clubs</a></li>
-            <li class="list-group-item"><a href="/users/Index" class="btn btn-default btn-block" style="background-color:green">Users</a></li>
+            @if (Session["power"].Equals("admin"))
+            {
+                <li class="list-group-item"><a href="/users/Index" class="btn btn-default btn-block" style="background-color:green">Users</a></li>
+                <li class="list-group-item"><a href="/paymentoptions/Index" class="btn btn-default btn-block" style="background-color:burlywood">Payment Option</a></li>
+                <li class="list-group-item"><a href="/purchases/Index" class="btn btn-default btn-block" style="background-color:darkblue">Purchases</a></li>
+
+            }
+            
             <li class="list-group-item"><a href="/products/Index" class="btn btn-default btn-block" style="background-color:blue">Products</a></li>
-            <li class="list-group-item"><a href="/paymentoptions/Index" class="btn btn-default btn-block" style="background-color:burlywood">Payment Option</a></li>
             <li class="list-group-item"><a href="/manufacturers/Index" class="btn btn-default btn-block" style="background-color:greenyellow">Manufacturers</a></li>
+            <li class="list-group-item"><a href="/matches/Index" class="btn btn-default btn-block" style="background-color:chocolate">Manufacturers</a></li>
+            <li class="list-group-item"><a href="/tickets/Index" class="btn btn-default btn-block" style="background-color:darkkhaki">Tickets</a></li>
 
         </ul>
     </div>

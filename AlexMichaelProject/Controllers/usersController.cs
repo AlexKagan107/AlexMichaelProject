@@ -275,26 +275,10 @@ namespace AlexMichaelProject.Controllers
                 {
                     result = "false";
                 }
-                //return RedirectToAction("AddCardToUser");
             }
-            //return View();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> addCardToUser2(string username, string teamName)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        team club = await db.teams.FindAsync(teamName);
-        //        user user = await db.users.FindAsync(username);
-        //        user.teams.Add(club);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("AddClubToUser");
-        //    }
-        //    return View();
-        //}
 
         public async void userCreditCards(String username)
         {
