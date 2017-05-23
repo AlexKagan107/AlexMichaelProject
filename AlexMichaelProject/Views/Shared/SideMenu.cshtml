@@ -6,7 +6,7 @@
         <ul class="list-group">
             <li class="list-group-item"><a href="/leuges/Index" class="btn btn-default btn-block" style="background-color:darksalmon">Leuge</a></li>
             <li class="list-group-item"><a href="/teams/Index" class="btn btn-default btn-block" style="background-color:darkmagenta">Clubs</a></li>
-           @if ((String)Session["power"] == "user")
+           @if ((String)Session["power"] == "admin")
            {
                 <li class="list-group-item"><a href="/users/Index" class="btn btn-default btn-block" style="background-color:green">Users</a></li>
                 <li class="list-group-item"><a href="/paymentoptions/Index" class="btn btn-default btn-block" style="background-color:burlywood">Payment Option</a></li>
