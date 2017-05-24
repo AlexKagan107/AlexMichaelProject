@@ -93,14 +93,14 @@ namespace AlexMichaelProject.Controllers
                 }
                 match tempMatch = await db.matches.FindAsync(matchID);
 
-
+                int seatNumberIndex = seatNumber;
                 for (int j = 0; j < quanity; j++)
                 {
                     ticket ticket = new ticket();
                     ticket.matchID = tempMatch.matchID;
                     ticket.cost = cost;
                     ticket.seatType = seatType;
-                    int seatNumberIndex = seatNumber;
+                    
                     ticket.seatNumber = seatNumberIndex;
                     seatNumberIndex++;
                     ticket.ticketID = ticketsID[j];
