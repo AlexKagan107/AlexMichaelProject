@@ -5,7 +5,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="panel panel-body" style="width:70%;float:left">
+<div class="panel panel-body" style="width:80%;float:left">
     <div class="col-md-3">
         @{ Html.RenderAction("SideMenu", "Home");}
     </div>
@@ -82,16 +82,22 @@
     
 
     </div>
-<div style="width:30%; float:right;">
+<div style="width:20%; float:right;">
     @foreach (var item in Model)
-
-
     {
-        <div style="float:right;">
-            @Html.DisplayFor(modelItem => item.teamA) Vs @Html.DisplayFor(modelItem => item.teamB)
-            Playing at:@Html.DisplayFor(modelItem => item.stadium) Date:@Html.DisplayFor(modelItem => item.date)
-            @Html.ActionLink("Details", "Details","matches", new { id = item.matchID },null)
-        </div>
+        <div class="panel panel-default" ststyle="float:right;">
+            
+            <div class="panel-heading">
+                @Html.DisplayFor(modelItem => item.teamA) Vs @Html.DisplayFor(modelItem => item.teamB)
+            </div>
+            <div class="panel-body" style="align-content:center;">
+                Playing at:@Html.DisplayFor(modelItem => item.stadium)
+                <br />
+                Date:@item.date.ToString("dd/MM/yyyy")
+                <br />
+                @Html.ActionLink("Details", "Details", "matches", new { id = item.matchID }, null)
+            </div>
+            </div>
     }
-
 </div>
+    
