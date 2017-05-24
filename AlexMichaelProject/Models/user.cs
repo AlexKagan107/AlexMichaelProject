@@ -38,6 +38,5 @@ namespace AlexMichaelProject.Models
         public virtual ICollection<team> teams { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paymentoption> paymentoptions { get; set; }
-        
     }
 }

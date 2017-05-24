@@ -52,7 +52,11 @@
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ticketID }) |
-        @Html.ActionLink("Back to List", "Index")
+        @*@Html.ActionLink("Back to List", "Index")*@
+        @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
+    {
+        UpdateTargetId = "show",
+    })
     </p>
 </body>
 </html>
