@@ -51,7 +51,12 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ticketID }) |
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.ticketID })*@
+        @Ajax.ActionLink("Edit", "Edit", "tickets", new { id = Model.ticketID }, new AjaxOptions()
+   {
+       UpdateTargetId = "show",
+   })
+        |
         @*@Html.ActionLink("Back to List", "Index")*@
         @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
     {

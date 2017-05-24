@@ -20,45 +20,79 @@
             <dt>
                 @Html.DisplayNameFor(model => model.seatNumber)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.seatNumber)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.cost)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.cost)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.seatType)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.seatType)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.match.teamA)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.match.teamA)
             </dd>
-    
+
         </dl>
-    
-        @using (Html.BeginForm()) {
+        <form id="myForm" action=@Url.Action("DeleteConfirmed","tickets") method="post">
+            @*@using (Html.BeginForm()) {*@
             @Html.AntiForgeryToken()
-    
+
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <input type="hidden" value=@Model.ticketID name="id" />
+                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
                 @Html.ActionLink("Back to List", "Index")
             </div>
-        }
+            @*}*@
+        </form>
     </div>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnDelete").click(function () {
+            //debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/tickets/DeleteConfirmed",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("Ticket Deleteed successfully");
+                        window.location.href = "/tickets/Index";
+                    }
+                    else {
+                        alert("Sorry, This Ticket can not be Deleted!!!");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

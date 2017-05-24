@@ -63,31 +63,26 @@
                                 <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
                                     @*@Html.ActionLink("Details", "Details", new { id = item.ticketID })*@
                                     @Ajax.ActionLink("Details", "Details", "tickets", new { id = item.ticketID }, new AjaxOptions()
-                                                                    {
-                                                                         UpdateTargetId = "show",
-                                                                    })
+                               {
+                                   UpdateTargetId = "show",
+                               })
                                 </p>
                                 @if ((String)Session["power"] == "admin")
                 {
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
                                         @*@Html.ActionLink("Edit", "Edit", new { id = item.ticketID })*@
                                         @Ajax.ActionLink("Edit", "Edit", "tickets", new { id = item.ticketID }, new AjaxOptions()
-                                                                       {
-                                                                           UpdateTargetId = "show",
-                                                                       })
+                                   {
+                                       UpdateTargetId = "show",
+                                   })
                                     </p>
 
                                     <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-
                                         @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
-
                                         @Ajax.ActionLink("Deleteee", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
                                    {
-                                       //HttpMethod = "POST",
                                        UpdateTargetId = "show",
-                                       //InsertionMode = InsertionMode.Replace,
                                    })
-
                                     </p>
                                 }
                             </td>

@@ -164,14 +164,24 @@ namespace AlexMichaelProject.Controllers
         }
 
         // POST: tickets/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ticket ticket = await db.tickets.FindAsync(id);
-            db.tickets.Remove(ticket);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string result = "true";
+            try
+            {
+                ticket ticket = await db.tickets.FindAsync(id);
+                db.tickets.Remove(ticket);
+                await db.SaveChangesAsync();
+                result = "true";
+                //return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
