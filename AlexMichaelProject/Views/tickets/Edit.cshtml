@@ -27,6 +27,14 @@
                     </div>
                 </div>
 
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.matchID, "Match ID:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" value=@Html.DisplayFor(model => model.matchID) class="form-control" disabled />
+                        @Html.ValidationMessageFor(model => model.matchID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.seatNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -51,6 +59,14 @@
                     </div>
                 </div>
 
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.seatType, "Seat Type:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" value=@Html.DisplayFor(model => model.seatType) class="form-control" disabled />
+                        @Html.ValidationMessageFor(model => model.seatType, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="button" value="Save" class="btn btn-default" id="btnSave" />
@@ -61,11 +77,11 @@
     </form>
 
     <div>
-        @*@Html.ActionLink("Back to List", "Index")*@
-        @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
+        @Html.ActionLink("Back to List", "Index")
+        @*@Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
    {
-       UpdateTargetId = "show",
-   })
+       UpdateTargetId = "show"
+   })*@
     </div>
 </body>
 </html>
