@@ -1,9 +1,5 @@
 ﻿@model AlexMichaelProject.Models.product
 
-@{
-    //Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -13,81 +9,31 @@
 </head>
 <body>
     <h3>Are you sure you want to delete this?</h3>
-    <div>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>product @Model.product1</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.product1)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.product1)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.type)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.type)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.cost)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.cost)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.size)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.size)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.description)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.description)
-            </dd>
-    
-            @*<dt>
-                @Html.DisplayNameFor(model => model.photo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.photo)
-            </dd>*@
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.manufacturer1.msite)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.manufacturer1.msite)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.team.teamName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.team.teamName)
-            </dd>
-    
+            <dt>Product ID:</dt>
+            <dd>@Html.DisplayFor(model => model.product1)</dd>
+            <dt>Product Type:</dt>
+            <dd>@Html.DisplayFor(model => model.type)</dd>
+            <dt>Cost:</dt>
+            <dd>@Html.DisplayFor(model => model.cost)</dd>
+            <dt>Size:</dt>
+            <dd>@Html.DisplayFor(model => model.size)</dd>
+            <dt>Description:</dt>
+            <dd>@Html.DisplayFor(model => model.description)</dd>
+            <dt>Manufacturer:</dt>
+            <dd>@Html.DisplayFor(model => model.manufacturer1.msite)</dd>
+            <dt>Club:</dt>
+            <dd>@Html.DisplayFor(model => model.team.teamName)</dd>
         </dl>
-    
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
-    
             <div class="form-actions no-color">
-
                 <input type="submit" value="Delete" class="btn btn-default" style="margin-left:50px;"/>
                 <p class="btn btn-primary btn-md">
                     @Html.ActionLink("Back to List", "Index")

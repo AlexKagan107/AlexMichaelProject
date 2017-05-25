@@ -2,30 +2,14 @@
 
 <table class="table">
     <tr>
-        <th>
-            Product Code
-        </th>
-        <th>
-            Manufacturer
-        </th>
-        <th>
-            Club
-        </th>
-        <th>
-            Type
-        </th>
-        <th>
-            Price
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.size)
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Photo
-        </th>
+        <th>Product Code</th>
+        <th>Manufacturer</th>
+        <th>Club</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Description</th>
+        <th>Photo</th>
     </tr>
 
     @foreach (var item in Model)
@@ -59,7 +43,6 @@
             <td>
                 @if ((String)Session["power"] == "user")
                 {
-
                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
                         @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.product1 })
                     </p>
@@ -72,17 +55,13 @@
                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
                         @Html.ActionLink("Edit", "Edit", new { id = item.product1 })
                     </p>
-
                     <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-
                         @Html.ActionLink("Delete", "Delete", new { id = item.product1 })
                     </p>
                 }
             </td>
-
         </tr>
     }
-
 </table>
 
 

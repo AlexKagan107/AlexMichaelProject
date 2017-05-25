@@ -12,62 +12,57 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Credit Card Number
-            </th>
-            <th>
-                Credit Card Company
-            </th>
-            <th>
-                Expired Date
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
             <tr>
-                <td>
-                    @{
-                        string cNumber = item.creditcardnumber + "";
-                        Char[] temp = cNumber.ToCharArray();
-                        for (int i = 0; i < temp.Length - 4; i++)
-                        {
-                            temp[i] = '*';
-                        }
-                        String number = "";
-                        for (int j = 0; j < temp.Length; j++)
-                        {
-                            number = number + temp[j];
-                        }
-                    }
-
-                    @number.ToString()
-                    @*@Html.DisplayFor(modelItem => item.creditcardnumber)*@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.creditcardcompany)
-                </td>
-                <td>
-                    @{
-                        string date = item.expireddate.ToString("dd/MM/yyyy");
-                    }
-
-                    @date
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.creditcardnumber }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.creditcardnumber }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.creditcardnumber })
-                </td>
+                <th>Credit Card Number</th>
+                <th>Credit Card Company</th>
+                <th>Expired Date</th>
             </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            string cNumber = item.creditcardnumber + "";
+                            Char[] temp = cNumber.ToCharArray();
+                            for (int i = 0; i < temp.Length - 4; i++)
+                            {
+                                temp[i] = '*';
+                            }
+                            String number = "";
+                            for (int j = 0; j < temp.Length; j++)
+                            {
+                                number = number + temp[j];
+                            }
                         }
-
-    </table>
+                        @number.ToString()
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.creditcardcompany)</td>
+                    <td>
+                        @{string date = item.expireddate.ToString("dd/MM/yyyy");}
+                        @date
+                    </td>
+                    <td>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.creditcardnumber })
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+                            @Html.ActionLink("Details", "Details", new { id = item.creditcardnumber })
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.creditcardnumber })
+                        </p>
+                    </td>
+                </tr>
+                            }
+        </table>
+    </div>
 </body>
 </html>

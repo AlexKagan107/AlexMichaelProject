@@ -1,9 +1,5 @@
 ﻿@model AlexMichaelProject.Models.match
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,59 +8,35 @@
     <title>Delete</title>
 </head>
 <body>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
     <h3>Are you sure you want to delete this?</h3>
-    <div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>match</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.stadium)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.stadium)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.league)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.league)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.date)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.date)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.team.leuge)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.team.leuge)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.team1.leuge)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.team1.leuge)
-            </dd>
-    
+            <dt>MatchID:</dt>
+            <dd>@Html.DisplayFor(model => model.matchID)</dd>
+            <dt>Team A:</dt>
+            <dd>@Html.DisplayFor(model => model.teamA)</dd>
+            <dt>Team B:</dt>
+            <dd> @Html.DisplayFor(model => model.teamB)</dd>
+            <dt>Stadium:</dt>
+            <dd>@Html.DisplayFor(model => model.stadium)</dd>
+            <dt>League:</dt>
+            <dd>@Html.DisplayFor(model => model.league)</dd>
+            <dt>Date:</dt>
+            <dd>@Html.DisplayFor(model => model.date)</dd>
         </dl>
-    
-        @using (Html.BeginForm()) {
+        @using (Html.BeginForm())
+        {
             @Html.AntiForgeryToken()
-    
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                <input type="submit" value="Delete" class="btn btn-default" />
+                <p class="btn btn-primary btn-md">
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
             </div>
         }
     </div>

@@ -15,13 +15,16 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
-        // GET: paymentoptions
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
+
         public async Task<ActionResult> Index()
         {
             return View(await db.paymentoptions.ToListAsync());
         }
 
-        // GET: paymentoptions/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,15 +39,11 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        // GET: paymentoptions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: paymentoptions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "creditcardnumber,creditcardcompany,expireddate")] paymentoption paymentoption)
@@ -59,7 +58,6 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        // GET: paymentoptions/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,9 +72,6 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        // POST: paymentoptions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "creditcardnumber,creditcardcompany,expireddate")] paymentoption paymentoption)
@@ -90,7 +85,6 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        // GET: paymentoptions/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -105,7 +99,6 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        // POST: paymentoptions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

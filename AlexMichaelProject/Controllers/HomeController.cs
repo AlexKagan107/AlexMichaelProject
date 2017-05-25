@@ -13,7 +13,6 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
-
         public async Task<ActionResult> Index()
         {
             return View(await db.matches.ToListAsync());
@@ -24,11 +23,5 @@ namespace AlexMichaelProject.Controllers
             return PartialView("SideMenu");
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

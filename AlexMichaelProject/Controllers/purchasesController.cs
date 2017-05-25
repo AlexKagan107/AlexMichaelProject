@@ -15,14 +15,17 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
-        // GET: purchases
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
+
         public async Task<ActionResult> Index()
         {
             var purchases = db.purchases.Include(p => p.paymentoption).Include(p => p.product1).Include(p => p.user);
             return View(await purchases.ToListAsync());
         }
 
-        // GET: purchases/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,7 +40,6 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
-        // GET: purchases/Create
         public ActionResult Create()
         {
             ViewBag.creditcardnumber = new SelectList(db.paymentoptions, "creditcardnumber", "creditcardcompany");
@@ -46,9 +48,6 @@ namespace AlexMichaelProject.Controllers
             return View();
         }
 
-        // POST: purchases/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "username,product,creditcardnumber,dateOfPurchase,dealID")] purchase purchase)
@@ -66,10 +65,6 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
-        
-
-
-        // GET: purchases/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,9 +82,6 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
-        // POST: purchases/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "username,product,creditcardnumber,dateOfPurchase,dealID")] purchase purchase)
@@ -106,7 +98,6 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
-        // GET: purchases/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,7 +112,6 @@ namespace AlexMichaelProject.Controllers
             return View(purchase);
         }
 
-        // POST: purchases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

@@ -15,19 +15,17 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
-        
-
         public ActionResult SideMenu()
         {
             return PartialView("SideMenu");
         }
 
-        // GET: products
         public async Task<ActionResult> Index()
         {
             var products = db.products.Include(p => p.manufacturer1).Include(p => p.team);
             return View(await products.ToListAsync());
         }
+
         [HttpPost]
         public async Task<PartialViewResult> Index(string clubName)
         {
@@ -35,7 +33,6 @@ namespace AlexMichaelProject.Controllers
             return PartialView(await products.ToListAsync());
         }
 
-        // GET: products/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -50,7 +47,6 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        // GET: products/Create
         public ActionResult Create()
         {
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "mname");
@@ -58,9 +54,6 @@ namespace AlexMichaelProject.Controllers
             return View();
         }
 
-        // POST: products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "product1,type,manufacturer,clubName,cost,size,description,photo")] product product)
@@ -77,7 +70,6 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        // GET: products/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -94,9 +86,6 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        // POST: products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "product1,type,manufacturer,clubName,cost,size,description,photo")] product product)
@@ -112,7 +101,6 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        // GET: products/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -127,7 +115,6 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        // POST: products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -197,7 +184,6 @@ namespace AlexMichaelProject.Controllers
             }
             Session["card"] = cart;
             string result = "true";
-            //return RedirectToAction("showcart", "users");
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
