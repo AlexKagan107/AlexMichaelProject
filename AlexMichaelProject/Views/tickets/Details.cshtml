@@ -1,9 +1,5 @@
 ﻿@model AlexMichaelProject.Models.ticket
 
-@{
-   // Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,73 +8,41 @@
     <title>Details</title>
 </head>
 <body>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
-    <div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>ticket</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.seatNumber)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.seatNumber)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.cost)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.cost)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.seatType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.seatType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.match.teamA)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.match.teamA)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.match.teamB)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.match.teamB)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.match.stadium)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.match.stadium)
-            </dd>
-    
+            <dt>TicketID:</dt>
+            <dd>@Html.DisplayFor(model => model.ticketID)</dd>
+            <dt>MatchID::</dt>
+            <dd>@Html.DisplayFor(model => model.matchID)</dd>
+            <dt>Seat Number::</dt>
+            <dd>@Html.DisplayFor(model => model.seatNumber)</dd>
+            <dt>Cost:</dt>
+            <dd>@Html.DisplayFor(model => model.cost)</dd>
+            <dt>Seat Type:</dt>
+            <dd>@Html.DisplayFor(model => model.seatType)</dd>
         </dl>
     </div>
-    <p>
+    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
         @Html.ActionLink("Edit", "Edit", new { id = Model.ticketID })
         @*@Ajax.ActionLink("Edit", "Edit", "tickets", new { id = Model.ticketID }, new AjaxOptions()
-   {
-       UpdateTargetId = "show",
-   })*@
+            {
+                UpdateTargetId = "show",
+            })*@
         |
+    </p>
+    <p class="btn btn-primary btn-md">
         @Html.ActionLink("Back to List", "Index")
         @*@Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
-   {
-       UpdateTargetId = "show"
-   })*@
+            {
+                UpdateTargetId = "show"
+            })*@
     </p>
-
 </body>
 </html>

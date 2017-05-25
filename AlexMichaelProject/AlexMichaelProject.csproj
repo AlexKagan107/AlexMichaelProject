@@ -277,7 +277,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\teams\Create.cshtml" />
@@ -288,7 +287,6 @@
     <Content Include="Views\users\Create.cshtml" />
     <Content Include="Views\users\Delete.cshtml" />
     <Content Include="Views\users\Details.cshtml" />
-    <Content Include="Views\users\Edit.cshtml" />
     <Content Include="Views\users\Index.cshtml" />
     <Content Include="Views\users\login.cshtml" />
     <Content Include="Views\users\AddClubToUser.cshtml" />
@@ -308,10 +306,7 @@
     <Content Include="Views\leuges\Details.cshtml" />
     <Content Include="Views\leuges\Edit.cshtml" />
     <Content Include="Views\leuges\Index.cshtml" />
-    <Content Include="Views\purchases\Create.cshtml" />
-    <Content Include="Views\purchases\Delete.cshtml" />
     <Content Include="Views\purchases\Details.cshtml" />
-    <Content Include="Views\purchases\Edit.cshtml" />
     <Content Include="Views\purchases\Index.cshtml" />
     <Content Include="Views\paymentoptions\Create.cshtml" />
     <Content Include="Views\paymentoptions\Delete.cshtml" />

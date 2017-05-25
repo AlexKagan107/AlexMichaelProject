@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.team>
 
-@{
-    ViewBag.Title = "Index";
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -19,43 +15,34 @@
 
         <div class="col-md-9">
             <br />
-            <p>
+            <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
                 @Html.ActionLink("Create New", "Create")
             </p>
             <table class="table">
                 <tr>
-                    <th>
-                        Club Name
-                    </th>
-                    <th>
-                        League
-                    </th>
-                    <th>
-                        Home Stadium
-                    </th>
-                    <th></th>
+                    <th>Club Name</th>
+                    <th>League</th>
+                    <th>Home Stadium</th>
                 </tr>
-
                 @foreach (var item in Model)
             {
                     <tr>
+                        <td>@Html.DisplayFor(modelItem => item.teamName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.leuge)</td>
+                        <td>@Html.DisplayFor(modelItem => item.homeStadium)</td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.teamName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.leuge)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.homeStadium)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.teamName }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.teamName }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.teamName })
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.teamName })
+                            </p>
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+                                @Html.ActionLink("Details", "Details", new { id = item.teamName })
+                            </p>
+                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                                @Html.ActionLink("Delete", "Delete", new { id = item.teamName })
+                            </p>
                         </td>
                     </tr>
                 }
-
             </table>
         </div>
     </div>

@@ -1,9 +1,5 @@
 ﻿@model AlexMichaelProject.Models.purchase
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,46 +8,26 @@
     <title>Details</title>
 </head>
 <body>
-    <div>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>purchase</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.dateOfPurchase)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.dateOfPurchase)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.paymentoption.creditcardcompany)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.paymentoption.creditcardcompany)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.product1.type)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.product1.type)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.user.password)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.user.password)
-            </dd>
-    
+            <dt>Username:</dt>
+            <dd>@Html.DisplayFor(model => model.username)</dd>
+            <dt>ProductID:</dt>
+            <dd>@Html.DisplayFor(model => model.product1)</dd>
+            <dt>CreditCard Number:</dt>
+            <dd>@Html.DisplayFor(model => model.paymentoption.creditcardnumber)</dd>
+            <dt>Date:</dt>
+            <dd>@Html.DisplayFor(model => model.dateOfPurchase)</dd>
+            <dt>DealID:</dt>
+            <dd>@Html.DisplayFor(model => model.dealID)</dd>
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.dealID }) |
+    <p class="btn btn-primary btn-md">
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>

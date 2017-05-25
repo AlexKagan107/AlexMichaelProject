@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.purchase>
 
-
 <!DOCTYPE html>
 
 <html>
@@ -9,55 +8,41 @@
     <title>Index</title>
 </head>
 <body>
-    <table class="table">
-        <tr>
-            <th>
-                Username
-            </th>
-            <th>
-                Product ID
-            </th>
-            <th>
-                Credit Card Number
-            </th>
-            <th>
-                Date of purchase
-            </th>
-            <th>
-                DealID
-            </th>
-            
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        if(Session["username"].Equals(item.username)|| Session["power"].Equals("admin")) { 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.product1.product1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.creditcardnumber)
-            </td>
-            <td>
-                @{ 
-                    string date= item.dateOfPurchase.ToString("dd/MM/yyyy");
-                }
-                
-                @date
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dealID)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", "Products", new { id = item.product1.product1 }, null)
-            </td>
-        </tr>
-        }
-    }
-    </table>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        <table class="table">
+            <tr>
+                <th>Username</th>
+                <th>Product ID</th>
+                <th>Credit Card Number</th>
+                <th>Date of purchase</th>
+                <th>DealID</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (Session["username"].Equals(item.username) || Session["power"].Equals("admin"))
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.product1.product1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.creditcardnumber)</td>
+                        <td>
+                            @{string date = item.dateOfPurchase.ToString("dd/MM/yyyy");}
+                            @date
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.dealID)</td>
+                        <td>
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+                                @Html.ActionLink("Details", "Details", "Products", new { id = item.product1.product1 }, null)
+                            </p>
+                        </td>
+                    </tr>
+                                    }
+                                }
+        </table>
+    </div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 ﻿@model AlexMichaelProject.Models.ticket
 
-
 <!DOCTYPE html>
 
 <html>
@@ -9,100 +8,87 @@
     <title>Create</title>
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div style="width:100%">
-            <div class="form-horizontal" style="width:500px;float:left;">
-                <h4>ticket</h4>
-                <hr />
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div style="width:100%">
+                <div class="form-horizontal" style="width:500px;float:left;">
+                    <h4>ticket</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.ticketID, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.ticketID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ticketID, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.matchID, "matchID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("matchID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.matchID, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>*@
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.matchID, "matchID", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("matchID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.matchID, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.seatNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.seatNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.seatNumber, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.seatNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.seatNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.seatNumber, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.seatType, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="seatType" class="form-control">
+                                <option selected="selected" value="First Level">First Level</option>
+                                <option value="Second Level">Second Level</option>
+                                <option value="Third Level">Third Level</option>
+                                <option value="Vip Cabins">Vip Cabins</option>
+                            </select>
+
+                            @*@Html.DropDownList("seatType", null, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.ValidationMessageFor(model => model.seatType, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.seatType, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <select name="seatType" class="form-control">
-                            <option selected="selected" value="First Level">First Level</option>
-                            <option value="Second Level">Second Level</option>
-                            <option value="Third Level">Third Level</option>
-                            <option value="Vip Cabins">Vip Cabins</option>
-                        </select>
-
-                        @*@Html.DropDownList("seatType", null, htmlAttributes: new { @class = "form-control" })*@
-                        @Html.ValidationMessageFor(model => model.seatType, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.cost,"Quantity:", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <select name="amount" class="form-control">
-                            <option selected="selected" value="1">1</option>
-
-                            @{ 
-                                for(int i = 2; i < 51; i++)
-                                {
-                                    <option value=@i>@i</option>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cost, "Quantity:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select name="amount" class="form-control">
+                                <option selected="selected" value="1">1</option>
+                                @{
+                                    for (int i = 2; i < 51; i++)
+                                    {
+                                        <option value=@i>@i</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                                @Html.ActionLink("Back to List", "Index")
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                            @Html.ActionLink("Back to List", "Index")
-                        </p>
-                    </div>
+                <div style="float:left;">
+                    <img src="https://image.ibb.co/hoggHa/stadium.jpg" style="width:500px; height:500px; float:left;" />
                 </div>
             </div>
-            <div style="float:left;">
-                <img src="https://image.ibb.co/hoggHa/stadium.jpg" style="width:500px; height:500px; float:left;" />
-            </div>
-        </div>
-
-    }
-
-
-
-
-
+                          }
+    </div>
 </body>
 </html>
