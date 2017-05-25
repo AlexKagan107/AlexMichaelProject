@@ -49,22 +49,36 @@
             <dd>
                 @Html.DisplayFor(model => model.match.teamA)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.match.teamB)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.match.teamB)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.match.stadium)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.match.stadium)
+            </dd>
     
         </dl>
     </div>
     <p>
-        @*@Html.ActionLink("Edit", "Edit", new { id = Model.ticketID })*@
-        @Ajax.ActionLink("Edit", "Edit", "tickets", new { id = Model.ticketID }, new AjaxOptions()
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ticketID })
+        @*@Ajax.ActionLink("Edit", "Edit", "tickets", new { id = Model.ticketID }, new AjaxOptions()
    {
        UpdateTargetId = "show",
-   })
+   })*@
         |
-        @*@Html.ActionLink("Back to List", "Index")*@
-        @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
-    {
-       HttpMethod = "POST",
-        UpdateTargetId = "show",
-    })
+        @Html.ActionLink("Back to List", "Index")
+        @*@Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
+   {
+       UpdateTargetId = "show"
+   })*@
     </p>
+
 </body>
 </html>

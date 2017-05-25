@@ -229,7 +229,7 @@ namespace AlexMichaelProject.Controllers
                 db.purchases.Add(temp);
                 db.tickets.Remove(t);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "products");
+                return RedirectToAction("Index");
                 
             }
             return View();

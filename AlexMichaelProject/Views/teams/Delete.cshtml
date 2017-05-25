@@ -13,7 +13,7 @@
 </head>
 <body>
     <h3>Are you sure you want to delete this?</h3>
-    <div>
+    <div id="del">
         <h4>team</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -42,10 +42,16 @@
             <div class="form-actions no-color">
                 <input type="hidden" value=@Model.teamName name="id" />
                 <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
-                @Html.ActionLink("Back to List", "Index")
+                @*@Html.ActionLink("Back to List", "Index")*@
             </div>
             @*}*@
         </form>
+    </div>
+    <br />
+    <div>
+        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
     </div>
 </body>
 </html>
@@ -66,7 +72,8 @@
                     debugger
                     if (response == "true") {
                         alert("Football Team Deleteed successfully");
-                        window.location.href = "/teams/Index";
+                        //window.location.href = "/teams/Index";
+                        $('#del').remove();
                     }
                     else {
                         alert("Sorry, This Team can not be Deleted!!!");
