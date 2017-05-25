@@ -8,62 +8,29 @@
     <title>Details</title>
 </head>
 <body>
-    <div>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>match between @Model.teamA Vs @Model.teamB at @Model.stadium, Time:@Model.date</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                MatchID:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.matchID)
-            </dd>
-    
-            <dt>
-                Team A:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.teamA)
-            </dd>
-    
-            <dt>
-                Team B:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.teamB)
-            </dd>
-    
-            <dt>
-                Stadium:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.stadium)
-            </dd>
-    
-            <dt>
-                League:
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.league)
-            </dd>
-
-            <dt>
-                Date:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.date)
-            </dd>
-    
+            <dt>MatchID:</dt>
+            <dd>@Html.DisplayFor(model => model.matchID)</dd>
+            <dt>Team A:</dt>
+            <dd>@Html.DisplayFor(model => model.teamA)</dd>
+            <dt>Team B:</dt>
+            <dd>@Html.DisplayFor(model => model.teamB)</dd>
+            <dt>Stadium:</dt>
+            <dd>@Html.DisplayFor(model => model.stadium)</dd>
+            <dt>League:</dt>
+            <dd>@Html.DisplayFor(model => model.league)</dd>
+            <dt>Date:</dt>
+            <dd>@Html.DisplayFor(model => model.date)</dd>
         </dl>
     </div>
     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
-        @Html.ActionLink("Buy Tickets", "Buy","tickets", new { id = Model.matchID },null)
+        @Html.ActionLink("Buy Tickets", "Buy", "tickets", new { id = Model.matchID }, null)
     </p>
     <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
         @Html.ActionLink("Back to List", "Index")

@@ -36,9 +36,6 @@
                             <li>@Html.ActionLink("My Cart (0)", "showcart", "users")</li>
                         }
                     }
-                    
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    
                 </ul>
                 @if (Session["username"] != null)
                 {
@@ -46,7 +43,6 @@
                         <li><a href="#">Welcome : @Session["username"]</a></li>
                         <li><a href="/users/Logout">Logout</a></li>
                     </ul>
-
                 }
                 else
                 {

@@ -15,6 +15,11 @@ namespace AlexMichaelProject.Controllers
     {
         private DBEntities db = new DBEntities();
 
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
+
         public async Task<ActionResult> BuyCart()
         {
             string username = (string)Session["username"];
@@ -24,11 +29,6 @@ namespace AlexMichaelProject.Controllers
             return View();
         }
 
-        public ActionResult SideMenu()
-        {
-            return PartialView("SideMenu");
-        }
-        // GET: users
         public async Task<ActionResult> Index()
         {
             return View(await db.users.ToListAsync());
@@ -39,7 +39,6 @@ namespace AlexMichaelProject.Controllers
             return View(await db.products.ToListAsync());
         }
 
-        // GET: users/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -55,16 +54,12 @@ namespace AlexMichaelProject.Controllers
             return View(user);
         }
 
-        // GET: users/Create
         public ActionResult Create()
         {
             ViewBag.favoriteClub = new SelectList(db.teams, "teamName", "teamName");
             return View();
         }
 
-        // POST: users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "username,password,fName,fLname,adress,phoneNumber,mail,favoriteClub,isadmin")] user user)
@@ -85,11 +80,9 @@ namespace AlexMichaelProject.Controllers
                     result = "false";
                 }
             }
-            //return View(user);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: users/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             ViewBag.favoriteClub = new SelectList(db.teams, "teamName", "teamName");
@@ -105,9 +98,6 @@ namespace AlexMichaelProject.Controllers
             return View(user);
         }
 
-        // POST: users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "username,password,fName,fLname,adress,phoneNumber,mail,favoriteClub,isadmin")] user user)
@@ -118,13 +108,10 @@ namespace AlexMichaelProject.Controllers
                 db.Entry(user).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("Index");
             }
-            //return View(user);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: users/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -139,8 +126,6 @@ namespace AlexMichaelProject.Controllers
             return View(user);
         }
 
-        // POST: users/Delete/5
-        //[HttpPost, ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
@@ -159,7 +144,6 @@ namespace AlexMichaelProject.Controllers
                 db.users.Remove(users);
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -196,9 +180,7 @@ namespace AlexMichaelProject.Controllers
                 user.teams.Add(club);
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("AddClubToUser");
             }
-            //return View();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -330,9 +312,7 @@ namespace AlexMichaelProject.Controllers
                 Session["cartsize"]=zero;
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("Index", "products");
             }
-            //return View();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

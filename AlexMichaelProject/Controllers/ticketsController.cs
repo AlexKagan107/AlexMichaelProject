@@ -11,12 +11,15 @@ using AlexMichaelProject.Models;
 
 namespace AlexMichaelProject.Controllers
 {
-    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class ticketsController : Controller
     {
         private DBEntities db = new DBEntities();
-        
-        // GET: tickets
+
+        public ActionResult SideMenu()
+        {
+            return PartialView("SideMenu");
+        }
+
         public async Task<ActionResult> Index()
         {
             var tickets = db.tickets.Include(t => t.match);
@@ -31,7 +34,6 @@ namespace AlexMichaelProject.Controllers
             return View(tickets.ToList());
         }
 
-        // GET: tickets/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,31 +48,12 @@ namespace AlexMichaelProject.Controllers
             return View(ticket);
         }  
 
-        // GET: tickets/Create
         public ActionResult Create()
         {
             ViewBag.matchID = new SelectList(db.matches, "matchID", "matchID");
 
             return View();
         }
-
-        // POST: tickets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "ticketID,matchID,seatNumber,cost,seatType")] ticket ticket)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.tickets.Add(ticket);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.matchID = new SelectList(db.matches, "matchID", "teamA", ticket.matchID);
-        //    return View(ticket);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -116,7 +99,6 @@ namespace AlexMichaelProject.Controllers
 
         }
 
-        // GET: tickets/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,9 +114,6 @@ namespace AlexMichaelProject.Controllers
             return View(ticket);
         }
 
-        // POST: tickets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ticketID,matchID,seatNumber,cost,seatType")] ticket ticket)
@@ -145,14 +124,11 @@ namespace AlexMichaelProject.Controllers
                 db.Entry(ticket).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("Index");
             }
             ViewBag.matchID = new SelectList(db.matches, "matchID", "matchID", ticket.matchID);
             return Json(result, JsonRequestBehavior.AllowGet);
-            //return View(ticket);
         }
 
-        // GET: tickets/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,7 +143,6 @@ namespace AlexMichaelProject.Controllers
             return View(ticket);
         }
 
-        // POST: tickets/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -179,7 +154,6 @@ namespace AlexMichaelProject.Controllers
                 db.tickets.Remove(ticket);
                 await db.SaveChangesAsync();
                 result = "true";
-                //return RedirectToAction("Index");
             }
             catch(Exception ex)
             {

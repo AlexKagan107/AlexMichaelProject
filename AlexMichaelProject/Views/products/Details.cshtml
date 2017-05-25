@@ -12,63 +12,26 @@
     <title>Details</title>
 </head>
 <body>
-    <div>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>product</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dd>
-                <img src=@Html.DisplayFor(model => model.photo) style="width:250px;height:250px;" />
-            </dd>
-
-            <dt>
-                Product Type:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.type)
-            </dd>
-
-            <dt>
-                Cost
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.cost)$
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.size)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.size)
-            </dd>
-
-            <dt>
-                Description:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.description)
-            </dd>
-
-
-            <dt>
-                Manufacturer
-            </dt>
-
-            <dd>
-                <a href=@Html.DisplayFor(model => model.manufacturer1.msite)>@Html.DisplayFor(model => model.manufacturer1.mname)</a>
-            </dd>
-
-            <dt>
-                Team Name:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.team.teamName)
-            </dd>
-
+            <dd><img src=@Html.DisplayFor(model => model.photo) style="width:250px;height:250px;" /></dd>
+            <dt>Product Type:</dt>
+            <dd>@Html.DisplayFor(model => model.type)</dd>
+            <dt>Cost</dt>
+            <dd>@Html.DisplayFor(model => model.cost)$</dd>
+            <dt>@Html.DisplayNameFor(model => model.size)</dt>
+            <dd>@Html.DisplayFor(model => model.size)</dd>
+            <dt>Description:</dt>
+            <dd>@Html.DisplayFor(model => model.description)</dd>
+            <dt>Manufacturer</dt>
+            <dd><a href=@Html.DisplayFor(model => model.manufacturer1.msite)>@Html.DisplayFor(model => model.manufacturer1.mname)</a></dd>
+            <dt>Team Name:</dt>
+            <dd>@Html.DisplayFor(model => model.team.teamName)</dd>
         </dl>
     </div>
     <div style="margin-left:50px;">
@@ -77,7 +40,6 @@
             <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
                 @Html.ActionLink("Add To Cart", "AddToCart", new { id = Model.product1 })
             </p>
-            
         }
         @if ((String)Session["power"] == "admin")
         {
@@ -89,9 +51,6 @@
                 @Html.ActionLink("Delete", "Delete", new { id = Model.product1 })
             </p>
         }
-
-        
-
         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
             @Html.ActionLink("Back to List", "Index")
         </p>
