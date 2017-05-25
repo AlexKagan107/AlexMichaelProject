@@ -57,7 +57,11 @@
             <div class="form-actions no-color">
                 <input type="hidden" value=@Model.ticketID name="id" />
                 <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
-                @Html.ActionLink("Back to List", "Index")
+                @*@Html.ActionLink("Back to List", "Index")*@
+                @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
+           {
+               UpdateTargetId = "show",
+           })
             </div>
             @*}*@
         </form>

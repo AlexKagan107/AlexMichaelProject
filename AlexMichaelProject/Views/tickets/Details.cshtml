@@ -1,7 +1,7 @@
 ﻿@model AlexMichaelProject.Models.ticket
 
 @{
-    Layout = null;
+   // Layout = null;
 }
 
 <!DOCTYPE html>
@@ -12,6 +12,8 @@
     <title>Details</title>
 </head>
 <body>
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
     <div>
         <h4>ticket</h4>
         <hr />
@@ -60,6 +62,7 @@
         @*@Html.ActionLink("Back to List", "Index")*@
         @Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
     {
+       HttpMethod = "POST",
         UpdateTargetId = "show",
     })
     </p>

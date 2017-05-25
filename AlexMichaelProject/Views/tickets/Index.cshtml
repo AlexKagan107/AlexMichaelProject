@@ -9,6 +9,8 @@
     <title>Index</title>
 </head>
 <body>
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
     <div id="show">
         <div>
             <div style="width:60%; float:left;">
@@ -65,6 +67,7 @@
                             @*@Html.ActionLink("Details", "Details", new { id = item.ticketID })*@
                             @Ajax.ActionLink("Details", "Details", "tickets", new { id = item.ticketID }, new AjaxOptions()
                                {
+                                    HttpMethod = "POST",
                                    UpdateTargetId = "show",
                                })
                         </p>
@@ -72,15 +75,16 @@
                 {
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
                             @*@Html.ActionLink("Edit", "Edit", new { id = item.ticketID })*@
-                            @Ajax.ActionLink("Edit", "Edit", "tickets", new { id = item.ticketID }, new AjaxOptions()
-                                   {
-                                       UpdateTargetId = "show",
+                            @Ajax.ActionLink("Edit", "Edit", "tickets", new { id = item.ticketID }, new AjaxOptions
+                       {
+                          
+                                UpdateTargetId = "SHOW",
                                    })
                         </p>
 
                         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
                             @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
-                            @Ajax.ActionLink("Deleteee", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
+                            @Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
                                    {
                                        UpdateTargetId = "show",
                                    })
@@ -99,5 +103,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

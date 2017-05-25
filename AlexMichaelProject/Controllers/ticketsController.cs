@@ -11,17 +11,18 @@ using AlexMichaelProject.Models;
 
 namespace AlexMichaelProject.Controllers
 {
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class ticketsController : Controller
     {
         private DBEntities db = new DBEntities();
-
+        
         // GET: tickets
         public async Task<ActionResult> Index()
         {
             var tickets = db.tickets.Include(t => t.match);
+            
             return View(await tickets.ToListAsync());
         }
-
 
         public async Task<ActionResult> Buy(int id)
         {
@@ -43,7 +44,7 @@ namespace AlexMichaelProject.Controllers
                 return HttpNotFound();
             }
             return View(ticket);
-        }
+        }  
 
         // GET: tickets/Create
         public ActionResult Create()
@@ -127,7 +128,7 @@ namespace AlexMichaelProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.matchID = new SelectList(db.matches, "matchID", "teamA", ticket.matchID);
+            ViewBag.matchID = new SelectList(db.matches, "matchID", "matchID", ticket.matchID);
             return View(ticket);
         }
 
@@ -138,14 +139,17 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ticketID,matchID,seatNumber,cost,seatType")] ticket ticket)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                result = "true";
+                //return RedirectToAction("Index");
             }
-            ViewBag.matchID = new SelectList(db.matches, "matchID", "teamA", ticket.matchID);
-            return View(ticket);
+            ViewBag.matchID = new SelectList(db.matches, "matchID", "matchID", ticket.matchID);
+            return Json(result, JsonRequestBehavior.AllowGet);
+            //return View(ticket);
         }
 
         // GET: tickets/Delete/5
