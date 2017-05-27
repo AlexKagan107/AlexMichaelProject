@@ -34,9 +34,13 @@
                                 <option value="stadium">Stadium</option>
                                 <option value="league">League</option>
                             </select>
-                            <h4>Search: @Html.TextBox("text")</h4>
-                            <input type="submit" name="name" value="Search" class="btn btn-info" />
-                        </form> 
+                            <h4>
+                                Search: @Html.TextBox("text")
+                                <button type="submit" name="name" value="Search" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </h4>
+                        </form>
                     </div>
                 }
                 <br />

@@ -29,8 +29,12 @@
                         @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
                         {
                             <div>
-                                <h4>Search By Match ID: @Html.TextBox("MatchID")</h4>
-                                <input type="submit" name="name" value="Search" class="btn btn-info" />
+                                <h4>
+                                    Search By Match ID: @Html.TextBox("MatchID")
+                                    <button type="submit" name="name" value="Search" class="btn btn-info">
+                                        <span class="glyphicon glyphicon-search"></span> Search
+                                    </button>
+                                </h4>
                             </div>
                         }
                         <br />

@@ -219,7 +219,11 @@
     <Content Include="Content\Images\bayern2.jpg" />
     <Content Include="Content\Images\Chelsea.jpg" />
     <Content Include="Content\Images\dortmund.jpg" />
+    <Content Include="Content\Images\home3.jpg" />
     <Content Include="Content\Images\home4.jpg" />
+    <Content Include="Content\Images\home5.jpg" />
+    <Content Include="Content\Images\home7.jpg" />
+    <Content Include="Content\Images\home8.jpg" />
     <Content Include="Content\Images\juventus.jpg" />
     <Content Include="Content\Images\madrid.jpg" />
     <Content Include="Content\Images\milan.jpg" />
