@@ -26,6 +26,33 @@ namespace AlexMichaelProject.Controllers
             return View(await matches.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> Index(string type, string text)
+        {
+            if(type == "teamA")
+            { 
+                var matches = db.matches.Where(o=>o.teamA.StartsWith(text)).Include(m => m.team).Include(m => m.team1);
+                return PartialView(await matches.ToListAsync());
+            }
+            if (type == "teamB")
+            {
+                var matches = db.matches.Where(o => o.teamB.StartsWith(text)).Include(m => m.team).Include(m => m.team1);
+                return PartialView(await matches.ToListAsync());
+            }
+            if (type == "stadium")
+            {
+                var matches = db.matches.Where(o => o.stadium.StartsWith(text)).Include(m => m.team).Include(m => m.team1);
+                return PartialView(await matches.ToListAsync());
+            }
+            if (type == "league")
+            {
+                var matches = db.matches.Where(o => o.league.StartsWith(text)).Include(m => m.team).Include(m => m.team1);
+                return PartialView(await matches.ToListAsync());
+            }
+            return PartialView();
+
+        }
+
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -108,15 +135,26 @@ namespace AlexMichaelProject.Controllers
             return View(match);
         }
 
-        [HttpPost, ActionName("Delete")]
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            match match = await db.matches.FindAsync(id);
-            db.matches.Remove(match);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+            string result = "true";
+            try
+            {
+                match match = await db.matches.FindAsync(id);
+                db.matches.Remove(match);
+                await db.SaveChangesAsync();
+                result = "true";
+                //return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        } 
 
         protected override void Dispose(bool disposing)
         {

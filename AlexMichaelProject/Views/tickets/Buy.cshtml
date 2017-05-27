@@ -8,53 +8,65 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="col-md-3" style="width:20%;float:left;">
-        @{ Html.RenderAction("SideMenu", "Home");}
-    </div>
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>TicketID</th>
-                <th>MatchID</th>
-                <th>Seat Number</th>
-                <th>Seat Type</th>
-                <th>Price</th>
-            </tr>
-
-            @foreach (var item in Model)
+    <div id="show2">
+        <div class="col-md-3" style="width:20%;float:left;">
+            @{ Html.RenderAction("SideMenu", "Home");}
+        </div>
+        <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+            @if ((String)Session["power"] == "admin")
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ticketID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.matchID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.seatNumber)</td>
-                    <td>@Html.DisplayFor(modelItem => item.seatType)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cost)</td>
-                    <td>
-                        @if ((String)Session["power"] == "user")
-                {
-                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
-                                @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.ticketID })
-                            </p>
-                        }
-                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
-                            @Html.ActionLink("Details", "Details", new { id = item.ticketID })
-                        </p>
-                        @if ((String)Session["power"] == "admin")
-                {
-                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ticketID })
-                            </p>
-                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ticketID })
-                            </p>
-                        }
-                    </td>
-                </tr>
+                <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
             }
-        </table>
+            <br />
+
+            <table class="table">
+                <tr>
+                    <th>TicketID</th>
+                    <th>MatchID</th>
+                    <th>Seat Number</th>
+                    <th>Seat Type</th>
+                    <th>Price</th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ticketID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.matchID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.seatNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.seatType)</td>
+                        <td>@Html.DisplayFor(modelItem => item.cost)</td>
+                        <td>
+                            @if ((String)Session["power"] == "user")
+                {
+                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+                                    @*@Html.ActionLink("Buy", "purchaset", new { id = item.ticketID })*@
+                                    @Ajax.ActionLink("Buy", "purchaset", new { id = item.ticketID }, new AjaxOptions()
+                               {
+                                   HttpMethod = "POST",
+                                   UpdateTargetId = "show2"
+                               })
+                                </p>
+                            }
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
+                                @Html.ActionLink("Details", "Details", new { id = item.ticketID })
+                            </p>
+                            @if ((String)Session["power"] == "admin")
+                {
+                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ticketID })
+                                </p>
+                                <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ticketID })
+                                </p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
 </body>
 </html>

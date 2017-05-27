@@ -27,6 +27,15 @@ namespace AlexMichaelProject.Controllers
             return View(await tickets.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> Index(int MatchID)
+        {
+            string tmp = MatchID.ToString();
+            var tickets = db.tickets.Where(o=>o.matchID.ToString().StartsWith(tmp)).Include(t => t.match);
+
+            return PartialView(await tickets.ToListAsync());
+        }
+
         public async Task<ActionResult> Buy(int id)
         {
             match temp = await db.matches.FindAsync(id);

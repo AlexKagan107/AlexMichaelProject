@@ -8,45 +8,87 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="col-md-3" style="width:20%;float:left;">
-        @{ Html.RenderAction("SideMenu", "Home");}
-    </div>
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>MatchID</th>
-                <th>Team A</th>
-                <th>Team B</th>
-                <th>Stadium</th>
-                <th>League</th>
-                <th>Date</th>
-            </tr>
-            @foreach (var item in Model)
+    <div id="show">
+        <div id="search" class="col-md-3" style="width:100%;float:left;margin-top:20px;">
+            <div class="col-md-3" style="width:20%;float:left;">
+                @{ Html.RenderAction("SideMenu", "Home");}
+            </div>
+            <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+                <br />
+                @if ((String)Session["power"] == "admin")
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.matchID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.teamA)</td>
-                    <td>@Html.DisplayFor(modelItem => item.teamB)</td>
-                    <td>@Html.DisplayFor(modelItem => item.stadium)</td>
-                    <td>@Html.DisplayFor(modelItem => item.league)</td>
-                    <td>@Html.DisplayFor(modelItem => item.date)</td>
-                    <td>
-                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.matchID })
-                        </p>
-                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
-                            @Html.ActionLink("Details", "Details", new { id = item.matchID })
-                        </p>
-                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                            @Html.ActionLink("Delete", "Delete", new { id = item.matchID })
-                        </p>
-                    </td>
-                </tr>
-            }
-        </table>
+                    <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                }
+                <br />
+
+                @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
+                {
+                    <div>
+                        <form>
+                            <h4>Search Type:</h4>
+                            <select name="type" class="form-control">
+                                <option selected="selected" value="teamA">Team A</option>
+                                <option value="teamB">Team B</option>
+                                <option value="stadium">Stadium</option>
+                                <option value="league">League</option>
+                            </select>
+                            <h4>Search: @Html.TextBox("text")</h4>
+                            <input type="submit" name="name" value="Search" class="btn btn-info" />
+                        </form> 
+                    </div>
+                }
+                <br />
+
+                <table class="table">
+                    <tr>
+                        <th>MatchID</th>
+                        <th>Team A</th>
+                        <th>Team B</th>
+                        <th>Stadium</th>
+                        <th>League</th>
+                        <th>Date</th>
+                    </tr>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.matchID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.teamA)</td>
+                            <td>@Html.DisplayFor(modelItem => item.teamB)</td>
+                            <td>@Html.DisplayFor(modelItem => item.stadium)</td>
+                            <td>@Html.DisplayFor(modelItem => item.league)</td>
+                            <td>@Html.DisplayFor(modelItem => item.date)</td>
+                            <td>
+
+                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.matchID })*@
+                                    @Ajax.ActionLink("Details", "Details", new { id = item.matchID }, new AjaxOptions()
+                               {
+                                   HttpMethod = "POST",
+                                   UpdateTargetId = "show"
+                               })
+                                </p>
+                                @if ((String)Session["power"] == "admin")
+                                {
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.matchID })
+                                    </p>
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.matchID })*@
+                                        @Ajax.ActionLink("Delete", "Delete", new { id = item.matchID }, new AjaxOptions()
+                                   {
+                                       HttpMethod = "POST",
+                                       UpdateTargetId = "show"
+                                   })
+                                    </p>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -12,7 +12,7 @@
         @{ Html.RenderAction("SideMenu", "Home");}
     </div>
     <h3>Are you sure you want to delete this?</h3>
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+    <div id="del" class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>match</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -29,16 +29,57 @@
             <dt>Date:</dt>
             <dd>@Html.DisplayFor(model => model.date)</dd>
         </dl>
-        @using (Html.BeginForm())
-        {
+        @*@using (Html.BeginForm())
+            {*@
+        <form id="myForm" action=@Url.Action("DeleteConfirmed","matches") method="post">
             @Html.AntiForgeryToken()
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" />
-                <p class="btn btn-primary btn-md">
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
+                <input type="hidden" value=@Model.matchID name="id" />
+                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
             </div>
-        }
+            @*}*@
+        </form>
+    </div>
+    <br />
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
     </div>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnDelete").click(function () {
+            //debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/matches/DeleteConfirmed",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("Match Deleteed successfully");
+                        //window.location.href = "/teams/Index";
+                        $('#del').remove();
+                    }
+                    else {
+                        alert("Sorry, This Match can not be Deleted!!!");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+

@@ -8,74 +8,89 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="col-md-3" style="width:20%;float:left;">
-        @{ Html.RenderAction("SideMenu", "Home");}
-    </div>
-    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <div id="show">
+        <div id="search" class="col-md-3" style="width:100%;float:left;margin-top:20px;">
+            <div class="col-md-3" style="width:20%;float:left;">
+                @{ Html.RenderAction("SideMenu", "Home");}
+            </div>
+            @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
-    <div id="show" class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <div>
-            <div style="width:60%; float:left;">
-                @if ((String)Session["power"] == "admin")
-                {
-                    <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-                        @Html.ActionLink("Create New", "Create")
-                    </p>
-                }
-                <table class="table">
-                    <tr>
-                        <th>TicketID</th>
-                        <th>MatchID</th>
-                        <th>Seat Number</th>
-                        <th>Seat Type</th>
-                        <th>Price</th>
-                    </tr>
-                    @foreach (var item in Model)
+            <div id="show" class="col-md-3" style="width:80%;float:right;margin-top:20px;">
+                <div>
+                    <div style="width:60%; float:left;">
+                        @if ((String)Session["power"] == "admin")
+                        {
+                            <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+                        }
+                        <br />
+
+                        @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
+                        {
+                            <div>
+                                <h4>Search By Match ID: @Html.TextBox("MatchID")</h4>
+                                <input type="submit" name="name" value="Search" class="btn btn-info" />
+                            </div>
+                        }
+                        <br />
+
+                        <table class="table">
+                            <tr>
+                                <th>TicketID</th>
+                                <th>MatchID</th>
+                                <th>Seat Number</th>
+                                <th>Seat Type</th>
+                                <th>Price</th>
+                            </tr>
+                            @foreach (var item in Model)
             {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.ticketID)</td>
-                            <td>@Html.DisplayFor(modelItem => item.matchID)</td>
-                            <td>@Html.DisplayFor(modelItem => item.seatNumber)</td>
-                            <td>@Html.DisplayFor(modelItem => item.seatType)</td>
-                            <td>@Html.DisplayFor(modelItem => item.cost)$</td>
-                            <td>
-                                @if ((String)Session["power"] == "user")
-                                {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ticketID)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.matchID)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.seatNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.seatType)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.cost)$</td>
+                                    <td>
+                                        @if ((String)Session["power"] == "user")
+                                        {
 
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
-                                        @*@Html.ActionLink("Buy", "purchaset", new { id = item.ticketID })*@
-                                        @Ajax.ActionLink("Buy", "purchaset", new { id = item.ticketID }, new AjaxOptions()
+                                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
+                                                @*@Html.ActionLink("Buy", "purchaset", new { id = item.ticketID })*@
+                                                @Ajax.ActionLink("Buy", "purchaset", new { id = item.ticketID }, new AjaxOptions()
+                                           {
+                                               HttpMethod = "POST",
+                                               UpdateTargetId = "show"
+                                           })
+                                            </p>
+                                        }
+                                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
+                                            @*@Html.ActionLink("Details", "Details", new { id = item.ticketID })*@
+                                            @Ajax.ActionLink("Details", "Details", new { id = item.ticketID }, new AjaxOptions()
                                        {
                                            HttpMethod = "POST",
                                            UpdateTargetId = "show"
                                        })
-                                    </p>
-                                }
-                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                                    @*@Html.ActionLink("Details", "Details", new { id = item.ticketID })*@
-                                    @Ajax.ActionLink("Details", "Details", new { id = item.ticketID }, new AjaxOptions()
-                                   {
-                                       HttpMethod = "POST",
-                                       UpdateTargetId = "show"
-                                   })
-                                </p>
-                                @if ((String)Session["power"] == "admin")
-                                {
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
-                                        @Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
-                                       {
-                                           UpdateTargetId = "show"
-                                       })
-                                    </p>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
-            <div style="width:40%; float:left;">
-                <img src="https://image.ibb.co/hoggHa/stadium.jpg" style="width:500px; height:500px;" />
+                                        </p>
+                                        @if ((String)Session["power"] == "admin")
+                                        {
+                                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown; font-weight:bold">
+                                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
+                                                @Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
+                                           {
+                                               UpdateTargetId = "show"
+                                           })
+                                            </p>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <div style="width:40%; float:left;">
+                        <img src="https://image.ibb.co/hoggHa/stadium.jpg" style="width:500px; height:500px;" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

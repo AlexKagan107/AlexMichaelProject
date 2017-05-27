@@ -25,7 +25,7 @@
             @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
             {
                 <div>
-                    Search By ClubName:@Html.TextBox("clubName")
+                    Search By Club Name:@Html.TextBox("clubName")
                     <input type="submit" name="name" value="Search" class="btn btn-info" />
                 </div>
             }
