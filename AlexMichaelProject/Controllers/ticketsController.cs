@@ -23,7 +23,7 @@ namespace AlexMichaelProject.Controllers
         public async Task<ActionResult> Index()
         {
             var tickets = db.tickets.Include(t => t.match);
-            
+
             return View(await tickets.ToListAsync());
         }
 
@@ -46,7 +46,7 @@ namespace AlexMichaelProject.Controllers
                 return HttpNotFound();
             }
             return View(ticket);
-        }  
+        }
 
         public ActionResult Create()
         {
@@ -59,6 +59,7 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(int matchID, int seatNumber, int cost, string seatType, string amount)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 int quanity = Int32.Parse(amount);
@@ -84,7 +85,7 @@ namespace AlexMichaelProject.Controllers
                     ticket.matchID = tempMatch.matchID;
                     ticket.cost = cost;
                     ticket.seatType = seatType;
-                    
+
                     ticket.seatNumber = seatNumberIndex;
                     seatNumberIndex++;
                     ticket.ticketID = ticketsID[j];
@@ -93,10 +94,11 @@ namespace AlexMichaelProject.Controllers
 
                 }
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                result = "true";
             }
-            return RedirectToAction("Index");
-
+            //return RedirectToAction("Index");
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Edit(int? id)
@@ -155,7 +157,7 @@ namespace AlexMichaelProject.Controllers
                 await db.SaveChangesAsync();
                 result = "true";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result = "false";
             }
@@ -171,16 +173,24 @@ namespace AlexMichaelProject.Controllers
             base.Dispose(disposing);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> purchaset(int id)
         {
             string username = (string)Session["username"];
             user tempuser = await db.users.FindAsync(username);
-            
+
             ViewBag.paymentoptions = new SelectList(tempuser.paymentoptions, "creditcardnumber", "creditcardnumber");
             ticket t = await db.tickets.FindAsync(id);
-            
-            Session["ticketPrice"] = t.cost + "";
-            Session["ticketid"] = id;
+            if (t != null)
+            {
+                Session["ticketPrice"] = t.cost + "";
+                Session["ticketid"] = id;
+            }
+            else
+            {
+                Session["ticketPrice"] = 0 + "";
+            }
             return View();
         }
 
@@ -189,6 +199,7 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> buyt(int paymentoptions)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 string username = (string)Session["username"];
@@ -203,13 +214,13 @@ namespace AlexMichaelProject.Controllers
                 p.clubName = "ticket";
                 p.cost = t.cost;
                 p.size = t.seatNumber;
-                p.description = t.matchID+"";
+                p.description = t.matchID + "";
                 p.photo = null;
 
                 int j = 0;
                 purchase temp = new purchase();
                 temp.username = username;
-                temp.product = p.product1 ;
+                temp.product = p.product1;
                 temp.creditcardnumber = paymentoptions;
                 temp.dateOfPurchase = DateTime.Today;
                 Boolean flag = false;
@@ -229,10 +240,12 @@ namespace AlexMichaelProject.Controllers
                 db.purchases.Add(temp);
                 db.tickets.Remove(t);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-                
+                //return RedirectToAction("Index");
+                result = "true";
+
             }
-            return View();
+            //return View();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 

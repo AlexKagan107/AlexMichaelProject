@@ -9,28 +9,67 @@
     <title>Purchase</title>
 </head>
 <body>
-    @*@using (Html.BeginForm())
-    {*@
-    <form id="myForm" action=@Url.Action("buyt", "tickets") method="post">
+    <div id="del">
+        <form id="myForm">
+            @using (Html.BeginForm())
+            { 
+                //<form id="myForm" action=@Url.Action("buyt", "tickets") method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.paymentoptions, "chose credit card:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("paymentoptions", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.paymentoptions, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <h4 class="control-label col-md-2">
+                        Total Price to Pay: @Session["ticketPrice"]$
+                    </h4>
+                    <h4 class="btn btn-primary btn-md">
+                        <input type="submit" value="Buy" class="btn btn-default" id="btnBuy" />
 
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <div class="form-group">
-                @Html.LabelFor(model => model.paymentoptions, "chose credit card:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("paymentoptions", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.paymentoptions, "", new { @class = "text-danger" })
+                    </h4>
                 </div>
-            </div>
-            <h4 class="control-label col-md-2">
-                Total Price to Pay: @Session["ticketPrice"]$
-            </h4>
-            <h4 class="btn btn-primary btn-md">
-                <input type="submit" value="Buy" class="btn btn-default" />
-
-            </h4>
-        </div>
+            }
         </form>
-        @*}*@
+    </div>
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnBuy").click(function () {
+            //debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/tickets/buyt",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        //$('#del').remove();
+                        alert("Ticket successfully purchased");
+                        //window.location.href = "/tickets/Index";
+                    }
+                    else {
+                        alert("Sorry, This Ticket can not be purchased!!!");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

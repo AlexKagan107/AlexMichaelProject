@@ -16,10 +16,12 @@
     <div id="show" class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <div>
             <div style="width:60%; float:left;">
-                <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-
+                @if ((String)Session["power"] == "admin")
+                {
+                    <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                }
                 <table class="table">
                     <tr>
                         <th>TicketID</th>
@@ -38,28 +40,33 @@
                             <td>@Html.DisplayFor(modelItem => item.cost)$</td>
                             <td>
                                 @if ((String)Session["power"] == "user")
-                {
+                                {
 
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:aquamarine;">
-                                        @Html.ActionLink("Buy", "purchaset", new { id = item.ticketID })
+                                        @*@Html.ActionLink("Buy", "purchaset", new { id = item.ticketID })*@
+                                        @Ajax.ActionLink("Buy", "purchaset", new { id = item.ticketID }, new AjaxOptions()
+                                       {
+                                           HttpMethod = "POST",
+                                           UpdateTargetId = "show"
+                                       })
                                     </p>
                                 }
                                 <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
                                     @*@Html.ActionLink("Details", "Details", new { id = item.ticketID })*@
                                     @Ajax.ActionLink("Details", "Details", new { id = item.ticketID }, new AjaxOptions()
-                               {
-                                   HttpMethod = "POST",
-                                   UpdateTargetId = "show",
-                               })
+                                   {
+                                       HttpMethod = "POST",
+                                       UpdateTargetId = "show"
+                                   })
                                 </p>
                                 @if ((String)Session["power"] == "admin")
-                {
+                                {
                                     <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ticketID })
-                                        @*@Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
-                                            {
-                                                UpdateTargetId = "show"
-                                            })*@
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
+                                        @Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
+                                       {
+                                           UpdateTargetId = "show"
+                                       })
                                     </p>
                                 }
                             </td>
