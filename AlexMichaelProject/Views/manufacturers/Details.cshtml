@@ -15,11 +15,13 @@
         <h4>manufacturer @Model.mname</h4>
         <hr />
         <dl class="dl-horizontal">
+            <dt class="control-label col-md-2">Manufacturers:</dt>
+            <dd>@Html.DisplayFor(model => model.mname)</dd>
             <dt class="control-label col-md-2">WebSite:</dt>
-            <dd>@Html.DisplayFor(model => model.msite)</dd>
+            <dd><a href=http://@Html.DisplayFor(model => model.msite)>@Html.DisplayFor(model => model.msite)</a></dd>
         </dl>
     </div>
-    <p class="btn btn-primary btn-md" style="background-color:wheat; margin-left:50px;">
+    <p class="btn btn-primary btn-md" style="background-color:khaki; margin-left:50px;">
         @Html.ActionLink("Edit", "Edit", new { id = Model.mname })
     </p>
     <p class="btn btn-primary btn-md">
