@@ -334,6 +334,7 @@
     <Content Include="Views\tickets\Buy.cshtml" />
     <Content Include="Views\tickets\purchaset.cshtml" />
     <Content Include="Views\products\_SearchProduct.cshtml" />
+    <Content Include="Views\teams\clubLeuge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

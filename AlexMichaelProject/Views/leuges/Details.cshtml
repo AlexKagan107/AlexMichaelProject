@@ -1,31 +1,39 @@
-﻿@model AlexMichaelProject.Models.leuge
+﻿@model IEnumerable<AlexMichaelProject.Models.team>
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>leuge @Model.leugeName</title>
+    <title>Index</title>
 </head>
 <body>
-    <div class="col-md-3" style="width:20%;float:left;">
-        @{ Html.RenderAction("SideMenu", "Home");}
+    <div id="show">
+        <div class="panel panel-danger">
+            <div class="col-md-3" style="margin-top:20px">
+                @{ Html.RenderAction("SideMenu", "Home");}
+            </div>
+
+            <div class="col-md-9">
+             
+                <table class="table">
+                    <tr>
+                        <th>Club Name</th>
+                        <th>League</th>
+                        <th>Home Stadium</th>
+                    </tr>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.teamName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.leuge)</td>
+                            <td>@Html.DisplayFor(modelItem => item.homeStadium)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <h4>leuge</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Legue Name:</dt>
-            <dd>@Html.DisplayFor(model => model.leugeName)</dd>
-        </dl>
-    </div>
-    <div style="margin-left:50px;">
-        <p class="btn btn-primary btn-md" style="background-color:wheat;">
-            @Html.ActionLink("Edit", "Edit", new { id = Model.leugeName })
-        </p>
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </div>
+
 </body>
 </html>

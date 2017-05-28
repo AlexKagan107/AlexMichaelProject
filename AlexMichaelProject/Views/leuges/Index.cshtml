@@ -8,43 +8,40 @@
     <title>Index</title>
 </head>
 <body>
+    <div id="show">
         <div class="col-md-3" style="width:20%;float:left;">
             @{ Html.RenderAction("SideMenu", "Home");}
         </div>
 
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        @if ((String)Session["power"] == "admin")
-        {
-            <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-                @Html.ActionLink("Create New", "Create")
-            </p>
-        }
-        <table class="table">
-            <tr><th>Leuge Name</th></tr>
-
-            @foreach (var item in Model)
+        <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+            @if ((String)Session["power"] == "admin")
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.leugeName)</td>
-                    <td>
-                        @if ((String)Session["power"] == "admin")
-                        {
-                            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:yellow;">
-                                @Html.ActionLink("Edit", "Edit", new { id = item.leugeName })
-                            </p>
-                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                                @Html.ActionLink("Delete", "Delete", new { id = item.leugeName })
-                            </p>
-                        }
-                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey;">
-
-                            @Html.ActionLink("Details", "Details", new { id = item.leugeName })
-                        </p>
-                    </td>
-                </tr>
+                <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
             }
-        </table>
+            <table class="table">
+                <tr><th><h3>League Name</h3></th></tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => item.leugeName)</h4></td>
+                        <td>
+                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:darkblue;">
+                                @*@Html.ActionLink("Clubs", "clubLeuge", "teams", new { id = item.leugeName },null)*@
+                                @Ajax.ActionLink("Clubs", "clubLeuge", "teams", new { id = item.leugeName }, new AjaxOptions()
+                       {
+                           HttpMethod = "POST",
+                           UpdateTargetId = "show"
+                       })
+                            </p>
+                        </td>
+                    </tr>
+                }
+            </table>
         </div>
+    </div>
 
 </body>
 </html>

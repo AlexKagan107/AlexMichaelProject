@@ -73,7 +73,7 @@
         </div>
     }
 
-    @if (Session["fanclub"] == null)
+    @if (Session["fanclub"] == null || (string)Session["power"] == "admin")
     {
         @*<div class="col-md-9">
                 <img src="~/Content/Images/home4.jpg" class="img-rounded" style="width:95% ; height:85%" />
@@ -87,8 +87,7 @@
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
                     <li data-target="#myCarousel" data-slide-to="3"></li>
-                    <li data-target="#myCarousel" data-slide-to="4"></li>
-                    <li data-target="#myCarousel" data-slide-to="5"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li> 
                 </ol>
 
                 <!-- Wrapper for slides -->

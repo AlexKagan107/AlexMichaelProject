@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<AlexMichaelProject.Models.team>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="panel panel-danger">
+        <div class="col-md-3" style="margin-top:20px">
+            @{ Html.RenderAction("SideMenu", "Home");}
+        </div>
+
+        <div class="col-md-9">
+
+            <table class="table">
+                <tr><th><h3>Clubs of the League</h3></th></tr>
+                <tr>
+                    <th><h3>Club Name</h3></th>
+                    <th><h3>League</h3></th>
+                    <th><h3>Home Stadium</h3></th>
+                </tr>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td><h4>@Html.DisplayFor(modelItem => item.teamName)</h4></td>
+                        <td><h4>@Html.DisplayFor(modelItem => item.leuge)</h4></td>
+                        <td><h4>@Html.DisplayFor(modelItem => item.homeStadium)</h4></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <p class="btn btn-primary btn-md">
+        @Html.ActionLink("Back to List", "Index", "leuges")
+    </p>
+</body>
+</html>

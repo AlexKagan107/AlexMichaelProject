@@ -132,6 +132,13 @@ namespace AlexMichaelProject.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public async Task<ActionResult> clubLeuge(string id)
+        {
+            leuge temp = await db.leuges.FindAsync(id);
+            List<team> team = temp.teams.ToList();
+            return View(team.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

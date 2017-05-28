@@ -25,16 +25,16 @@
                 <br />
                 <table class="table">
                     <tr>
-                        <th>Club Name</th>
-                        <th>League</th>
-                        <th>Home Stadium</th>
+                        <th><h3>Club Name</h3></th>
+                        <th><h3>League</h3></th>
+                        <th><h3>Home Stadium</h3></th>
                     </tr>
                     @foreach (var item in Model)
             {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.teamName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.leuge)</td>
-                            <td>@Html.DisplayFor(modelItem => item.homeStadium)</td>
+                            <td><h4>@Html.DisplayFor(modelItem => item.teamName)</h4></td>
+                            <td><h4>@Html.DisplayFor(modelItem => item.leuge)</h4></td>
+                            <td><h4>@Html.DisplayFor(modelItem => item.homeStadium)</h4></td>
                             <td>
                                 <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
                                     @*@Html.ActionLink("Details", "Details", new { id = item.teamName })*@
