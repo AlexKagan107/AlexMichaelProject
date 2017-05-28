@@ -47,6 +47,20 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
+        public async Task<ActionResult> purchaseProd(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            product product = await db.products.FindAsync(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
         public ActionResult Create()
         {
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "mname");

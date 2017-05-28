@@ -13,13 +13,13 @@
     <title>Delete</title>
 </head>
 <body>
-
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryval")*@
-
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
     <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>user</h4>
+    <div id="del" class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+
+        <h4>User</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -97,49 +97,58 @@
 
         <form id="myForm" action=@Url.Action("DeleteConfirmed","users") method="post">
             @*@using (Html.BeginForm())
-            {*@
-                @Html.AntiForgeryToken()
+                {*@
+            @Html.AntiForgeryToken()
 
-                <div class="form-actions no-color">
-                    <input type="hidden" value=@Model.username name="id" />
-                    <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> |
-                    @Html.ActionLink("Back to List", "Index")
-                </div>
+            <div class="form-actions no-color">
+                <input type="hidden" value=@Model.username name="id" />
+                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> 
+                @*@Html.ActionLink("Back to List", "Index")*@
+            </div>
             @*}*@
         </form>
     </div>
+
+    <br />
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+
 
 </body>
 </html>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#btnDelete").click(function () {
-                 //debugger
-                var data = $("#myForm").serialize();
+<script>
+    $(document).ready(function () {
+        $("#btnDelete").click(function () {
+            //debugger
+            var data = $("#myForm").serialize();
 
-                $.ajax({
-                    type: "POST",
-                    url: "/users/DeleteConfirmed",
-                    data: data,
-                    async: true,
-                    success: function (response) {
-                         debugger
-                        if (response == "true") {
-                            alert("User Deleteed successfully");
-                            window.location.href = "/users/Index";
-                        }
-                        else{
-                            alert("Sorry, This Username can not be Deleted!!!");
-                        }
+            $.ajax({
+                type: "POST",
+                url: "/users/DeleteConfirmed",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("User Deleteed successfully");
+                        //window.location.href = "/users/Index";
+                        $('#del').remove();
                     }
-                })
+                    else {
+                        alert("Sorry, This Username can not be Deleted!!!");
+                    }
+                }
             })
         })
+    })
 
-    </script>
+</script>
 
 
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

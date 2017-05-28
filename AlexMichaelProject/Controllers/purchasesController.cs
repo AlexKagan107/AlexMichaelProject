@@ -26,6 +26,28 @@ namespace AlexMichaelProject.Controllers
             return View(await purchases.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> Index(string type, string text)
+        {
+            if (type == "Username")
+            {
+                var purchases = db.purchases.Where(o => o.username.StartsWith(text)).Include(p => p.paymentoption).Include(p => p.product1).Include(p => p.user);
+                return PartialView(await purchases.ToListAsync());
+            }
+            if (type == "DealID")
+            {
+                var purchases = db.purchases.Where(o => o.dealID.ToString().StartsWith(text)).Include(p => p.paymentoption).Include(p => p.product1).Include(p => p.user);
+                return PartialView(await purchases.ToListAsync());
+            }
+            if (type == "ProductID")
+            {
+                var purchases = db.purchases.Where(o => o.product.ToString().StartsWith(text)).Include(p => p.paymentoption).Include(p => p.product1).Include(p => p.user);
+                return PartialView(await purchases.ToListAsync());
+            }
+            return PartialView();
+
+        }
+
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)

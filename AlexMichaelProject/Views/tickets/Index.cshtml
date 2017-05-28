@@ -78,7 +78,7 @@
                                         </p>
                                         @if ((String)Session["power"] == "admin")
                                         {
-                                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown; font-weight:bold">
+                                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown">
                                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.ticketID })*@
                                                 @Ajax.ActionLink("Delete", "Delete", "tickets", new { id = item.ticketID }, new AjaxOptions()
                                            {

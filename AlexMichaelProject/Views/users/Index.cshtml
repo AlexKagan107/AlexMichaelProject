@@ -8,52 +8,72 @@
 <html>
 <head>
     @*<meta name="viewport" content="width=device-width" />*@
-    <title>Index</title>
+    <title>Users</title>
 </head>
 <body>
-    <div class="panel panel-danger">
-        <div class="col-md-3" style="margin-top:20px">
-            @{ Html.RenderAction("SideMenu", "Home");}
-        </div>
-        <div class="col-md-9">
-            <br />
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
-            <table class="table">
-                <tr>
-                    <th>User Name</th>
-                    <th>Password</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Adress</th>
-                    <th>Phone Number</th>
-                    <th>E-Mail</th>
-                    <th>Favorite Club</th>
-                    <th>IsAdmin?</th>
-                </tr>
-
-                @foreach (var item in Model)
-            {
+    <div id="show">
+        <div class="panel panel-danger">
+            <div class="col-md-3" style="margin-top:20px">
+                @{ Html.RenderAction("SideMenu", "Home");}
+            </div>
+            <div class="col-md-9">
+                <br />
+                <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <table class="table">
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.username)</td>
-                        <td>@Html.DisplayFor(modelItem => item.password)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.fLname)</td>
-                        <td>@Html.DisplayFor(modelItem => item.adress)</td>
-                        <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
-                        <td>@Html.DisplayFor(modelItem => item.mail)</td>
-                        <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
-                        <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.username }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.username }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.username })
-                        </td>
+                        <th>User Name</th>
+                        <th>Password</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Adress</th>
+                        <th>Phone Number</th>
+                        <th>E-Mail</th>
+                        <th>Favorite Club</th>
+                        <th>Type User</th>
                     </tr>
-                }
 
-            </table>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.username)</td>
+                            <td>@Html.DisplayFor(modelItem => item.password)</td>
+                            <td>@Html.DisplayFor(modelItem => item.fName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.fLname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.adress)</td>
+                            <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.mail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
+                            <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
+                            <td>
+                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
+                                    @*@Html.ActionLink("Details", "Details", new { id = item.username })*@
+                                    @Ajax.ActionLink("Details", "Details", new { id = item.username }, new AjaxOptions()
+                               {
+                                   HttpMethod = "POST",
+                                   UpdateTargetId = "show"
+                               })
+                                </p>
+
+                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.username })
+                                </p>
+
+                                <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.username })*@
+                                    @Ajax.ActionLink("Delete", "Delete", new { id = item.username }, new AjaxOptions()
+                               {
+                                   HttpMethod = "POST",
+                                   UpdateTargetId = "show"
+                               })
+                                </p>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
         </div>
     </div>
 </body>
