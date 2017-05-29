@@ -78,16 +78,28 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "matchID,teamA,teamB,stadium,league,date")] match match)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
-                db.matches.Add(match);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                match dbMatch = await db.matches.FindAsync(match.matchID);
+                if(dbMatch == null)
+                {
+                    db.matches.Add(match);
+                    await db.SaveChangesAsync();
+                    //return RedirectToAction("Index");
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
+
             }
 
             ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
             ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
-            return View(match);
+            //return View(match);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Edit(int? id)
@@ -110,15 +122,18 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "matchID,teamA,teamB,stadium,league,date")] match match)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 db.Entry(match).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                result = "true";
             }
             ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName", match.teamA);
             ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName", match.teamB);
-            return View(match);
+            //return View(match);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Delete(int? id)

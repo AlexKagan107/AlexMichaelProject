@@ -48,14 +48,24 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "creditcardnumber,creditcardcompany,expireddate")] paymentoption paymentoption)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
-                db.paymentoptions.Add(paymentoption);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                paymentoption dbCard = await db.paymentoptions.FindAsync(paymentoption.creditcardnumber);
+                if(dbCard == null)
+                {
+                    db.paymentoptions.Add(paymentoption);
+                    await db.SaveChangesAsync();
+                    //return RedirectToAction("Index");
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
             }
-
-            return View(paymentoption);
+            return Json(result, JsonRequestBehavior.AllowGet);
+            //return View(paymentoption);
         }
 
         public async Task<ActionResult> Edit(int? id)
@@ -76,13 +86,16 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "creditcardnumber,creditcardcompany,expireddate")] paymentoption paymentoption)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 db.Entry(paymentoption).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                result = "true";
             }
-            return View(paymentoption);
+            //return View(paymentoption);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Delete(int? id)
@@ -99,14 +112,25 @@ namespace AlexMichaelProject.Controllers
             return View(paymentoption);
         }
 
-        [HttpPost, ActionName("Delete")]
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            paymentoption paymentoption = await db.paymentoptions.FindAsync(id);
-            db.paymentoptions.Remove(paymentoption);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string result = "";
+            try
+            {
+                paymentoption paymentoption = await db.paymentoptions.FindAsync(id);
+                db.paymentoptions.Remove(paymentoption);
+                await db.SaveChangesAsync();
+                //return RedirectToAction("Index");
+                result = "true";
+            }
+            catch(Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

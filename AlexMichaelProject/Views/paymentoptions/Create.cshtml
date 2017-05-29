@@ -14,50 +14,84 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        <form id="myForm">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                <h4>paymentoption</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.creditcardnumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                <div class="form-horizontal">
+                    <h4>paymentoption</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.creditcardnumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
 
-                        @Html.EditorFor(model => model.creditcardnumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.creditcardnumber, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.creditcardnumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.creditcardnumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.creditcardcompany, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.creditcardcompany, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.creditcardcompany, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.expireddate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.expireddate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.expireddate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" value="Create" class="btn btn-default" id="btnCreate" />
+                            <p class="btn btn-primary btn-md">
+                                @Html.ActionLink("Back to List", "Index")
+                            </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.creditcardcompany, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.creditcardcompany, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.creditcardcompany, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.expireddate, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.expireddate, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.expireddate, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
-                        <p class="btn btn-primary btn-md">
-                            @Html.ActionLink("Back to List", "Index")
-                        </p>
-                    </div>
-                </div>
-            </div>
-        }
+            }
+        </form>
     </div>
 </body>
 </html>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnCreate").click(function () {
+            debugger
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/paymentoptions/Create",
+                data: data,
+                async: true,
+                success: function (response) {
+                    debugger
+                    if (response == "true") {
+                        alert("Credit Card Created successfully!");
+                        window.location.href = "/paymentoptions/Index";
+                    }
+                    else  {
+                        alert("Sorry the Credit Card Number Not Available! Please choose a different number.");
+                    }
+                }
+            })
+        })
+    })
+
+</script>
+
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
