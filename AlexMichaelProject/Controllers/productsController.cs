@@ -72,16 +72,28 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "product1,type,manufacturer,clubName,cost,size,description,photo")] product product)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
-                db.products.Add(product);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                product dbProduct = await db.products.FindAsync(product.product1);
+                if(dbProduct == null)
+                {
+                    db.products.Add(product);
+                    await db.SaveChangesAsync();
+                    //return RedirectToAction("Index");
+                    result = "true";
+                }
+                else
+                {
+                    result = "false";
+                }
+
             }
 
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite", product.manufacturer);
             ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName", product.clubName);
-            return View(product);
+            //return View(product);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Edit(string id)
@@ -104,15 +116,18 @@ namespace AlexMichaelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "product1,type,manufacturer,clubName,cost,size,description,photo")] product product)
         {
+            string result = "";
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                result = "true";
             }
             ViewBag.manufacturer = new SelectList(db.manufacturers, "mname", "msite", product.manufacturer);
             ViewBag.clubName = new SelectList(db.teams, "teamName", "teamName", product.clubName);
-            return View(product);
+            //return View(product);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<ActionResult> Delete(string id)
@@ -129,14 +144,25 @@ namespace AlexMichaelProject.Controllers
             return View(product);
         }
 
-        [HttpPost, ActionName("Delete")]
+        //[HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            product product = await db.products.FindAsync(id);
-            db.products.Remove(product);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string result = "";
+            try
+            {
+                product product = await db.products.FindAsync(id);
+                db.products.Remove(product);
+                await db.SaveChangesAsync();
+                //return RedirectToAction("Index");
+                result = "true";
+            }
+            catch(Exception ex)
+            {
+                result = "false";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

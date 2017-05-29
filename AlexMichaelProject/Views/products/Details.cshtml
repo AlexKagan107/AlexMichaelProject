@@ -39,13 +39,13 @@
         }
         @if ((String)Session["power"] == "admin")
         {
-            <p class="btn btn-primary btn-md">
+            <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
                 @Html.ActionLink("Edit", "Edit", new { id = Model.product1 })
             </p>
-            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+            @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
 
                 @Html.ActionLink("Delete", "Delete", new { id = Model.product1 })
-            </p>
+            </p>*@
         }
         <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
             @Html.ActionLink("Back to List", "Index")

@@ -57,6 +57,7 @@
             success: function (response) {
                 // debugger
                 if (response == "fail") {
+                    alert("Login or Password INVALID! Please try again.")
                     window.location.href = "/users/Login";
                 }
                 else if (response != "fail") {

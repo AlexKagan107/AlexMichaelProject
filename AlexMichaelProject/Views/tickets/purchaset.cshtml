@@ -9,7 +9,10 @@
     <title>Purchase</title>
 </head>
 <body>
-    <div id="del">
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div id="del" class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <form id="myForm">
             @using (Html.BeginForm())
             { 
@@ -27,16 +30,18 @@
                         Total Price to Pay: @Session["ticketPrice"]$
                     </h4>
                     <h4 class="btn btn-primary btn-md">
-                        <input type="submit" value="Buy" class="btn btn-default" id="btnBuy" />
-
+                        <input type="button" value="Buy" class="btn btn-default" id="btnBuy" />
                     </h4>
                 </div>
             }
         </form>
     </div>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px; ">
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </body>
 </html>
 
@@ -54,10 +59,10 @@
                 async: true,
                 success: function (response) {
                     debugger
-                    if (response == "true") {
-                        //$('#del').remove();
+                    if (response == "true") {  
                         alert("Ticket successfully purchased");
-                        //window.location.href = "/tickets/Index";
+                        //$('#del').remove();
+                        window.location.href = "/tickets/Index";
                     }
                     else {
                         alert("Sorry, This Ticket can not be purchased!!!");
