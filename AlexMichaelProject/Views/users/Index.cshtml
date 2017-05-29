@@ -18,9 +18,12 @@
             </div>
             <div class="col-md-9">
                 <br />
-                <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
-                    @Html.ActionLink("Create New", "Create")
-                </p>
+                @if ((String)Session["power"] == "admin")
+                {
+                    <p class="btn btn-primary btn-success" style="background-color:lightgreen;">
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                }
                 <table class="table">
                     <tr>
                         <th>User Name</th>
@@ -35,7 +38,7 @@
                     </tr>
 
                     @foreach (var item in Model)
-            {
+                    {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.username)</td>
                             <td>@Html.DisplayFor(modelItem => item.password)</td>
@@ -55,23 +58,24 @@
                                    UpdateTargetId = "show"
                                })
                                 </p>
+                                @if ((String)Session["power"] == "admin")
+                                {
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.username })
+                                    </p>
 
-                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.username })
-                                </p>
-
-                                <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.username })*@
-                                    @Ajax.ActionLink("Delete", "Delete", new { id = item.username }, new AjaxOptions()
-                               {
-                                   HttpMethod = "POST",
-                                   UpdateTargetId = "show"
-                               })
-                                </p>
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.username })*@
+                                        @Ajax.ActionLink("Delete", "Delete", new { id = item.username }, new AjaxOptions()
+                                   {
+                                       HttpMethod = "POST",
+                                       UpdateTargetId = "show"
+                                   })
+                                    </p>
+                                }
                             </td>
                         </tr>
                     }
-
                 </table>
             </div>
         </div>
