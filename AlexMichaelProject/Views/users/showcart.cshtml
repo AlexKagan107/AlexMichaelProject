@@ -141,12 +141,13 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     var tmp;
-
+    var row;
     var Click = function () {
+        debugger
         tmp = event.srcElement.id;
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
-        debugger
+        
         //var data = $("#myForm").serialize();
 
         $.ajax({
@@ -157,10 +158,12 @@
             async: true,
             success: function (response) {
                 debugger
-                if (response == "true") {
+                if (response == "true") {                  
                     alert("Deleteed successfully");
-                    //window.location.href = "/users/showcart";
                     $('#myRow').remove();
+
+                    //window.location.href = "/users/showcart";
+                    
                 }
                 else {
                     alert("Sorry, This Product can not be Deleted!!!");
@@ -170,6 +173,13 @@
         //})
         //})
     }
+
+    //function myRow(x) {
+    //    debugger
+    //    var row;
+    //    row = x.rowIndex;
+    //    return (row);
+    //}
 
 </script>
 
