@@ -14,7 +14,7 @@
         List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
     }
     <div id="show">
-        <table class="table" id="show">
+        <table class="table" id="tableId">
             <tr>
                 <th>
                     Product Code
@@ -46,34 +46,35 @@
             {
 
                 int total = 0;
-                foreach (var item in CartItems)
+                //foreach (var item in CartItems)
+                for(int i = 0; i< CartItems.Count;i++)
                 {
-                    total = total + item.cost;
+                    total = total + CartItems.ElementAt(i).cost;
                     <tr id="myRow">
                         <td>
-                            @Html.DisplayFor(modelItem => item.product1)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.manufacturer)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.clubName)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).clubName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.type)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).type)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.cost)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).cost)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.size)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).size)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.description)
+                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).description)
                         </td>
                         <td>
 
-                            <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
+                            <img src=@Html.DisplayFor(modelItem => CartItems.ElementAt(i).photo) style="width:40px;height:40px;" />
                         </td>
 
                         <td>
@@ -91,11 +92,12 @@
                             <div class="col-md-offset-2 col-md-10">
                                 @Html.AntiForgeryToken()
                                 <div class="form-actions no-color">
-                                    <input type="hidden" value=@item.product1 name="id" />
+                                    
+                                    <input type="hidden" value=@CartItems.ElementAt(i).product1 name="id" />
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
-                                        @Html.ActionLink("Details", "Details", "products", new { id = item.product1 }, null)
+                                        @Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)
                                     </p>
-                                    <input type="button" value="Delete" class="btn btn-default" id="@item.product1" onclick="Click();return" />
+                                    <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1));return" />
                                 </div>
                             </div>
                             @*</form>*@
@@ -141,15 +143,18 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     var tmp;
-    var row;
-    var Click = function () {
+    var Click = function (index) {
         debugger
         tmp = event.srcElement.id;
+
+        var table = document.getElementById("tableId");
+        var row = table.rows[index];
+        //console.log(row.id);
+
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
         
         //var data = $("#myForm").serialize();
-
         $.ajax({
             type: "POST",
             url: "/products/removeFromCart",
@@ -160,8 +165,8 @@
                 debugger
                 if (response == "true") {                  
                     alert("Deleteed successfully");
-                    $('#myRow').remove();
-
+                    //$('#myRow').remove();
+                    $(row).remove();
                     //window.location.href = "/users/showcart";
                     
                 }
