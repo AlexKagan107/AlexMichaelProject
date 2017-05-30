@@ -57,20 +57,16 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="button" value="Save" class="btn btn-default" id="btnSave" />
+                            @if ((String)Session["power"] == "admin")
+                            {
+                                <input type="button" value="Save" class="btn btn-default" id="btnSave" />
+                            }
+                            @Html.ActionLink("Back to List", "Index")
                         </div>
                     </div>
                 </div>
             }
         </form>
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-            @*@Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
-                {
-                    UpdateTargetId = "show"
-                })*@
-        </div>
     </div>
 </body>
 </html>

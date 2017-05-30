@@ -13,7 +13,6 @@
             <div class="col-md-3" style="margin-top:20px">
                 @{ Html.RenderAction("SideMenu", "Home");}
             </div>
-
             <div class="col-md-9">
                 <br />
                 @if ((String)Session["power"] == "admin")
@@ -37,7 +36,6 @@
                             <td><h4>@Html.DisplayFor(modelItem => item.homeStadium)</h4></td>
                             <td>
                                 <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                                    @*@Html.ActionLink("Details", "Details", new { id = item.teamName })*@
                                     @Ajax.ActionLink("Details", "Details", new { id = item.teamName }, new AjaxOptions()
                                {
                                    HttpMethod = "POST",
@@ -58,7 +56,6 @@
                                    })
                                     </p>
                                 }
-
                             </td>
                         </tr>
                     }
@@ -66,6 +63,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
