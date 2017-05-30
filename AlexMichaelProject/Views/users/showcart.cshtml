@@ -62,7 +62,7 @@
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
                                         @Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)
                                     </p>
-                                    <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1));return" />
+                                    <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1),@CartItems.ElementAt(i).cost,@total);return" />
                                     @*<input type="button" value="Delete" class="btn btn-default" id="btnDelete" />*@
                                 </div>
                             </div>
@@ -103,9 +103,20 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     var tmp;
-    var Click = function (index) {
+    var itemPrice;
+    var total;
+    var newTotal;
+    var headerTotal;
+
+    var Click = function (index, price,total) {
         debugger
         tmp = event.srcElement.id;
+
+        itemPrice = price;
+        total = total;
+        newTotal = total - itemPrice;
+        headerTotal = "The sum is:" + newTotal + "$";
+
 
         var table = document.getElementById("tableId");
         var row = table.rows[index];
@@ -116,9 +127,8 @@
 
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
-
         //var data = $("#myForm").serialize();
-        
+
         $.ajax({
             type: "POST",
             url: "/products/removeFromCart",
@@ -133,6 +143,9 @@
                     $("tr").click(function () {
                         $(this).remove();
                     })
+
+                    $("#sumcart").replaceWith(headerTotal);
+
                     //window.location.href = "/users/showcart";
 
                 }
@@ -140,18 +153,12 @@
                     alert("Sorry, This Product can not be Deleted!!!");
                 }
             }
-            })
-        
+        })
+
         //})
         //})
     }
 
-    //function myRow(x) {
-    //    debugger
-    //    var row;
-    //    row = x.rowIndex;
-    //    return (row);
-    //}
 
 </script>
 
