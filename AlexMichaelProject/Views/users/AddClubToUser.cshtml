@@ -1,63 +1,52 @@
-﻿
-@model AlexMichaelProject.Models.FansOfClubs
+﻿@model AlexMichaelProject.Models.FansOfClubs
 
-@{
-    ViewBag.Title = "AddClubToUser";
-}
-
-
-<h2>Add Clubs To User</h2>
-
-<form id="myForm">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Users and Favorite Clubs</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.username, "User Name:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("username", null, htmlAttributes: new { @class = "form-control" })
-
-                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.username, "User Name:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })*@
-                    <input type="text" value=@Session["username"] class="form-control" disabled />
-                    <input type="hidden" value=@Session["username"] name="username" />
-                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.teamName, "Choose a Club:", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("teamName", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.teamName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="Create" class="btn btn-default" id="btnCreate"/>
-                </div>
-            </div>
-        </div>
-    }
-</form>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="col-md-3" style="width:20%;float:left;">
+    @{ Html.RenderAction("SideMenu", "Home");}
 </div>
+<div style="width:80%;float:right;margin-top:20px;">
+    <form id="myForm">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Users and Favorite Clubs</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.username, "User Name:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" value=@Session["username"] class="form-control" disabled />
+                        <input type="hidden" value=@Session["username"] name="username" />
+                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.teamName, "Choose a Club:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("teamName", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.teamName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="button" value="Create" class="btn btn-default" id="btnCreate" />
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+
+
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>

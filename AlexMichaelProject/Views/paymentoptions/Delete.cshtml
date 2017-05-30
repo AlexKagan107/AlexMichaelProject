@@ -24,26 +24,20 @@
             <dt>Expired Date:</dt>
             <dd>@Html.DisplayFor(model => model.expireddate)</dd>
         </dl>
-        @*@using (Html.BeginForm())
-            {*@
+       
         <form id="myForm" action=@Url.Action("DeleteConfirmed", "paymentoptions") method="post">
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
                 <input type="hidden" value=@Model.creditcardnumber name="id" />
                 <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
-                
+                <p class="btn btn-primary btn-md">
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
             </div>
-            @*}*@
         </form>
     </div>
 
-    <br />
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </div>
 </body>
 </html>
 

@@ -1,7 +1,6 @@
 ﻿@model AlexMichaelProject.Models.user
 
 @{
-    //Layout = null;
     ViewBag.Title = "Delete";
 }
 
@@ -22,101 +21,52 @@
         <h4>User</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                User Name:
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.username)
-            </dd>
-            <dt>
-                Password:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.password)
-            </dd>
-
-            <dt>
-                Firs Name:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fName)
-            </dd>
-
-            <dt>
-                Last Name:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fLname)
-            </dd>
-
-            <dt>
-                Adress:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.adress)
-            </dd>
-
-            <dt>
-                Phone number:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.phoneNumber)
-            </dd>
-
-            <dt>
-                E-mail:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.mail)
-            </dd>
-
-            <dt>
-                Favorite Club:
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.favoriteClub)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.isadmin)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.isadmin)
-            </dd>
-
+            <dt>User Name:</dt>
+            <dd>@Html.DisplayFor(model => model.username)</dd>
+            <dt>Password:</dt>
+            <dd>@Html.DisplayFor(model => model.password)</dd>
+            <dt>First Name:</dt>
+            <dd>@Html.DisplayFor(model => model.fName)</dd>
+            <dt>Last Name:</dt>
+            <dd>@Html.DisplayFor(model => model.fLname)</dd>
+            <dt>Adress:</dt>
+            <dd>@Html.DisplayFor(model => model.adress)</dd>
+            <dt>Phone number:</dt>
+            <dd>@Html.DisplayFor(model => model.phoneNumber)</dd>
+            <dt>E-mail:</dt>
+            <dd>@Html.DisplayFor(model => model.mail)</dd>
+            <dt>Favorite Club:</dt>
+            <dd>@Html.DisplayFor(model => model.favoriteClub)</dd>
+            <dt>IsAdmin:</dt>
+            <dd>@Html.DisplayFor(model => model.isadmin)</dd>
         </dl>
 
 
         <form id="myForm" action=@Url.Action("DeleteConfirmed","users") method="post">
-            @*@using (Html.BeginForm())
-                {*@
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="hidden" value=@Model.username name="id" />
-                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" /> 
-                @*@Html.ActionLink("Back to List", "Index")*@
+            <div class="form-actions no-color" style="margin-left:100px;">
+                @if ((String)Session["power"] == "admin")
+                {
+                    <input type="hidden" value=@Model.username name="id" />
+                    <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
+                }
+                @if ((String)Session["power"] == "admin")
+                {
+                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                }
+
+                @if ((String)Session["power"] == "user")
+                {
+                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                        @Html.ActionLink("Back to List", "Details", new { id = (String)Session["username"] })
+                    </p>
+                }
             </div>
-            @*}*@
         </form>
     </div>
-
-    <br />
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </div>
-
-
 </body>
 </html>
 
