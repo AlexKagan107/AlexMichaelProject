@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<AlexMichaelProject.Models.user>
 
-@{
-    ViewBag.Title = "Index";
-}
 <!DOCTYPE html>
 
 <html>
@@ -39,51 +36,50 @@
                             <th>Type User</th>
                         }
                     </tr>
-
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.username)</td>
-                            <td>@Html.DisplayFor(modelItem => item.password)</td>
-                            <td>@Html.DisplayFor(modelItem => item.fName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.fLname)</td>
-                            <td>@Html.DisplayFor(modelItem => item.adress)</td>
-                            <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
-                            <td>@Html.DisplayFor(modelItem => item.mail)</td>
-                            <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
-                            @if ((String)Session["power"] == "admin")
-                            {
-                                <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
-                            }
-                            <td>
-                                @if ((String)Session["power"] == "admin" || (String)Session["username"] == (item.username))
-                                {
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                                        @*@Html.ActionLink("Details", "Details", new { id = item.username })*@
-                                        @Ajax.ActionLink("Details", "Details", new { id = item.username }, new AjaxOptions()
-                                   {
-                                       HttpMethod = "POST",
-                                       UpdateTargetId = "show"
-                                   })
-                                    </p>
-                                }
+                        if ((String)Session["power"] == "admin" || item.username == (String)Session["username"])
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.username)</td>
+                                <td>@Html.DisplayFor(modelItem => item.password)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fLname)</td>
+                                <td>@Html.DisplayFor(modelItem => item.adress)</td>
+                                <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.mail)</td>
+                                <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
                                 @if ((String)Session["power"] == "admin")
                                 {
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.username })
-                                    </p>
-
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.username })*@
-                                        @Ajax.ActionLink("Delete", "Delete", new { id = item.username }, new AjaxOptions()
-                                   {
-                                       HttpMethod = "POST",
-                                       UpdateTargetId = "show"
-                                   })
-                                    </p>
+                                    <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
                                 }
-                            </td>
-                        </tr>
+                                <td>
+                                    @if ((String)Session["power"] == "admin" || (String)Session["username"] == (item.username))
+                                    {
+                                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
+                                            @Ajax.ActionLink("Details", "Details", new { id = item.username }, new AjaxOptions()
+                                       {
+                                           HttpMethod = "POST",
+                                           UpdateTargetId = "show"
+                                       })
+                                        </p>
+                                    }
+                                    @if ((String)Session["power"] == "admin")
+                                    {
+                                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.username })
+                                        </p>
+                                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
+                                            @Ajax.ActionLink("Delete", "Delete", new { id = item.username }, new AjaxOptions()
+                                       {
+                                           HttpMethod = "POST",
+                                           UpdateTargetId = "show"
+                                       })
+                                        </p>
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>

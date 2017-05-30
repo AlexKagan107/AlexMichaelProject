@@ -52,34 +52,33 @@
 
             @foreach (var item in Model.paymentoptions)
             {
-
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.creditcardnumber)</td>
-
-                    <td>@Html.DisplayFor(modelItem => item.creditcardcompany)</td>
-
-                    <td>
-                        @{
-                            string date = item.expireddate.ToString("dd/MM/yyyy");
-                        }
-                        @date
-                    </td>
-
-                    <td>
-                        <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:khaki;">
-                            @Html.ActionLink("Edit", "Edit", "paymentoptions", new { id = item.creditcardnumber }, null)
-                        </p>
-                        <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:silver;">
-                            @Html.ActionLink("Details", "Details", "paymentoptions", new { id = item.creditcardnumber }, null)
-                        </p>
-                        <p class="btn btn-primary btn-md" style="margin-right:1px; background-color:sandybrown">
-                            @Html.ActionLink("Delete", "Delete", "paymentoptions", new { id = item.creditcardnumber }, null)
-                        </p>
-                    </td>
-                </tr>
+                if ((String)Session["power"] == "admin" || Model.username == (String)Session["username"])
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.creditcardnumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.creditcardcompany)</td>
+                        <td>
+                            @{
+                                string date = item.expireddate.ToString("dd/MM/yyyy");
                             }
-        </table>
+                            @date
+                        </td>
 
+                        <td>
+                            <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:khaki;">
+                                @Html.ActionLink("Edit", "Edit", "paymentoptions", new { id = item.creditcardnumber }, null)
+                            </p>
+                            <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:silver;">
+                                @Html.ActionLink("Details", "Details", "paymentoptions", new { id = item.creditcardnumber }, null)
+                            </p>
+                            <p class="btn btn-primary btn-md" style="margin-right:1px; background-color:sandybrown">
+                                @Html.ActionLink("Delete", "Delete", "paymentoptions", new { id = item.creditcardnumber }, null)
+                            </p>
+                        </td>
+                    </tr>
+                                    }
+                                }
+        </table>
         <dl class="dl-horizontal">
             <dt>Intrested in:</dt>
         </dl>
@@ -88,18 +87,12 @@
             <tr>
                 <th>Team Name</th>
                 <th>League</th>
-
             </tr>
-
-
             @foreach (var item in Model.teams)
             {
-
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.teamName)</td>
-
                     <td>@Html.DisplayFor(modelItem => item.leuge)</td>
-
                     <td>
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
                             @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)

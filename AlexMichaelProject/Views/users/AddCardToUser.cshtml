@@ -30,15 +30,13 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @if ((String)Session["power"] == "admin" || (String)Session["username"] == (Model.username)) { 
-                            <input type="button" value="Create" class="btn btn-default" id="btnCreate" />
-                            }
-                            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
-                                @Html.ActionLink("Back to List", "Index")
-                            </p>
-                        </div>
+                        <input type="button" value="Create" class="btn btn-default" id="btnCreate" />
+                        <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
                     </div>
                 </div>
+            </div>
         }
     </form>
 </div>

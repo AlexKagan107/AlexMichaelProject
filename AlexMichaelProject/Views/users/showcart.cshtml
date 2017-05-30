@@ -15,7 +15,7 @@
         List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
     }
     <div id="show" class="col-md-3" style="width:80%;float:right;margin-top:20px;">
-        <table class="table" id="tableId" >
+        <table class="table" id="tableId">
             <tr>
                 <th>Product Code</th>
                 <th>Manufacturer</th>
@@ -29,7 +29,7 @@
             @if (CartItems != null)
             {
                 int total = 0;
-                for(int i = 0; i< CartItems.Count;i++)
+                for (int i = 0; i < CartItems.Count; i++)
                 {
                     total = total + CartItems.ElementAt(i).cost;
                     <tr id="myRow">
@@ -57,7 +57,7 @@
                             <div class="col-md-offset-2 col-md-10">
                                 @Html.AntiForgeryToken()
                                 <div class="form-actions no-color">
-                                    
+
                                     <input type="hidden" value=@CartItems.ElementAt(i).product1 name="id" />
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
                                         @Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)
@@ -74,9 +74,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                   
+
                     <td><h3 id="sumcart">The sum is:@total$</h3></td>
-                    
+
                     @{
                         Session["sum"] = @total + " ";
                     }
@@ -112,7 +112,7 @@
 
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
-        
+
         //var data = $("#myForm").serialize();
         $.ajax({
             type: "POST",
@@ -122,12 +122,12 @@
             async: true,
             success: function (response) {
                 debugger
-                if (response == "true") {                  
+                if (response == "true") {
                     alert("Deleteed successfully");
                     //$('#myRow').remove();
                     $(row).remove();
                     //window.location.href = "/users/showcart";
-                    
+
                 }
                 else {
                     alert("Sorry, This Product can not be Deleted!!!");
