@@ -201,7 +201,7 @@ namespace AlexMichaelProject.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> removeFromCart(string id)
+        public async Task<ActionResult> removeFromCart(string id)
         {
             String username = (String)Session["username"];
             

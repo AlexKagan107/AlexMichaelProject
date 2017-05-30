@@ -63,6 +63,7 @@
                                         @Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)
                                     </p>
                                     <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1));return" />
+                                    @*<input type="button" value="Delete" class="btn btn-default" id="btnDelete" />*@
                                 </div>
                             </div>
                             @*</form>*@
@@ -108,12 +109,13 @@
 
         var table = document.getElementById("tableId");
         var row = table.rows[index];
-       
+
 
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
 
         //var data = $("#myForm").serialize();
+        
         $.ajax({
             type: "POST",
             url: "/products/removeFromCart",
@@ -125,7 +127,9 @@
                 if (response == "true") {
                     alert("Deleteed successfully");
                     //$('#myRow').remove();
-                    $(row).remove();
+                    $("tr").click(function () {
+                        $(this).remove();
+                    })
                     //window.location.href = "/users/showcart";
 
                 }
@@ -133,7 +137,8 @@
                     alert("Sorry, This Product can not be Deleted!!!");
                 }
             }
-        })
+            })
+        
         //})
         //})
     }
