@@ -10,7 +10,10 @@
     <title>Details</title>
 </head>
 <body>
-    <div>
+    <div class="col-md-3" style="width:20%;float:left;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <h4>user: @Model.username</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -63,10 +66,15 @@
                     </td>
 
                     <td>
-
-                        @Html.ActionLink("Edit", "Edit", "paymentoptions", new { id = item.creditcardnumber }, null)
-                        @Html.ActionLink("Details", "Details", "paymentoptions", new { id = item.creditcardnumber }, null)
-                        @Html.ActionLink("Delete", "Delete", "paymentoptions", new { id = item.creditcardnumber }, null)
+                        <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:khaki;">
+                            @Html.ActionLink("Edit", "Edit", "paymentoptions", new { id = item.creditcardnumber }, null)
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:1px;background-color:silver;">
+                            @Html.ActionLink("Details", "Details", "paymentoptions", new { id = item.creditcardnumber }, null)
+                        </p>
+                        <p class="btn btn-primary btn-md" style="margin-right:1px; background-color:sandybrown">
+                            @Html.ActionLink("Delete", "Delete", "paymentoptions", new { id = item.creditcardnumber }, null)
+                        </p>
                     </td>
                 </tr>
                             }
@@ -91,9 +99,9 @@
                     <td>@Html.DisplayFor(modelItem => item.teamName)</td>
 
                     <td>@Html.DisplayFor(modelItem => item.leuge)</td>
-                
+
                     <td>
-                        <p class="btn btn-default" style="background-color:grey;">
+                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
                             @Html.ActionLink("Details", "Details", "teams", new { id = item.teamName }, null)
                         </p>
                     </td>
@@ -102,26 +110,30 @@
         </table>
 
     </div>
+    <div style="margin-left:500px;">
+        @if ((String)Session["power"] == "admin" || (String)Session["username"] == (Model.username))
+        {
 
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.username })
-    </p>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("Add Credit Card", "AddCardToUser", new { id = Model.username })
-    </p>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("Add Team", "AddClubToUser", new { id = Model.username })
-    </p>
-    <p class="btn btn-primary btn-md">
-        @Html.ActionLink("My Items", "index", "purchases", new { id = Model.username }, null)
-    </p>
-    @if ((String)Session["power"] == "admin")
-    {
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    }
-
+            <p class="btn btn-primary btn-md" style="margin-left:50px;">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.username })
+            </p>
+            <p class="btn btn-primary btn-md" style="margin-left:5px;">
+                @Html.ActionLink("Add Credit Card", "AddCardToUser", new { id = Model.username })
+            </p>
+            <p class="btn btn-primary btn-md" style="margin-left:5px;">
+                @Html.ActionLink("Add Team", "AddClubToUser", new { id = Model.username })
+            </p>
+            <p class="btn btn-primary btn-md" style="margin-left:5px;">
+                @Html.ActionLink("My Items", "index", "purchases", new { id = Model.username }, null)
+            </p>
+            if ((String)Session["power"] == "admin")
+            {
+                <p class="btn btn-primary btn-md" style="margin-left:5px;">
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            }
+        }
+    </div>
 </body>
 </html>
 

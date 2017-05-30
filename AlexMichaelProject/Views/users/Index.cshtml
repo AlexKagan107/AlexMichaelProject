@@ -34,7 +34,10 @@
                         <th>Phone Number</th>
                         <th>E-Mail</th>
                         <th>Favorite Club</th>
-                        <th>Type User</th>
+                        @if ((String)Session["power"] == "admin")
+                        {
+                            <th>Type User</th>
+                        }
                     </tr>
 
                     @foreach (var item in Model)
@@ -48,16 +51,22 @@
                             <td>@Html.DisplayFor(modelItem => item.phoneNumber)</td>
                             <td>@Html.DisplayFor(modelItem => item.mail)</td>
                             <td>@Html.DisplayFor(modelItem => item.favoriteClub)</td>
-                            <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
+                            @if ((String)Session["power"] == "admin")
+                            {
+                                <td>@Html.DisplayFor(modelItem => item.isadmin)</td>
+                            }
                             <td>
-                                <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                                    @*@Html.ActionLink("Details", "Details", new { id = item.username })*@
-                                    @Ajax.ActionLink("Details", "Details", new { id = item.username }, new AjaxOptions()
-                               {
-                                   HttpMethod = "POST",
-                                   UpdateTargetId = "show"
-                               })
-                                </p>
+                                @if ((String)Session["power"] == "admin" || (String)Session["username"] == (item.username))
+                                {
+                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
+                                        @*@Html.ActionLink("Details", "Details", new { id = item.username })*@
+                                        @Ajax.ActionLink("Details", "Details", new { id = item.username }, new AjaxOptions()
+                                   {
+                                       HttpMethod = "POST",
+                                       UpdateTargetId = "show"
+                                   })
+                                    </p>
+                                }
                                 @if ((String)Session["power"] == "admin")
                                 {
                                     <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">

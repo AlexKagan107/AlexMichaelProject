@@ -8,74 +8,39 @@
     <title>Cart</title>
 </head>
 <body>
-
+    <div class="col-md-3" style="margin-top:20px; width:20%;">
+        @{ Html.RenderAction("SideMenu", "Home");}
+    </div>
     @{
-
         List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
     }
-    <div id="show">
-        <table class="table" id="tableId">
+    <div id="show" class="col-md-3" style="width:80%;float:right;margin-top:20px;">
+        <table class="table" id="tableId" >
             <tr>
-                <th>
-                    Product Code
-                </th>
-                <th>
-                    Manufacturer
-                </th>
-                <th>
-                    Club
-                </th>
-                <th>
-                    Type
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Size
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Photo
-                </th>
+                <th>Product Code</th>
+                <th>Manufacturer</th>
+                <th>Club</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Size</th>
+                <th>Description</th>
+                <th>Photo</th>
             </tr>
-
             @if (CartItems != null)
             {
-
                 int total = 0;
-                //foreach (var item in CartItems)
                 for(int i = 0; i< CartItems.Count;i++)
                 {
                     total = total + CartItems.ElementAt(i).cost;
                     <tr id="myRow">
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).clubName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).cost)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).size)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => CartItems.ElementAt(i).description)
-                        </td>
-                        <td>
-
-                            <img src=@Html.DisplayFor(modelItem => CartItems.ElementAt(i).photo) style="width:40px;height:40px;" />
-                        </td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).clubName)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).type)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).cost)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).size)</td>
+                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).description)</td>
+                        <td><img src=@Html.DisplayFor(modelItem => CartItems.ElementAt(i).photo) style="width:40px;height:40px;" /></td>
 
                         <td>
                             @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
@@ -113,7 +78,6 @@
                     <td><h3 id="sumcart">The sum is:@total$</h3></td>
                     
                     @{
-                        
                         Session["sum"] = @total + " ";
                     }
 
@@ -131,11 +95,6 @@
     {
         <h3>There are no items in the cart</h3>
     }
-    else
-    {
-
-    }
-
 </body>
 </html>
 
