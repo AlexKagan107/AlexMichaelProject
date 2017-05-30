@@ -110,6 +110,9 @@
         var table = document.getElementById("tableId");
         var row = table.rows[index];
 
+        $("tr").click(function () {
+            $(this).remove();
+        })
 
         //$(document).ready(function () {
         //$("#btnDelete").click(function () {
