@@ -204,10 +204,15 @@ namespace AlexMichaelProject.Controllers
         public async Task<JsonResult> removeFromCart(string id)
         {
             String username = (String)Session["username"];
-            
+
+            String totalSum = (String)Session["sum"];
+            int total = Int32.Parse(totalSum);
+            int newTotal = 0;
             List<product>cart = (List<product>)Session["cart"];
             
             product temp = await db.products.FindAsync(id);
+            int costItem = temp.cost;
+
             List<product> tempList = new List<product>();
 
             for (int i = 0; i < cart.Count; i++)
@@ -223,8 +228,11 @@ namespace AlexMichaelProject.Controllers
                     
             }
             Session["card"] = cart;
-            string result = "true";
-            int counter = 9;
+            //string result = "true";
+            newTotal = total - costItem;
+            string result = newTotal.ToString();
+            Session["sum"] = result;
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

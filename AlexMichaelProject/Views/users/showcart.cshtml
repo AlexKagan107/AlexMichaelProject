@@ -32,6 +32,10 @@
                 for (int i = 0; i < CartItems.Count; i++)
                 {
                     total = total + CartItems.ElementAt(i).cost;
+                    
+                            Session["sum"] = total + " ";
+                       
+
                     <tr id="myRow">
                         <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)</td>
                         <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)</td>
@@ -76,12 +80,12 @@
                     <td></td>
                     <td></td>
 
-                    <td><h3 id="sumcart">The sum is:@total$</h3></td>
+                    <td><h3 id="sumcart">The sum is:@Session["sum"]$</h3></td>
 
-                    @{
+                    @*@{
                         Session["sum"] = @total + " ";
-                    }
-
+                    }*@
+                    
                     <td>
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:blue;">
                             @Html.ActionLink("Purchase", "BuyCart", new { })
@@ -115,8 +119,7 @@
         itemPrice = price;
         total = total;
         newTotal = total - itemPrice;
-        headerTotal = "The sum is:" + newTotal + "$";
-
+        //headerTotal = "The sum is:" + newTotal + "$";
 
         var table = document.getElementById("tableId");
         var row = table.rows[index];
@@ -137,14 +140,21 @@
             async: true,
             success: function (response) {
                 debugger
-                if (response == "true") {
+                if (response != "false") {
                     alert("Deleteed successfully");
                     //$('#myRow').remove();
                     $("tr").click(function () {
                         $(this).remove();
                     })
+                    
+                    headerTotal = "The sum is:" + response + "$";
+                    $("#sumcart")
+                        .change(function () {
+                            $("#sumcart").text(headerTotal);
+                        })
+                        .change();
 
-                    $("#sumcart").replaceWith(headerTotal);
+                    //$('#sumcart').replaceWith(headerTotal);
 
                     //window.location.href = "/users/showcart";
 
