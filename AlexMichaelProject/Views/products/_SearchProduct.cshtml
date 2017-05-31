@@ -15,31 +15,14 @@
     @foreach (var item in Model)
             {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.product1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clubName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-
-                <img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;" />
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.product1)</td>
+            <td>@Html.DisplayFor(modelItem => item.manufacturer)</td>
+            <td>@Html.DisplayFor(modelItem => item.clubName)</td>
+            <td>@Html.DisplayFor(modelItem => item.type)</td>
+            <td>@Html.DisplayFor(modelItem => item.cost)</td>
+            <td>@Html.DisplayFor(modelItem => item.size)</td>
+            <td>@Html.DisplayFor(modelItem => item.description)</td>
+            <td><img src=@Html.DisplayFor(modelItem => item.photo) style="width:40px;height:40px;"/></td>
             <td>
                 @if ((String)Session["power"] == "user")
                 {

@@ -13,13 +13,11 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-
     <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
         <form id="myForm">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-
                 <div class="form-horizontal">
                     <h4>Edit Product: @Model.product1</h4>
                     <hr />
@@ -84,8 +82,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="button" value="Save" class="btn btn-default" id="btnSave" />
-
+                            @if ((String)Session["power"] == "admin")
+                            {
+                                <input type="button" value="Save" class="btn btn-default" id="btnSave" />
+                            }
                             <p class="btn btn-primary btn-md">
                                 @Html.ActionLink("Back to List", "Index")
                             </p>
