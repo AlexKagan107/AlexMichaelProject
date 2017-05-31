@@ -8,7 +8,7 @@
     <title>Delete</title>
 </head>
 <body>
-    
+
     <div class="col-md-3" style="width:20%;float:left;">
         @{ Html.RenderAction("SideMenu", "Home");}
     </div>
@@ -32,22 +32,19 @@
             <dt>Club:</dt>
             <dd>@Html.DisplayFor(model => model.team.teamName)</dd>
         </dl>
-        @*@using (Html.BeginForm()) {*@
         <form id="myForm" action=@Url.Action("DeleteConfirmed", "products") method="post">
             @Html.AntiForgeryToken()
             <div class="form-actions no-color">
-                <input type="hidden" value=@Model.product1 name="id" />
-                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
+                @if ((String)Session["power"] == "admin")
+                {
+                    <input type="hidden" value=@Model.product1 name="id" />
+                    <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
+                }
+                <p class="btn btn-primary btn-md">
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
             </div>
-            @*}*@
         </form>
-    </div>
-
-    <br />
-    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        <p class="btn btn-primary btn-md">
-            @Html.ActionLink("Back to List", "Index")
-        </p>
     </div>
 </body>
 </html>
