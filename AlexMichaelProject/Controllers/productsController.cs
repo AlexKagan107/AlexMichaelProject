@@ -224,6 +224,7 @@ namespace AlexMichaelProject.Controllers
             }
             Session["card"] = cart;
             string result = "true";
+            int counter = 9;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
