@@ -29,9 +29,12 @@
             <dd>@Html.DisplayFor(model => model.date)</dd>
         </dl>
     </div>
-    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:gold;">
-        @Html.ActionLink("Buy Tickets", "Buy", "tickets", new { id = Model.matchID }, null)
-    </p>
+    @if ((String)Session["power"] == "user")
+    {
+        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:gold;">
+            @Html.ActionLink("Buy Tickets", "Buy", "tickets", new { id = Model.matchID }, null)
+        </p>
+    }
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Back to List", "Index")
     </p>

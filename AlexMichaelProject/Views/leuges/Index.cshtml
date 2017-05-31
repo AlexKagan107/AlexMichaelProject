@@ -29,7 +29,6 @@
                         <td><h4>@Html.DisplayFor(modelItem => item.leugeName)</h4></td>
                         <td>
                             <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:darkblue;">
-                                @*@Html.ActionLink("Clubs", "clubLeuge", "teams", new { id = item.leugeName },null)*@
                                 @Ajax.ActionLink("Clubs", "clubLeuge", "teams", new { id = item.leugeName }, new AjaxOptions()
                        {
                            HttpMethod = "POST",

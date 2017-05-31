@@ -26,9 +26,12 @@
             </dd>
         </dl>
     </div>
-    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.creditcardnumber })
-    </p>
+    @if ((String)Session["power"] == "admin")
+    {
+        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:khaki;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.creditcardnumber })
+        </p>
+    }
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Back to List", "Index")
     </p>

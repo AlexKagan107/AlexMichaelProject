@@ -29,7 +29,10 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color" style="margin-left:44px;">
-                <input type="submit" value="Delete" class="btn btn-default" />
+                @if ((String)Session["power"] == "admin")
+                {
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                }
                 <p class="btn btn-primary btn-md">
                     @Html.ActionLink("Back to List", "Index")
                 </p>
