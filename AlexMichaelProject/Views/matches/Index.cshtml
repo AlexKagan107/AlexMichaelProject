@@ -22,7 +22,6 @@
                     </p>
                 }
                 <br />
-
                 @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
                 {
                     <div>
@@ -44,7 +43,6 @@
                     </div>
                 }
                 <br />
-
                 <table class="table">
                     <tr>
                         <th>MatchID</th>
@@ -64,9 +62,7 @@
                             <td>@Html.DisplayFor(modelItem => item.league)</td>
                             <td>@Html.DisplayFor(modelItem => item.date)</td>
                             <td>
-
                                 <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                                    @*@Html.ActionLink("Details", "Details", new { id = item.matchID })*@
                                     @Ajax.ActionLink("Details", "Details", new { id = item.matchID }, new AjaxOptions()
                                {
                                    HttpMethod = "POST",
@@ -79,7 +75,6 @@
                                         @Html.ActionLink("Edit", "Edit", new { id = item.matchID })
                                     </p>
                                     <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.matchID })*@
                                         @Ajax.ActionLink("Delete", "Delete", new { id = item.matchID }, new AjaxOptions()
                                    {
                                        HttpMethod = "POST",

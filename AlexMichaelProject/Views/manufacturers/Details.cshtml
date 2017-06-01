@@ -21,9 +21,12 @@
             <dd><a href=http://@Html.DisplayFor(model => model.msite)>@Html.DisplayFor(model => model.msite)</a></dd>
         </dl>
     </div>
+@if ((String)Session["power"] == "admin")
+{
     <p class="btn btn-primary btn-md" style="background-color:khaki; margin-left:50px;">
         @Html.ActionLink("Edit", "Edit", new { id = Model.mname })
     </p>
+}
     <p class="btn btn-primary btn-md">
         @Html.ActionLink("Back to List", "Index")
     </p>

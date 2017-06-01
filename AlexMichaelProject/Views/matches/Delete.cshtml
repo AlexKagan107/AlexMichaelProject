@@ -29,15 +29,15 @@
             <dt>Date:</dt>
             <dd>@Html.DisplayFor(model => model.date)</dd>
         </dl>
-        @*@using (Html.BeginForm())
-            {*@
         <form id="myForm" action=@Url.Action("DeleteConfirmed","matches") method="post">
             @Html.AntiForgeryToken()
             <div class="form-actions no-color">
                 <input type="hidden" value=@Model.matchID name="id" />
-                <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
+                @if ((String)Session["power"] == "admin")
+                {
+                    <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
+                }
             </div>
-            @*}*@
         </form>
     </div>
     <br />

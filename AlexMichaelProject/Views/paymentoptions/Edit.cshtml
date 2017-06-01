@@ -50,7 +50,10 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="button" value="Save" class="btn btn-default" id="btnSave" />
+                            @if ((String)Session["power"] == "admin")
+                            {
+                                <input type="button" value="Save" class="btn btn-default" id="btnSave" />
+                            }
                             <p class="btn btn-primary btn-md">
                                 @Html.ActionLink("Back to List", "Index")
                             </p>

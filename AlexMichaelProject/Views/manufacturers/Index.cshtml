@@ -31,7 +31,6 @@
                     <td><a href=http://@Html.DisplayFor(modelItem => item.msite)>@Html.DisplayFor(modelItem => item.msite)</a></td>
                     <td>
                         <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:silver;">
-                            @*@Html.ActionLink("Details", "Details", new { id = item.mname })*@
                             @Ajax.ActionLink("Details", "Details", new { id = item.mname }, new AjaxOptions()
                         {
                             HttpMethod = "POST",
@@ -45,7 +44,6 @@
                             </p>
 
                             <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:sandybrown;">
-                                @*@Html.ActionLink("Delete", "Delete", new { id = item.mname })*@
                                 @Ajax.ActionLink("Delete", "Delete", new { id = item.mname }, new AjaxOptions()
                                                        {
                                                            HttpMethod = "POST",
