@@ -42,19 +42,9 @@
 
     <br />
     <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
-        @if ((String)Session["power"] == "admin")
-        {
             <p class="btn btn-primary btn-md">
                 @Html.ActionLink("Back to List", "Index")
             </p>
-        }
-        else
-        {
-            <p class="btn btn-primary btn-md">
-                @Html.ActionLink("Back to List", "Details", "users")
-            </p>
-        }
-
     </div>
 
 </body>
