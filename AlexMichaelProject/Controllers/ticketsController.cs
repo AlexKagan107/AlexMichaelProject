@@ -103,10 +103,8 @@ namespace AlexMichaelProject.Controllers
 
                 }
                 await db.SaveChangesAsync();
-                //return RedirectToAction("Index");
                 result = "true";
             }
-            //return RedirectToAction("Index");
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
