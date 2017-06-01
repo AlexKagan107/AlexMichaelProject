@@ -8,98 +8,105 @@
     <title>Cart</title>
 </head>
 <body>
-    <div class="col-md-3" style="margin-top:20px; width:20%;">
-        @{ Html.RenderAction("SideMenu", "Home");}
-    </div>
-    @{
-        List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
-    }
-    <div id="show" class="col-md-3" style="width:80%;float:right;margin-top:20px;">
-        <table class="table" id="tableId">
-            <tr>
-                <th>Product Code</th>
-                <th>Manufacturer</th>
-                <th>Club</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Size</th>
-                <th>Description</th>
-                <th>Photo</th>
-            </tr>
-            @if (CartItems != null)
-            {
-                int total = 0;
-                for (int i = 0; i < CartItems.Count; i++)
+    <div id="show">
+        <div class="col-md-3" style="margin-top:20px; width:20%;">
+            @{ Html.RenderAction("SideMenu", "Home");}
+        </div>
+        @{
+            List<AlexMichaelProject.Models.product> CartItems = (List<AlexMichaelProject.Models.product>)Session["cart"];
+        }
+        <div class="col-md-3" style="width:80%;float:right;margin-top:20px;">
+            <table class="table" id="tableId">
+                <tr>
+                    <th>Product Code</th>
+                    <th>Manufacturer</th>
+                    <th>Club</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Size</th>
+                    <th>Description</th>
+                    <th>Photo</th>
+                </tr>
+                @if (CartItems != null)
                 {
-                    total = total + CartItems.ElementAt(i).cost;
-                    
-                            Session["sum"] = total + " ";
-                       
+                    int total = 0;
+                    for (int i = 0; i < CartItems.Count; i++)
+                    {
+                        total = total + CartItems.ElementAt(i).cost;
 
-                    <tr id="myRow">
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).clubName)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).type)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).cost)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).size)</td>
-                        <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).description)</td>
-                        <td><img src=@Html.DisplayFor(modelItem => CartItems.ElementAt(i).photo) style="width:40px;height:40px;" /></td>
+                        Session["sum"] = total + " ";
+
+
+                        <tr id="myRow">
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).product1)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).manufacturer)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).clubName)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).type)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).cost)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).size)</td>
+                            <td>@Html.DisplayFor(modelItem => CartItems.ElementAt(i).description)</td>
+                            <td><img src=@Html.DisplayFor(modelItem => CartItems.ElementAt(i).photo) style="width:40px;height:40px;" /></td>
+
+                            <td>
+                                @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
+                                    @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
+                                    @Ajax.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, new AjaxOptions()
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "show",
+                                            InsertionMode = InsertionMode.Replace,
+                                        })
+                                    </p>*@
+
+                                @*<form id="myForm">*@
+                                <div class="col-md-offset-2 col-md-10">
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-actions no-color">
+
+                                        <input type="hidden" value=@CartItems.ElementAt(i).product1 name="id" />
+                                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
+                                            @*@Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)*@
+                                            @Ajax.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, new AjaxOptions()
+                                               {
+                                                   HttpMethod = "POST",
+                                                   UpdateTargetId = "show"
+                                               })
+                                        </p>
+                                        <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1),@CartItems.ElementAt(i).cost,@total);return" />
+                                        @*<input type="button" value="Delete" class="btn btn-default" id="btnDelete" />*@
+                                    </div>
+                                </div>
+                                @*</form>*@
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td><h3 id="sumcart">The sum is:@Session["sum"]$</h3></td>
+
+                        @*@{
+                                Session["sum"] = @total + " ";
+                            }*@
 
                         <td>
-                            @*<p class="btn btn-primary btn-md" style="margin-right:5px; background-color:black;">
-                                @Html.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, null)
-                                @Ajax.ActionLink("Remove From Cart", "removeFromCart", "products", new { id = item.product1 }, new AjaxOptions()
-                                    {
-                                        HttpMethod = "POST",
-                                        UpdateTargetId = "show",
-                                        InsertionMode = InsertionMode.Replace,
-                                    })
-                                </p>*@
-
-                            @*<form id="myForm">*@
-                            <div class="col-md-offset-2 col-md-10">
-                                @Html.AntiForgeryToken()
-                                <div class="form-actions no-color">
-
-                                    <input type="hidden" value=@CartItems.ElementAt(i).product1 name="id" />
-                                    <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:grey; ">
-                                        @Html.ActionLink("Details", "Details", "products", new { id = CartItems.ElementAt(i).product1 }, null)
-                                    </p>
-                                    <input type="button" value="Delete" class="btn btn-default" id="@CartItems.ElementAt(i).product1" onclick="Click(@(i+1),@CartItems.ElementAt(i).cost,@total);return" />
-                                    @*<input type="button" value="Delete" class="btn btn-default" id="btnDelete" />*@
-                                </div>
-                            </div>
-                            @*</form>*@
+                            <p class="btn btn-primary btn-md" style="margin-right:5px;margin-top:10px;background-color:blue;">
+                                @Html.ActionLink("Purchase", "BuyCart", new { })
+                            </p>
                         </td>
                     </tr>
                 }
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+            </table>
+        </div>
 
-                    <td><h3 id="sumcart">The sum is:@Session["sum"]$</h3></td>
-
-                    @*@{
-                        Session["sum"] = @total + " ";
-                    }*@
-                    
-                    <td>
-                        <p class="btn btn-primary btn-md" style="margin-right:5px;background-color:blue;">
-                            @Html.ActionLink("Purchase", "BuyCart", new { })
-                        </p>
-                    </td>
-                </tr>
-                        }
-        </table>
+        @if (CartItems == null)
+        {
+            <h3>There are no items in the cart</h3>
+        }
     </div>
-
-    @if (CartItems == null)
-    {
-        <h3>There are no items in the cart</h3>
-    }
 </body>
 </html>
 
@@ -113,7 +120,7 @@
     var headerTotal;
     var cart;
 
-    var Click = function (index, price,total) {
+    var Click = function (index, price, total) {
         debugger
         tmp = event.srcElement.id;
 
@@ -147,7 +154,7 @@
                     $("tr").click(function () {
                         $(this).remove();
                     })
-                    
+
                     headerTotal = "The sum is:" + response.data + "$";
                     $("#sumcart")
                         .change(function () {
