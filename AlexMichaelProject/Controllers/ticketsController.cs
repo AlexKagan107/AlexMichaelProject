@@ -86,16 +86,25 @@ namespace AlexMichaelProject.Controllers
 
                 }
                 match tempMatch = await db.matches.FindAsync(matchID);
-
+                IList<ticket> ticketsToMatch = tempMatch.tickets.ToList() ;
                 int seatNumberIndex = seatNumber;
                 for (int j = 0; j < quanity; j++)
                 {
+
                     ticket ticket = new ticket();
                     ticket.matchID = tempMatch.matchID;
                     ticket.cost = cost;
                     ticket.seatType = seatType;
-
                     ticket.seatNumber = seatNumberIndex;
+                    for (int k = 0; k < ticketsToMatch.Count; k++)
+                    {
+                        if(ticketsToMatch.ElementAt(k).seatNumber== ticket.seatNumber)
+                        {
+                            ticket.seatNumber++;
+                            seatNumberIndex++;
+                            k--;
+                        }
+                    }
                     seatNumberIndex++;
                     ticket.ticketID = ticketsID[j];
                     db.tickets.Add(ticket);

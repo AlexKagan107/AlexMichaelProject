@@ -69,6 +69,14 @@ namespace AlexMichaelProject.Controllers
 
         public ActionResult Create()
         {
+            for(int i = 0; i < db.matches.ToList().Count; i++)
+            {
+                if (db.matches.Find(i) == null)
+                {
+                    Session["matchid"] = i;
+                    break;
+                }
+            }
             ViewBag.teamA = new SelectList(db.teams, "teamName", "teamName");
             ViewBag.teamB = new SelectList(db.teams, "teamName", "teamName");
             return View();
@@ -86,7 +94,6 @@ namespace AlexMichaelProject.Controllers
                 {
                     db.matches.Add(match);
                     await db.SaveChangesAsync();
-                    //return RedirectToAction("Index");
                     result = "true";
                 }
                 else
