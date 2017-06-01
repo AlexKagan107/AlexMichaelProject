@@ -36,9 +36,7 @@
                 {
                     <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
                 }
-                <p class="btn btn-primary btn-md">
-                    @Html.ActionLink("Back to List", "Index")
-                </p>
+                
                 @*@Html.ActionLink("Back to List", "Index")*@
                 @*@Ajax.ActionLink("Back to List", "Index", "tickets", new AjaxOptions()
                     {
@@ -49,6 +47,11 @@
         </form>
     </div>
     <br />
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        <p class="btn btn-primary btn-md">
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </body>
 </html>
 

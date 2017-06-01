@@ -8,8 +8,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    
+
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,9 +27,12 @@
                     @if (Session["username"] != null)
                     {
                         <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>
-                        if (Session["cartsize"]!=null && (int)Session["cartsize"] > 0) {
-                            string s = "My Cart(" + (int)Session["cartsize"]+")";
-                        <li id="cart" style="color:white;">@Html.ActionLink(s, "showcart", "users")</li>
+                        if (Session["cartsize"] != null && (int)Session["cartsize"] > 0)
+                        {
+                            string s = "(" + (int)Session["cartsize"] + ")";
+                            <li>@Html.ActionLink("My Cart:", "showcart", "users")</li>
+
+                            <li id="cart" style="color:white; margin-top:20px;">@s</li>
                         }
                         else
                         {
@@ -59,7 +62,7 @@
         @RenderBody()
         <br />
         <hr />
-       
+
 
     </div>
 

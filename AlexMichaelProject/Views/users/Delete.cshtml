@@ -51,22 +51,27 @@
                     <input type="hidden" value=@Model.username name="id" />
                     <input type="button" value="Delete" class="btn btn-default" id="btnDelete" />
                 }
-                @if ((String)Session["power"] == "admin")
-                {
-                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
-                        @Html.ActionLink("Back to List", "Index")
-                    </p>
-                }
-
-                @if ((String)Session["power"] == "user")
-                {
-                    <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
-                        @Html.ActionLink("Back to List", "Details", new { id = (String)Session["username"] })
-                    </p>
-                }
-            </div>
+                </div>
         </form>
     </div>
+    <br />
+    <div class="col-md-3" style="width:80%;float:left;margin-top:20px;">
+        @if ((String)Session["power"] == "admin")
+        {
+            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        }
+
+        @if ((String)Session["power"] == "user")
+        {
+            <p class="btn btn-primary btn-md" style="margin-right:5px; background-color:grey;">
+                @Html.ActionLink("Back to List", "Details", new { id = (String)Session["username"] })
+            </p>
+        }
+    </div>
+
+
 </body>
 </html>
 
