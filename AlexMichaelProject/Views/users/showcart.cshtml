@@ -111,6 +111,7 @@
     var total;
     var newTotal;
     var headerTotal;
+    var cart;
 
     var Click = function (index, price,total) {
         debugger
@@ -140,19 +141,27 @@
             async: true,
             success: function (response) {
                 debugger
-                if (response != "false") {
+                if (response.data != "false") {
                     alert("Deleteed successfully");
                     //$('#myRow').remove();
                     $("tr").click(function () {
                         $(this).remove();
                     })
                     
-                    headerTotal = "The sum is:" + response + "$";
+                    headerTotal = "The sum is:" + response.data + "$";
                     $("#sumcart")
                         .change(function () {
                             $("#sumcart").text(headerTotal);
                         })
                         .change();
+
+                    cart = "MyCart(" + response.data2 + ")";
+                    $("#cart")
+                        .change(function () {
+                            $("#cart").text(cart);
+                        })
+                        .change();
+
 
                     //$('#sumcart').replaceWith(headerTotal);
 

@@ -29,7 +29,7 @@
                         <li><a href=http://localhost:60323/users/Details/@Session["username"]> My Profile</a></li>
                         if (Session["cartsize"]!=null && (int)Session["cartsize"] > 0) {
                             string s = "My Cart(" + (int)Session["cartsize"]+")";
-                        <li>@Html.ActionLink(s,"showcart", "users")</li>
+                        <li id="cart" style="color:white;">@Html.ActionLink(s, "showcart", "users")</li>
                         }
                         else
                         {

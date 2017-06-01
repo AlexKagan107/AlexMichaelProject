@@ -203,6 +203,7 @@ namespace AlexMichaelProject.Controllers
         [HttpPost]
         public async Task<JsonResult> removeFromCart(string id)
         {
+            int size = 0;
             String username = (String)Session["username"];
 
             String totalSum = (String)Session["sum"];
@@ -220,7 +221,7 @@ namespace AlexMichaelProject.Controllers
                 if (cart.ElementAt(i).product1.Equals(temp.product1))
                 {
                     cart.RemoveAt(i);
-                    int size = (int)Session["cartsize"];
+                     size = (int)Session["cartsize"];
                     size=size-1;
                     Session["cartsize"] = size;
                     break;
@@ -233,7 +234,11 @@ namespace AlexMichaelProject.Controllers
             string result = newTotal.ToString();
             Session["sum"] = result;
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            string newSize = size.ToString();
+
+            var response = new { data = result, data2 = newSize };
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }
