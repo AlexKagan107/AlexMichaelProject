@@ -27,10 +27,32 @@ namespace AlexMichaelProject.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> Index(string clubName)
+        public async Task<PartialViewResult> Index(string type, string text)
         {
-            var products = db.products.Where(o=>o.clubName.StartsWith(clubName)).Include(p => p.manufacturer1).Include(p => p.team);
-            return PartialView(await products.ToListAsync());
+            if (type == "Club")
+            {
+                var products = db.products.Where(o => o.clubName.StartsWith(text)).Include(p => p.manufacturer1).Include(p => p.team);
+                return PartialView(await products.ToListAsync());
+            }
+
+            if (type == "Type")
+            {
+                var products = db.products.Where(o => o.type.StartsWith(text)).Include(p => p.manufacturer1).Include(p => p.team);
+                return PartialView(await products.ToListAsync());
+            }
+
+            if (type == "Manufacturer")
+            {
+                var products = db.products.Where(o => o.manufacturer.StartsWith(text)).Include(p => p.manufacturer1).Include(p => p.team);
+                return PartialView(await products.ToListAsync());
+            }
+
+            if (type == "Size")
+            {
+                var products = db.products.Where(o => o.size.ToString().StartsWith(text)).Include(p => p.manufacturer1).Include(p => p.team);
+                return PartialView(await products.ToListAsync());
+            }
+            return PartialView();
         }
 
         public async Task<ActionResult> Details(string id)

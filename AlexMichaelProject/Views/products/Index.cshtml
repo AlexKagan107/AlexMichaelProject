@@ -23,12 +23,21 @@
                 @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "search", InsertionMode = InsertionMode.Replace }))
             {
                     <div>
-                        <h4>
-                            Search Club Name:@Html.TextBox("clubName")
-                            <button type="submit" name="name" value="Search" class="btn btn-info">
-                                <span class="glyphicon glyphicon-search"></span> Search
-                            </button>
-                        </h4>
+                        <form>
+                            <h4>Search Type:</h4>
+                            <select name="type" class="form-control">
+                                <option selected="selected" value="Club">Club Name</option>
+                                <option value="Type">Type</option>
+                                <option value="Manufacturer">Manufacturer</option>
+                                <option value="Size">Size</option>
+                            </select>
+                            <h4>
+                                Search: @Html.TextBox("text")
+                                <button type="submit" name="name" value="Search" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </h4>
+                        </form>
                     </div>
                 }
                 <br />
