@@ -25,7 +25,7 @@
                     @Html.HiddenFor(model => model.creditcardnumber)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.creditcardnumber, "CreditCard Number:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.creditcardnumber, "Credit Card Number:", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.creditcardnumber, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.creditcardcompany, "", new { @class = "text-danger" })
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.creditcardcompany, "CreditCard Company:", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.creditcardcompany, "Credit Card Company:", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.creditcardcompany, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.creditcardcompany, "", new { @class = "text-danger" })

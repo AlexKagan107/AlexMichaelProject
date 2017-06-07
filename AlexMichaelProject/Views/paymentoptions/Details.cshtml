@@ -15,11 +15,11 @@
         <h4>Paymentoption</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>CreditCard Number:</dt>
+            <dt>Credit Card Number:</dt>
             <dd>@Html.DisplayFor(model => model.creditcardnumber)</dd>
-            <dt>@Html.DisplayNameFor(model => model.creditcardcompany)</dt>
+            <dt>Credit Card Company:</dt>
             <dd>@Html.DisplayFor(model => model.creditcardcompany)</dd>
-            <dt>@Html.DisplayNameFor(model => model.expireddate)</dt>
+            <dt>Expired Date:</dt>
             <dd>
                 @{string date = Model.expireddate.ToString("dd/MM/yyyy");}
                 @date
